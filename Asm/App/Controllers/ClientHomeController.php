@@ -31,6 +31,18 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderProductPage();
     }
 
+    function ClientHomeController()
+    {
+        $this->ClientHomePage();
+    }
+
+    function ClientHomePage()
+    {
+        $this->_renderBase->renderClientHeader();
+        $this->_renderBase->renderClientHome();
+        $this->_renderBase->renderClientFooter();
+    }
+
    
 
     function ClientCheckoutPage(){
@@ -44,5 +56,13 @@ class ClientHomeController extends BaseController
     function ClientContactPage(){
         $this->_renderBase->renderContactPage();
     }
+    function ClientCartPage(){
+        $this->_renderBase->renderCartPage();
+    }
+
+  
+   
+
+   
 
 }
