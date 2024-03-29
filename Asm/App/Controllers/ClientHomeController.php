@@ -20,19 +20,29 @@ class ClientHomeController extends BaseController
         $this->_renderBase = new RenderBase();
     }
 
-    
+
 
     function ClientCategoriesPage()
     {
         $this->_renderBase->renderCatePage();
     }
 
-    function ClientProductPage(){
+    function ClientProductPage()
+    {
         $this->_renderBase->renderProductPage();
     }
 
     function ClientHomeController()
     {
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['user']['role'] == 1 || $_SESSION['user']['role'] == 2) {
+                header("Location: /?url=HomeController/homePage");
+                exit();
+            } else if ($_SESSION['user']['role'] == 0) {
+                header("Location: /?url=ClientHomeController/ClientHomePage");
+                exit();
+            }
+        }
         $this->ClientHomePage();
     }
 
@@ -43,26 +53,30 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientFooter();
     }
 
-   
 
-    function ClientCheckoutPage(){
+
+    function ClientCheckoutPage()
+    {
         $this->_renderBase->renderCheckoutPage();
     }
 
-    function ClientBlogsPage(){
+    function ClientBlogsPage()
+    {
         $this->_renderBase->renderBlogsPage();
     }
 
-    function ClientContactPage(){
+    function ClientContactPage()
+    {
         $this->_renderBase->renderContactPage();
     }
-    function ClientCartPage(){
+    function ClientCartPage()
+    {
         $this->_renderBase->renderCartPage();
     }
 
-  
-   
 
-   
+
+
+
 
 }

@@ -12,7 +12,6 @@ abstract class BaseModel implements CrudInterface
 {
     use QueryBuilder;
 
-
     private $_connection;
 
     protected $name = "BaseModel";
@@ -34,11 +33,10 @@ abstract class BaseModel implements CrudInterface
 
     public function orderBy(string $order = 'ASC')
     {
-        $this->_query = $this->_query . "order by " . $order;
+        $this->_query = $this->_query . " ORDER BY " . $order;
 
         return $this;
     }
-
 
     public function get()
     {
@@ -48,12 +46,10 @@ abstract class BaseModel implements CrudInterface
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function getOne($id)
     {
         return [];
     }
-
 
     public function limit(int $limit = 10)
     {
@@ -66,26 +62,25 @@ abstract class BaseModel implements CrudInterface
     public function update(int $id, array $data)
     {
     }
-    public function delete(int $id): bool
+
+    public function remove(int $id): bool
     {
         return true;
     }
 
-
-
     public function insertData($table, $data)
     {
         if (!empty($data)) {
-            $fielStr = '';
+            $fieldStr = '';
             $valueStr = '';
             foreach ($data as $key => $value) {
-                $fielStr .= $key . ',';
+                $fieldStr .= $key . ',';
                 $valueStr .= "'" . $value . "',";
             }
 
-            $fielStr = rtrim($fielStr, ',');
+            $fieldStr = rtrim($fieldStr, ',');
             $valueStr = rtrim($valueStr, ',');
-            $sql = "INSERT INTO  $table($fielStr) VALUES ($valueStr)";
+            $sql = "INSERT INTO  $table ($fieldStr) VALUES ($valueStr)";
 
             $status = $this->query($sql);
             if (!$status)
@@ -126,7 +121,7 @@ abstract class BaseModel implements CrudInterface
             $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition;
         }
         $status = $this->query($sql);
-        if (!$status)
+        if(!$status)
             return false;
         return true;
     }
@@ -137,11 +132,10 @@ abstract class BaseModel implements CrudInterface
             $statement = $this->_connection->PDO()->prepare($sql);
             $statement->execute();
             return $statement;
-        } catch (Exception $ex) {
+            } catch (Exception $ex) {
             $mess = $ex->getMessage();
             echo $mess;
             die();
         }
     }
 }
-

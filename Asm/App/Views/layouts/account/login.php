@@ -1,4 +1,5 @@
-<?
+<?php
+ob_start();
 use App\Core\Sessions;
 
 ?>
@@ -19,22 +20,22 @@ use App\Core\Sessions;
     <div class="container" id="container">
         <div class="form-container sign-in">
 
-            <form action="?url=LoginController/handleLogin" method="post" id="form">
+            <form action="/?url=LoginController/handleLogin" method="post" id="form">
                 <h1>Đăng nhập</h1>
-                <input type="text" placeholder="Tên đăng nhập" name="username" value="" id="username">
-                <?php if (isset($_SESSION['username'])): ?>
-                    <p style="color: red; margin: 0px;">
-                        <?php echo Sessions::display_session('username'); ?>
+                <input type="text" placeholder="Tên đăng nhập" name="email" value="" id="email">
+                <?php if (isset($_SESSION['email'])): ?>
+                    <p style="color: #DC143C; margin: 0px;">
+                        <?php echo Sessions::display_session('email'); ?>
                     </p>
                 <?php endif; ?>
                 <input type="password" placeholder="Mật khẩu" name="password" value="" id="password">
                 <?php if (isset($_SESSION['password'])): ?>
-                    <p style="color: red; margin: 0px;">
+                    <p style="color: #DC143C; margin: 0px;">
                         <?php echo Sessions::display_session('password'); ?>
                     </p>
                 <?php endif; ?>
                 <a href="#">Quên mật khẩu?</a>
-                <button type="submit" name="login">Đăng nhập</button>
+                <button type="submit" name="submit">Đăng nhập</button>
 
             </form>
         </div>

@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -9,7 +13,7 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/jqvmap/jquery.vmap.min.jso">
+  <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
@@ -19,3 +23,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/summernote/summernote-bs4.min.css">
   <script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men Wear</title>
+</head>

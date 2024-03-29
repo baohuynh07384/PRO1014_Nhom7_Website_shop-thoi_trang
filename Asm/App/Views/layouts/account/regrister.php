@@ -1,4 +1,4 @@
-<?
+<?php
 use App\Core\Sessions;
 
 ?>
@@ -19,12 +19,6 @@ use App\Core\Sessions;
     <div class="form-container sign-up">
       <form action="?url=RegristerController/handleRegister" method="post">
         <h1>Đăng ký</h1>
-        <input type="text" placeholder="Tên đăng nhập" name="username">
-        <?php if (isset($_SESSION['username'])): ?>
-          <p style="color: red; margin: 0px;">
-            <?php echo Sessions::display_session('username'); ?>
-          </p>
-        <?php endif; ?>
         <input type="text" placeholder="Email" name="email">
         <?php if (isset($_SESSION['email'])): ?>
           <p style="color: red; margin: 0px;">
@@ -37,7 +31,13 @@ use App\Core\Sessions;
             <?php echo Sessions::display_session('password'); ?>
           </p>
         <?php endif; ?>
-        <button type="submit" name="register">Đăng ký</button>
+        <input type="text" placeholder="Số điện thoại" name="phone">
+        <?php if (isset($_SESSION['phone'])): ?>
+          <p style="color: red; margin: 0px;">
+            <?php echo Sessions::display_session('phone'); ?>
+          </p>
+        <?php endif; ?>
+        <button type="submit" name="submit">Đăng ký</button>
       </form>
     </div>
 

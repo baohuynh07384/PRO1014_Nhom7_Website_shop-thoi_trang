@@ -6,9 +6,6 @@
   </div>
 </footer>
 </div>
-<?
-include "App/Views/layouts/admin/assets/includes/jquery.php";
+<?php
+include_once "App/Views/layouts/admin/assets/includes/jquery.php";
 ?>
-</body>
-
-</html>
