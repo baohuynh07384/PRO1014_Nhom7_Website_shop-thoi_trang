@@ -23,7 +23,7 @@ abstract class BaseModel implements CrudInterface
         $this->_connection = new Database();
     }
 
-    abstract public function getAllWithPaginate(int $limit, int $offset);
+    abstract public function getAllWithPaginate(int $number, int $offset);
 
     public function getAll()
     {
@@ -63,10 +63,8 @@ abstract class BaseModel implements CrudInterface
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update(int $id, array $data)
-    {
-    }
-    public function delete(int $id): bool
+   
+    public function remove(int $id): bool
     {
         return true;
     }
@@ -99,9 +97,7 @@ abstract class BaseModel implements CrudInterface
         if (!empty($data)) {
             $updateStr = '';
             foreach ($data as $key => $value) {
-                if (strpos($value, ' ') !== false) {
-                    $updateStr .= "$key=$value,";
-                } else if ($value === '' || $value === null) {
+                if ($value === '' || $value === null) {
                     $updateStr .= "$key=NULL,";
                 } else {
                     $updateStr .= "$key='$value',";

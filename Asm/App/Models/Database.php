@@ -14,7 +14,7 @@ class Database
 
     private static $dbHost = 'localhost';
 
-    private static $dbName = 'php2';
+    private static $dbName = 'duan1_spring';
 
     private static $dbUser = 'root';
 

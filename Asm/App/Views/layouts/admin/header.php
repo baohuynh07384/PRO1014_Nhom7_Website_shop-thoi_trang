@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,14 @@
   <?
   include "App/Views/layouts/admin/assets/includes/stylesheet.php";
   ?>
+  <style>
+    .error {
+      color: red;
+    }
+
+ 
+   
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -137,4 +146,3 @@
       </ul>
     </nav>
     <!-- /.navbar -->
-  
