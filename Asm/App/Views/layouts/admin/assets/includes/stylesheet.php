@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/summernote/summernote-bs4.min.css">
   <script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Men Wear</title>
@@ -35,3 +36,6 @@
 =======
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 >>>>>>> 11ce3df (Categories)
+=======
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+>>>>>>> 11ce3df372821ff4b4d58c05fdfd35db0366789d

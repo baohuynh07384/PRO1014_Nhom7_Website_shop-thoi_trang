@@ -23,6 +23,7 @@ class UserModel extends BaseModel
         return $this->getAll()->get();
     }
 
+<<<<<<< HEAD
     public function checkUserExist($email)
     {
         return $this->select()->where('email', '=', $email)
@@ -33,6 +34,29 @@ class UserModel extends BaseModel
     public function getOneUser($id)
     {
         return $this->select()->where('id', '=', $id)->first();
+=======
+    public function getOneUser($id)
+    {
+        return $this->select()->where('id', '=', $id)->first();
+    }
+
+    public function updateUser($data, $id)
+    {
+        
+        return $this->table('users')->where('id', ' = ',  $id)->update($data);
+    }
+
+    public function checkRole($role){
+        return $this->select()->where('role', '=', $role)->first();
+    }
+    public function deleteUser($id)
+    {
+        return $this->table('users')->where('id', '=', $id)->delete();
+    }
+
+    public function checkUserExist($username, $email){
+        return $this->select()->Where('username', '=', $username)->orWhere('email','=',$email) ->first();
+>>>>>>> 11ce3df372821ff4b4d58c05fdfd35db0366789d
     }
 
     public function updateUser($data, $id)

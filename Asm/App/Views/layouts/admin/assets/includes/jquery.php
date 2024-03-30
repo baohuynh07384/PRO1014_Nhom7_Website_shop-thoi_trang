@@ -41,10 +41,13 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="App/Views/layouts/admin/assets/dist/js/pages/dashboard.js"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </body>
 
 </html>
 =======
+=======
+>>>>>>> 11ce3df372821ff4b4d58c05fdfd35db0366789d
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
@@ -131,4 +134,7 @@ unset($_SESSION['success']);
 }
 
 ?>
+<<<<<<< HEAD
 >>>>>>> 11ce3df (Categories)
+=======
+>>>>>>> 11ce3df372821ff4b4d58c05fdfd35db0366789d

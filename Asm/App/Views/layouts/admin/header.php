@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
   include_once "App/Views/layouts/admin/assets/includes/stylesheet.php";
 ?>
 =======
+=======
+>>>>>>> 11ce3df372821ff4b4d58c05fdfd35db0366789d
 
 <!DOCTYPE html>
 <html lang="en">
