@@ -38,6 +38,8 @@ trait QueryBuilder
                 $this->where .= "$this->operator $field $compare '$value'";
             }
         }
+        
+        
         return $this;
     }
 

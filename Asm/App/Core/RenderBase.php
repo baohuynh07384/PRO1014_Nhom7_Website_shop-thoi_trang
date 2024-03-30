@@ -28,7 +28,7 @@ class RenderBase extends BaseController
     public function renderAccount(){
         $this->load->render('layouts/admin/createaccount');
     }
-    public function renderListaccount(){
+    public function renderListAccount(){
         $this->load->render('layouts/admin/list_account');
     }
 
@@ -57,7 +57,8 @@ class RenderBase extends BaseController
     public function renderListProduct(){
         $this->load->render('layouts/admin/list-product');
     }
-    
+
+   
     /**
      * từ chổ này là phương thức render của client 
      * 

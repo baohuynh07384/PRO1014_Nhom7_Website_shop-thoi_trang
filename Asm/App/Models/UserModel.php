@@ -29,6 +29,27 @@ class UserModel extends BaseModel
             ->where('status', '=', 1)
             ->where('role', '=', 1)
             ->first();
+    public function getOneUser($id)
+    {
+        return $this->select()->where('id', '=', $id)->first();
+    }
+
+    public function updateUser($data, $id)
+    {
+        
+        return $this->table('users')->where('id', ' = ',  $id)->update($data);
+    }
+
+    public function checkRole($role){
+        return $this->select()->where('role', '=', $role)->first();
+    }
+    public function deleteUser($id)
+    {
+        return $this->table('users')->where('id', '=', $id)->delete();
+    }
+
+    public function checkUserExist($username, $email){
+        return $this->select()->Where('username', '=', $username)->orWhere('email','=',$email) ->first();
     }
 
     public function getAllWithPaginate(int $limit = 10, int $offset = 0)

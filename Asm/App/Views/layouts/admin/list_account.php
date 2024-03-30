@@ -1,74 +1,117 @@
+<?php
+
+use App\Models\UserModel;
+
+
+if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
+  echo $_SESSION['success'];
+ 
+}
+
+?>
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="card card-primary">
-        <div class="card-header">
-          <h3 class="card-title">Danh Sách Tài khoản</h3>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Danh sách tài khoản</h1>
+          </div>
         </div>
       </div><!-- /.container-fluid -->
-  </section>
+    </section>
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="card card-solid">
-      <div class="card-body pb-0">
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
         <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                      <div class="card-header text-muted border-bottom-0">
-                        15-3-2024
-                      </div>
-                      <div class="card-body pt-0">
-                        <div class="row">
-                          <div class="col-7">
-                            <h2 class="lead"><b>Bảo</b></h2>
-                            <ul class="ml-4 mb-0 fa-ul text-muted">
-                              <li class="small"><span class="fa-li"><i class="fas fa-solid fa-lock"></i></span></li>
-                              <li class="small"><span class="fa-li"><i class="fas fa-solid fa-envelope"></i></span>bao123@gmail.com</li>
-                              <li class="small"><span class="fa-li"><i class="fas fa-solid fa-circle"></i></span>Hiện</li>
-                              <li class="small"><span class="fa-li"><i class="fas fa-solid fa-user"></i></span>admin</li>
-                            </ul>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã số</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Tên người dùng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                        $users = new UserModel;
+                        $userList = $users->getAllUser();
+                        foreach ($userList as $item) {
+                          $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
+                            echo '
+                             <tr class="">
+                             <td scope="row">' . $item['id'] . '</td>
+                             <td>
+                                 <img src="' . PUBLIC_URL . $item['image'] . '" alt="" width="100" height="100">
+                             </td>
+                             <td>' . $item['username'] . '</td>
+                             <td>' . $item['create_at'] . '</td>
+                             <td>' . $status. '</td>
+                             <td>
+                             <div class="row">
+                            <form action="/?url=AccountController/edit/' . $item["id"] . '" method="post">
+                              <input type="hidden" name="id_update" value="' . $item["id"] . '">
+                              <button type="submit" name="updateAccount" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>                           
+                            </form>
+                              <button type="button" name="" value="' . $item["id"] . '" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
                           </div>
-                          <div class="col-5 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/000/574/512/original/vector-sign-of-user-icon.jpg" alt="user-avatar" class="img-circle img-fluid">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-footer">
-                        <div class="text-right">
-                          <!-- <a href="#" class="btn btn-sm bg-teal">
-                            <i class="fas fa-comments"></i>
-                          </a> -->
-                            <div style="display:flex; float:right">
-                            <form action="" method="post">
-                            <input type="hidden" name="idupdate" value="">
-                            <input class="btn btn-success"  type="submit" name="update" value="Cập Nhật">
-                          </form>
-                          <form action="" method="post">
-                            <input type="hidden" name="" value="">
-                            <input class="btn btn-danger"  type="submit" name="delete" value="Xóa">
-                          </form>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-         
-        </div>
-      </div>
-    </div>
+                             </td>
+                             </tr>';
+                        }
+                        ?>
 
-    <nav aria-label="...">
-      <ul class="pagination pagination-sm">
-        <li class="page-item active" aria-current="page">
-        </li>
-        <li class="page-item"><a class="page-link" href="">1</a></li>
-        <li class="page-item"><a class="page-link" href="">2</a></li>
-        <li class="page-item"><a class="page-link" href="">3</a></li>
-      </ul>
-    </nav>
-  </section>
-  <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+
+                    </tbody>
+                   
+                </tbody>
+                </table>
+               
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- Delete-modal -->
+    <div class="modal fade" id="DeleteModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Thông báo</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/?url=AccountController/delete/<?php echo $item['id'] ?>" method="POST">
+            <div class="modal-body">
+              <input type="hidden" name="delete_id" id="" class="delete_id_cate">
+              <p>Bạn có chắc chắn muốn xóa ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="deleteAccount">Delete</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    <!-- Update modal -->
+  
+     
+    <!-- /.content -->
+  </div>
