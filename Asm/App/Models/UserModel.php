@@ -30,6 +30,25 @@ class UserModel extends BaseModel
             ->where('role', '=', 1)
             ->first();
     }
+    public function getOneUser($id)
+    {
+        return $this->select()->where('id', '=', $id)->first();
+    }
+
+    public function updateUser($data, $id)
+    {
+        
+        return $this->table('users')->where('id', ' = ',  $id)->update($data);
+    }
+
+    public function checkRole($role){
+        return $this->select()->where('role', '=', $role)->first();
+    }
+    public function deleteUser($id)
+    {
+        return $this->table('users')->where('id', '=', $id)->delete();
+    }
+
 
     public function getAllWithPaginate(int $limit = 10, int $offset = 0)
     {
@@ -46,10 +65,6 @@ class UserModel extends BaseModel
         // var_dump($this->tableName);
     }
 
-    public function changePass($id,$data, $email)
-    {
-        return $this->table($this->table)->where('email', '=', $email)->update($id,$data);
-    }
     public function checkLogin($email, $password){
         return $this->select()->where('email', '=', $email)
                              ->where('password', '=', $password)

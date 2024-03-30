@@ -39,5 +39,10 @@ class Validation
 
     }
 
+    public static function required($value)
+    {
+        return empty($value);
+    }
+
 
 }

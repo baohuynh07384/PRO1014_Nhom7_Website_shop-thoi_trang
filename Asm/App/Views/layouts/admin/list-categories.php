@@ -1,14 +1,35 @@
+<?php
+
+use App\Models\CategoriesModel;
+
+
+if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
+  echo $_SESSION['success'];
+ 
+}
+
+?>
+
 <div class="content-wrapper">
-    <div class="card card-primary">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Danh Sách Danh Mục</h3>
-                </div>
-            </div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Danh sách danh mục</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
     <!-- Main content -->
-    <div class="card-body table-responsive p-0">  
-        <div class="table-responsive">
-            <table class="table">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped text-center">
                 <thead>
                     <tr>
                         <th scope="col">Mã số</th>
@@ -20,40 +41,77 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>
-                            <img src="https://product.hstatic.net/1000357687/product/ao-nguoi-vietartboard-2_bafd841e2caf416191e680f6bbf95693_1024x1024.png" alt="" width="100" height="100">
-                        </td>
-                        <td>Áo thun</td>
-                        <td>15-3-1024</td>
-                        <td>Hiện</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>
-                            <img src="https://product.hstatic.net/1000357687/product/flex_short_bebe_sau_ddd6c752f74147b28cf300a15fae3df2_1024x1024.jpg" alt="" width="100" height="100">
-                        </td>
-                        <td>Quần ngắn</td>
-                        <td>15-3-1024</td>
-                        <td>Hiện</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
+                <?php
+
+                        $category = new CategoriesModel;
+                        $cateList = $category->getListCate();
+                        foreach ($cateList as $item) {
+                          $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
+                         
+                            echo '
+                             <tr class="">
+                             <td scope="row">' . $item['id'] . '</td>
+                             <td>
+                                 <img src="' . PUBLIC_URL . $item['image'] . '" alt="" width="100" height="100">
+                             </td>
+                             <td>' . $item['name'] . '</td>
+                             <td>' . $item['create_at'] . '</td>
+                             <td>'.$status.'</td>
+                             <td>
+                             <div class="row">
+                            <form action="/?url=CategoriesController/edit/' . $item["id"] . '" method="post">
+                              <input type="hidden" name="id_update" value="' . $item["id"] . '">
+                              <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>                           
+                            </form>
+                              <button type="button" name="" value="' . $item["id"] . '" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
+                          </div>
+                             </td>
+                             </tr>';
+                        }
+                        ?>
+
+
+                    </tbody>
                    
                 </tbody>
-            </table>
+                </table>
+               
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
         </div>
-   
-
-    </div>
-   </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- Delete-modal -->
+    <div class="modal fade" id="DeleteModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Thông báo</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/?url=CategoriesController/delete/<?php echo $item['id'] ?>" method="POST">
+            <div class="modal-body">
+              <input type="hidden" name="delete_id" id="" class="delete_id_cate">
+              <p>Bạn có chắc chắn muốn xóa ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="deleteCate">Delete</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+     
     <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+  </div>

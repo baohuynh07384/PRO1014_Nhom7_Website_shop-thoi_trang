@@ -1,6 +1,30 @@
+<<<<<<< HEAD
 <?php
   include_once "App/Views/layouts/admin/assets/includes/stylesheet.php";
 ?>
+=======
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men Wear</title>
+  <?
+  include "App/Views/layouts/admin/assets/includes/stylesheet.php";
+  ?>
+  <style>
+    .error {
+      color: red;
+    }
+
+ 
+   
+  </style>
+</head>
+
+>>>>>>> 11ce3df (Categories)
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -128,4 +152,3 @@
       </ul>
     </nav>
     <!-- /.navbar -->
-  

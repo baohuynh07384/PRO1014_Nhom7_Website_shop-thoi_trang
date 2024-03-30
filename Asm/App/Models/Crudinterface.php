@@ -33,5 +33,5 @@ interface CrudInterface{
      * phương thức update() dùng để cập nhập dữ liệu
      * @param int $id
      */
-    public function update(int $id, array $data);
+    
 }
