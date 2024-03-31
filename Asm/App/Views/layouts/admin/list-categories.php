@@ -42,33 +42,30 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
                 </thead>
                 <tbody>
                 <?php
-
-                        $category = new CategoriesModel;
-                        $cateList = $category->getListCate();
-                        foreach ($cateList as $item) {
+               
+                        foreach ($data as $item) :
                           $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
-                         
-                            echo '
+                         ?>
+                            
                              <tr class="">
-                             <td scope="row">' . $item['id'] . '</td>
+                             <td scope="row"><?= $item['id']  ?></td>
                              <td>
-                                 <img src="' . PUBLIC_URL . $item['image'] . '" alt="" width="100" height="100">
+                                 <img src="<?= PUBLIC_URL . $item['image']  ?>" alt="" width="100" height="100">
                              </td>
-                             <td>' . $item['name'] . '</td>
-                             <td>' . $item['create_at'] . '</td>
-                             <td>'.$status.'</td>
+                             <td><?= $item['name']  ?></td>
+                             <td><?= $item['create_at'] ?></td>
+                             <td><?= $status ?></td>
                              <td>
                              <div class="row">
-                            <form action="/?url=CategoriesController/edit/' . $item["id"] . '" method="post">
-                              <input type="hidden" name="id_update" value="' . $item["id"] . '">
+                            <form action="/?url=CategoriesController/edit/<?= $item['id'] ?>" method="post">
+                              <input type="hidden" name="id_update" value="<?= $item['id'] ?>">
                               <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>                           
                             </form>
-                              <button type="button" name="" value="' . $item["id"] . '" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
+                              <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
                           </div>
                              </td>
-                             </tr>';
-                        }
-                        ?>
+                             </tr>
+                    <?php endforeach; ?>
 
 
                     </tbody>

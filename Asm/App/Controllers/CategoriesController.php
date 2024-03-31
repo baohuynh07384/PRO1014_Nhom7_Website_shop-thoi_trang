@@ -12,6 +12,7 @@ class CategoriesController extends BaseController
 
     private $_renderBase;
 
+    private $_categories;
 
 
 
@@ -24,6 +25,7 @@ class CategoriesController extends BaseController
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
+        $this->_categories = new CategoriesModel();
     }
 
     function CategoriesController()
@@ -41,9 +43,10 @@ class CategoriesController extends BaseController
 
     public function ListCatPage()
     {
+        $data= $this->_categories->getListCate();
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
-        $this->_renderBase->renderListCat();
+        $this->load->render('layouts/admin/list-categories', $data);
         $this->_renderBase->renderAdminFooter();
     }
 
@@ -54,15 +57,25 @@ class CategoriesController extends BaseController
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $option = $_POST['option'];
-
             $target_file = UPLOAD_URL . basename($_FILES["image"]["name"]);
 
-            // if (Validation::required($name) || Validation::required($option) || Validation::required($target_file)) {
-            //     Sessions::addSession("name", "Vui lòng nhập tên danh mục ");
-            //     Sessions::addSession("option", "Vui lòng chọn trạng thái");
-            //     Sessions::addSession("target_file", "Vui lòng chọn hình ảnh");
-            //     return $this->redirect("/?url=CategoriesController/CreateCategoresPage");
-            // }
+            $data = [
+                'name' => $_POST['name'],
+                'option' => $_POST['option'],
+                'image' => $_FILES["image"]["name"],
+            ];
+
+            foreach ($data as $field => $value) {
+                if(Validation::CheckEmtpy($value)){
+                    $errors[$field] = "Vui lòng nhập $field";
+                }
+            }
+            if(!empty($errors)){
+                foreach ($errors as $key => $error) {
+                    Sessions::addSession($key, $error);
+                }
+                return $this->redirect("/?url=CategoriesController/CreateCategoresPage");
+            }
 
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                 $category = new CategoriesModel();

@@ -28,5 +28,10 @@
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css"/>
   <script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
+
+

@@ -17,6 +17,8 @@ trait QueryBuilder
     public $leftJoin = '';
     public $groupBy = '';
 
+    public $count = '';
+
     public function table($tableName)
     {
         $this->tableName = $tableName;
@@ -112,6 +114,8 @@ trait QueryBuilder
         return $this;
     }
 
+    
+
     public function insert($tableName, $data)
     {
         $this->tableName = $tableName;
@@ -179,5 +183,6 @@ trait QueryBuilder
         $this->innerJoin   = '';
         $this->insert      = '';
         $this->leftJoin    = '';
+        $this->count       = '';
     }
 }

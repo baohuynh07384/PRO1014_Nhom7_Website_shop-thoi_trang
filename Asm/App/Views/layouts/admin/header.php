@@ -1,4 +1,5 @@
 
+
   <?php
   include "App/Views/layouts/admin/assets/includes/stylesheet.php";
   ?>
@@ -9,7 +10,6 @@
 
   </style>
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">

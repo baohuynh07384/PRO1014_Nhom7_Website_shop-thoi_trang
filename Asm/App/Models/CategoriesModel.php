@@ -61,4 +61,16 @@ class CategoriesModel extends BaseModel
         return $result;
     }
 
+    public function countCategories()
+    {
+        $data = $this->select('COUNT(categories.id) AS categories')->table('categories')->first();
+       
+        if ($data) {
+            return $data['categories']; 
+        } else {
+            return 0; 
+        }
+        
+    }
+
 }
