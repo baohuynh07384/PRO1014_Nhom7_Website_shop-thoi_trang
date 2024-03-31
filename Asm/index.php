@@ -6,7 +6,7 @@ session_start();
 
 require_once "vendor\autoload.php";
 
-define("ROOT_URL", "http://127.0.0.1:5000");
+define("ROOT_URL", "http://duan1.local/");
 define('UPLOAD_URL', __DIR__.'/public/uploads/');
 define('PUBLIC_URL', ROOT_URL.'/public/uploads/');
 use App\Models\UserModel;

@@ -32,6 +32,10 @@
   <script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men Wear</title>
+</head>
 
 
 
