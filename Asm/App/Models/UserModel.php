@@ -43,21 +43,11 @@ class UserModel extends BaseModel
         return $this->table('users')->where('id', ' = ',  $id)->update($data);
     }
 
-<<<<<<< HEAD
-=======
-    public function checkRole($role){
-        return $this->select()->where('role', '=', $role)->first();
-    }
->>>>>>> 672e810 (QuenMatKhau_Phu)
     public function deleteUser($id)
     {
         return $this->table('users')->where('id', '=', $id)->delete();
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 672e810 (QuenMatKhau_Phu)
     public function getAllWithPaginate(int $limit = 10, int $offset = 0)
     {
         // return $this->select()->where('email', '=', $email)->first();
