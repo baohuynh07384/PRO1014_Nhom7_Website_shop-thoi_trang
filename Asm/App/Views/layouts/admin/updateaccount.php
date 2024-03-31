@@ -74,7 +74,6 @@ use App\Core\Sessions;
                     <input name="image" type="file" class="form-control"/>
                     <input type="hidden" name="image_old" value="<?php echo $data['image']; ?>">
                     <img src="<?php echo PUBLIC_URL . $data['image'] ?>" class="img-thumbnail w-25 h-25" alt="...">
-
                 </div>
             </div>
             <div class="card-footer">
