@@ -21,9 +21,7 @@ class RenderBase extends BaseController
     Public function renderCategories(){
         $this->load->render('layouts/admin/createcategories');
     }
-    public function renderListCat(){
-        $this->load->render('layouts/admin/list-categories');
-    }
+  
    
     public function renderAccount(){
         $this->load->render('layouts/admin/createaccount');
@@ -43,9 +41,7 @@ class RenderBase extends BaseController
     public function renderSilder(){
         $this->load->render('layouts/admin/slider');
     }
-    public function renderHome(){
-        $this->load->render('layouts/admin/dashboard');
-    }
+   
     public function renderAdminFooter(){
         $this->load->render('layouts/admin/footer');
     }   
@@ -110,5 +106,17 @@ class RenderBase extends BaseController
     }
     public function renderRegrister(){
         $this->load->render('layouts/account/regrister');
+    }
+
+    public function renderPageForgotPass(){
+        $this-> load -> render('layouts/account/forgotpass');
+    }
+
+    public function renderPageConfirm(){
+        $this -> load -> render('layouts/account/confirmpass');
+    }
+
+    public function renderPageChangePass(){
+        $this -> load -> render('layouts/account/changepass');
     }
 }

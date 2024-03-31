@@ -8,7 +8,7 @@ use App\Core\Sessions;
         <div class="card-header">
             <h3 class="card-title">Thêm danh mục</h3>
         </div>
-        <form method="post" action="/?url=CategoriesController/addCategory" enctype="multipart/form-data" id="ValidateCateForm" class="">
+        <form method="post" action="/?url=CategoriesController/addCategory" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
             <div class="card-body">
                 <div class="form-group">
                     <label for="name">Tên danh mục</label>
@@ -35,9 +35,9 @@ use App\Core\Sessions;
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh danh mục</label>
                     <input name="image" type="file" multiple  class="form-control" required/>
-                    <?php if (isset($_SESSION['target_file'])) : ?>
+                    <?php if (isset($_SESSION['image'])) : ?>
                         <p style="color: red;">
-                            <?php echo Sessions::display_session('target_file'); ?>
+                            <?php echo Sessions::display_session('image'); ?>
                         </p>
                     <?php endif; ?>
                 </div>

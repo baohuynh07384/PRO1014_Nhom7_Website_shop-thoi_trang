@@ -34,7 +34,7 @@ use App\Core\Sessions;
                         <?php echo Sessions::display_session('password'); ?>
                     </p>
                 <?php endif; ?>
-                <a href="#">Quên mật khẩu?</a>
+                <a href="/?url=ForgotController/loadPageForgot">Quên mật khẩu?</a>
                 <button type="submit" name="submit">Đăng nhập</button>
 
             </form>

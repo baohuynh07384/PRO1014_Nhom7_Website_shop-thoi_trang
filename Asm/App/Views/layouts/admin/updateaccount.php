@@ -11,8 +11,8 @@ error_reporting(E_ALL);
         <form method="post" action="/?url=AccountController/editAccount/<?php echo $data['id'] ?>" enctype="multipart/form-data" id="" class="">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="username">Tên người dùng</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter name" name="username" required class="error" value="<?php echo $data['username'] ?>">
+                    <label for="name">Tên người dùng</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required class="error" value="<?php echo $data['username'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
