@@ -35,7 +35,7 @@ use App\Core\Sessions;
                     </div>
                     <div class="form-group col-6">
                         <label for="quantity">Tác giả</label>
-                        <input type="text" name="author" class="form-control" placeholder="Nhập tác giả" value="">
+                        <input type="text" name="author" class="form-control" placeholder="Nhập tác giả" value="<?= $_SESSION['user']['name'];?>">
                         <?php if (isset($_SESSION['tác giả'])) : ?>
                             <p style="color: red; margin: 0px;">
                                 <?php echo Sessions::display_session('tác giả'); ?>
