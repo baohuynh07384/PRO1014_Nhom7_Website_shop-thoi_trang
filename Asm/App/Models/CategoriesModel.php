@@ -25,7 +25,7 @@ class CategoriesModel extends BaseModel
 
     }
 
-    public function create(int $id, array $data)
+    public function create( array $data)
     {
 
     }
@@ -37,7 +37,7 @@ class CategoriesModel extends BaseModel
 
     public function getListCate()
     {
-        return $this->getAll()->get();
+        return $this->getAll()->fetch();
     }
 
     public function deleteCate($id)

@@ -36,7 +36,7 @@ class UserModel extends BaseModel
     }
 
     public function getUsers($id){
-        return $this->select()->where('id', '!=', $id)->where('role', '!=', '1')->get();
+        return $this->select()->where('id', '!=', $id)->where('role', '!=', '1')->fetch();
     }
     public function updateUser($data, $id)
     {
@@ -58,7 +58,7 @@ class UserModel extends BaseModel
         return $this->insert($this->table, $data);
     }
 
-    public function create($id,$data)
+    public function create($data)
     {
         // var_dump($this->tableName);
     }

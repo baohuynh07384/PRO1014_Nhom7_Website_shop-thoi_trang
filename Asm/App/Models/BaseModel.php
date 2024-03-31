@@ -68,10 +68,6 @@ abstract class BaseModel implements CrudInterface
 
 
 
-    public function delete(int $id): bool
-    {
-        return true;
-    }
 
     public function insertData($table, $data)
     {
