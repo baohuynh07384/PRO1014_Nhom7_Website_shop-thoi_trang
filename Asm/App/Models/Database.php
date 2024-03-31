@@ -14,7 +14,7 @@ class Database
 
     private static $dbHost = 'localhost';
 
-    private static $dbName = 'php';
+    private static $dbName = 'php2';
 
     private static $dbUser = 'root';
 
@@ -34,18 +34,6 @@ class Database
             return $conn;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
-        }
-    }
-
-    public function query($sql)
-    {
-        try {
-            $statement = $this->PDO()->prepare($sql);
-            $statement->execute();
-            return $statement;
-        } catch (Exception $ex) {
-            $mess = $ex->getMessage();
-            echo $mess;
         }
     }
 }

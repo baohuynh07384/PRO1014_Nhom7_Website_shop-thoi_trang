@@ -111,14 +111,15 @@ class BlogController extends BaseController
             }
         }
     }
-    function update($id){
+    function update($id)
+    {
         if (isset($_POST['edit'])) {
             $title = $_POST['name'];
             $author = $_POST['author'];
             $new_type = $_POST['new_type'];
             $status = $_POST['status'];
             $content = $_POST['content'];
-            $new_image =$_FILES['thumbnail']['name'];
+            $new_image = $_FILES['thumbnail']['name'];
             $old_image = $_POST['thumbnail_old'];
 
             if ($new_image != '') {
@@ -130,7 +131,6 @@ class BlogController extends BaseController
                 } else {
                     $update_image = $new_image;
                     var_dump($update_image);
-                  
                 }
             } else {
                 $update_image = $old_image;
@@ -138,24 +138,22 @@ class BlogController extends BaseController
         }
 
         $blogs = new BlogModel;
-        $updateResult = $blogs->edit(['title' => $title, 'author' => $author, 'new_type' => $new_type,
-         'status' => $status, 'content' => $content , 'thumbnail' => $update_image], $id);
+        $updateResult = $blogs->edit([
+            'title' => $title, 'author' => $author, 'new_type' => $new_type,
+            'status' => $status, 'content' => $content, 'thumbnail' => $update_image
+        ], $id);
 
         if ($updateResult) {
             if ($new_image != '') {
                 $target_path = UPLOAD_URL . basename($_FILES["thumbnail"]["name"]);
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'],$target_path);
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path);
                 unlink(UPLOAD_URL . $old_image);
             }
             $_SESSION['success'] = "Chỉnh sửa thành công";
             header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
             exit();
-
         } else {
             echo "Có lỗi xảy ra khi cập nhật danh mục.";
         }
-        }
-        }
-    
-
-
+    }
+}

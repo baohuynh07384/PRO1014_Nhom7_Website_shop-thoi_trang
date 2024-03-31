@@ -40,7 +40,7 @@ class RenderBase extends BaseController
         $this->load->render('layouts/admin/footer');
     }   
    
-    public function renderProduct(){
+    public function renderCreateProduct(){
         $this->load->render('layouts/admin/createproduct');
     }
        

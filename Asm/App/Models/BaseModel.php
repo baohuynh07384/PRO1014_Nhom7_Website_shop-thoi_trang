@@ -7,7 +7,7 @@ use App\Models\Database;
 use PDO;
 use Exception;
 use App\Models\QueryBuilder;
-
+use PDOException;
 abstract class BaseModel implements CrudInterface
 {
     use QueryBuilder;
@@ -16,6 +16,8 @@ abstract class BaseModel implements CrudInterface
 
     protected $name = "BaseModel";
     private $_query;
+    
+    protected $lastInsertedId;
 
     public function __construct()
     {
@@ -31,7 +33,7 @@ abstract class BaseModel implements CrudInterface
         return $this;
     }
 
-    public function orderBy(string $field, string $order = 'ASC')
+    public function orderBy( $field,  $order = 'ASC')
     {
         $this->_query = $this->_query . " ORDER BY " . $order;
 
@@ -53,7 +55,7 @@ abstract class BaseModel implements CrudInterface
     }
 
 
-    public function limit(int $limit = 10, int $offset = 0)
+    public function limit($number, $offset = 0)
     {
         $stmt = $this->_connection->PDO()->prepare($this->_query);
         $result = $stmt->execute();
@@ -64,10 +66,6 @@ abstract class BaseModel implements CrudInterface
     // public function update( array $data  ){
     //     return true;
     // }
-
-
-
-
 
     public function insertData($table, $data)
     {
@@ -82,8 +80,9 @@ abstract class BaseModel implements CrudInterface
             $fieldStr = rtrim($fieldStr, ',');
             $valueStr = rtrim($valueStr, ',');
             $sql = "INSERT INTO  $table ($fieldStr) VALUES ($valueStr)";
-
             $status = $this->query($sql);
+            var_dump($this->getInsertLastId());
+            var_dump($status);
             if (!$status)
                 return false;
         }
@@ -121,20 +120,34 @@ abstract class BaseModel implements CrudInterface
             $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition;
         }
         $status = $this->query($sql);
-        if(!$status)
+        if (!$status)
             return false;
         return true;
     }
+
 
     public function query($sql)
     {
         try {
             $statement = $this->_connection->PDO()->prepare($sql);
             $statement->execute();
+            $this->lastInsertedId = $this->_connection->PDO()->lastInsertId();
+            // echo '$this->lastInsertedId';
+            // var_dump($this->lastInsertedId);
+            // echo '====$this->lastInsertedId';
+            // var_dump($statement);
+
+            // return $this->lastInsertedId;
             return $statement;
             } catch (Exception $ex) {
             $mess = $ex->getMessage();
-            echo $mess;
+            echo $mess; 
         }
     }
+
+    public function getInsertLastId(){
+        return $this->_connection->PDO()->lastInsertId();
+       
+    }
+
 }
