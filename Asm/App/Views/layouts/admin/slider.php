@@ -1,4 +1,7 @@
 <!-- Main Sidebar Container -->
+<!-- <div class="preloader flex-column justify-content-center align-items-center">
+  <img class="animation__shake" src="App/Views/layouts/admin/assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+</div> -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
 
@@ -117,6 +120,29 @@
               Đơn hàng
             </p>
           </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fa-regular fa-newspaper"></i>
+            <p>
+              Bài viết
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?url=BlogController/CreateBlogPage" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tạo bài viết</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="?url=BlogController/ListBlogPage" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách sách bài viết</p>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>

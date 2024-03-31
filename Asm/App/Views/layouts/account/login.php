@@ -1,4 +1,5 @@
-<?
+<?php
+
 use App\Core\Sessions;
 
 ?>
@@ -22,13 +23,13 @@ use App\Core\Sessions;
             <form action="?url=LoginController/handleLogin" method="post" id="form">
                 <h1>Đăng nhập</h1>
                 <input type="text" placeholder="Tên đăng nhập" name="username" value="" id="username">
-                <?php if (isset($_SESSION['username'])): ?>
+                <?php if (isset($_SESSION['username'])) : ?>
                     <p style="color: red; margin: 0px;">
                         <?php echo Sessions::display_session('username'); ?>
                     </p>
                 <?php endif; ?>
                 <input type="password" placeholder="Mật khẩu" name="password" value="" id="password">
-                <?php if (isset($_SESSION['password'])): ?>
+                <?php if (isset($_SESSION['password'])) : ?>
                     <p style="color: red; margin: 0px;">
                         <?php echo Sessions::display_session('password'); ?>
                     </p>
@@ -46,17 +47,10 @@ use App\Core\Sessions;
                     <a href="?url=ClientHomeController/ClientHomePage" class="close" tabindex="0" role="button"></a>
                     <h1>Xin chào</h1>
                     <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
-                    <button class="hidden"><a href="?url=RegristerController/RegristerPage"
-                            style="background-color:#D10024; color: white;">Đăng ký</a></button>
+                    <button class="hidden"><a href="?url=RegristerController/RegristerPage" style="background-color:#D10024; color: white;">Đăng ký</a></button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="App/Views/layouts/account/assets/js/script.js"></script>
-
-
-    </script>
-</body>
-
-</html>

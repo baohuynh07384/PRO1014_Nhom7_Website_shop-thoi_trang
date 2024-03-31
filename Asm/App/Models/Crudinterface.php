@@ -21,17 +21,17 @@ interface CrudInterface{
      * @param int $id
      * @return mixed
      */
-    public function create(int $id, array $data);
+    public function create(array $data);
 
     /**
      * phương thức delete() dùng để xóa dữ liệu 
-     * @param int $id 
+     * @param array $data 
      */
-    public function delete(int $id): bool;
+    public function delete(int $id);
 
     /**
      * phương thức update() dùng để cập nhập dữ liệu
      * @param int $id
      */
-    public function update(int $id, array $data);
+    public function update( array $data);
 }

@@ -62,7 +62,7 @@ trait QueryBuilder
         return $this;
     }
 
-    public function limit($number, $offset = 0)
+    public function limit(int $number, int $offset = 0)
     {
         $this->limit = " LIMIT $offset, $number";
         return $this;
@@ -73,7 +73,7 @@ trait QueryBuilder
      * $this->db->orderBy('id','DESC')
      * $this->db->orderBy('id desc, name asc')
      */
-    public function orderBy($field, $type = 'ASC')
+    public function orderBy(string $field, string $type = 'ASC')
     {
         $fileArr = array_filter(explode(',', $field));
         if (!empty($fileArr && count($fileArr) >= 2)) {
@@ -117,7 +117,7 @@ trait QueryBuilder
         return $insertStatus;
     }
 
-    public function update($data)
+    public function update( array $data)
     {
         $whereUpdate  = str_replace('WHERE', '', $this->where);
         $whereUpdate  = trim($whereUpdate);
@@ -126,7 +126,7 @@ trait QueryBuilder
         return $updateStatus;
     }
 
-    public function delete()
+    public function delete(int $id)
     {
         $whereDelete  = str_replace('WHERE', '', $this->where);
         $whereDelete  = trim($whereDelete);
@@ -150,7 +150,7 @@ trait QueryBuilder
         return false;
     }
 
-    public function get()
+    public function fetch()
     {
         // echo $this->innerJoin;
         $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->leftJoin $this->where $this->groupBy  $this->orderBy  $this->limit";

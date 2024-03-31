@@ -1,14 +1,9 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "738d8392182e8644d04b53f2e7165885",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
             "version": "4.22.1",
+            "version_normalized": "4.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ckeditor/ckeditor4-releases.git",
@@ -20,7 +15,9 @@
                 "reference": "0d51138b0a258165ac09724e8f5cda67cf9126a3",
                 "shasum": ""
             },
+            "time": "2023-06-30T13:35:30+00:00",
             "type": "library",
+            "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+",
@@ -52,16 +49,9 @@
                 "source": "https://github.com/ckeditor/ckeditor4",
                 "wiki": "https://ckeditor.com/docs/ckeditor4/latest/"
             },
-            "time": "2023-06-30T13:35:30+00:00"
+            "install-path": "../ckeditor/ckeditor"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "dev": true,
+    "dev-package-names": []
 }

@@ -32,13 +32,12 @@ abstract class BaseModel implements CrudInterface
         return $this;
     }
 
-    public function orderBy(string $order = 'ASC')
+    public function orderBy(string $field, string $order = 'ASC')
     {
         $this->_query = $this->_query . "order by " . $order;
 
         return $this;
     }
-
 
     public function get()
     {
@@ -55,7 +54,7 @@ abstract class BaseModel implements CrudInterface
     }
 
 
-    public function limit(int $limit = 10)
+    public function limit(int $limit = 10, int $offset = 0)
     {
         $stmt = $this->_connection->PDO()->prepare($this->_query);
         $result = $stmt->execute();
@@ -63,9 +62,13 @@ abstract class BaseModel implements CrudInterface
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update(int $id, array $data)
-    {
-    }
+    // public function update( array $data  ){
+    //     return true;
+    // }
+
+
+
+
     public function delete(int $id): bool
     {
         return true;
@@ -99,9 +102,7 @@ abstract class BaseModel implements CrudInterface
         if (!empty($data)) {
             $updateStr = '';
             foreach ($data as $key => $value) {
-                if (strpos($value, ' ') !== false) {
-                    $updateStr .= "$key=$value,";
-                } else if ($value === '' || $value === null) {
+                if ($value === '' || $value === null) {
                     $updateStr .= "$key=NULL,";
                 } else {
                     $updateStr .= "$key='$value',";
@@ -109,6 +110,7 @@ abstract class BaseModel implements CrudInterface
             }
             $updateStr = rtrim($updateStr, ',');
             $sql = "UPDATE $table SET $updateStr";
+            var_dump($sql);
             if (!empty($condition)) {
                 $sql = "UPDATE $table SET $updateStr WHERE $condition";
             }
@@ -140,8 +142,6 @@ abstract class BaseModel implements CrudInterface
         } catch (Exception $ex) {
             $mess = $ex->getMessage();
             echo $mess;
-            die();
         }
     }
 }
-

@@ -14,26 +14,18 @@ class RenderBase extends BaseController
      * chỗ này là phương thức render của admin 
      * 
      */
-  
-  
-   
-   
     Public function renderCategories(){
         $this->load->render('layouts/admin/createcategories');
     }
     public function renderListCat(){
         $this->load->render('layouts/admin/list-categories');
     }
-   
     public function renderAccount(){
         $this->load->render('layouts/admin/createaccount');
     }
     public function renderListaccount(){
         $this->load->render('layouts/admin/list_account');
     }
-
-  
-
     public function renderCart(){
         $this->load->render('layouts/admin/list-cart');
     }
@@ -58,12 +50,14 @@ class RenderBase extends BaseController
         $this->load->render('layouts/admin/list-product');
     }
     
+    public function renderCreateBlog(){
+        $this->load->render('layouts/admin/createblog');
+    }
+    
     /**
      * từ chổ này là phương thức render của client 
      * 
      */
- 
-
     public function renderCatePage(){
         $this->load->render('layouts/client/store');
     }
@@ -93,9 +87,6 @@ class RenderBase extends BaseController
     public function renderClientHome(){
         $this->load->render('layouts/client/home');
     }
-
-
-
     public function renderCartPage(){
         $this->load->render('layouts/client/cart');
     }

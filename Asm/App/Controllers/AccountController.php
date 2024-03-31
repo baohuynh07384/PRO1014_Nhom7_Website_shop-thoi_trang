@@ -32,6 +32,6 @@ class AccountController extends BaseController
         $this->_renderBase->renderAccount();
         $this->_renderBase->renderAdminFooter();
     }
-
-  
+    
+    
 }

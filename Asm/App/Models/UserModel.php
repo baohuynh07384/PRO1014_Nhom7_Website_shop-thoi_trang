@@ -37,7 +37,7 @@ class UserModel extends BaseModel{
         return  $this->select()->where('status', '=', $status)->orwhere('username', '=', $username)->first();
     }
     
-    public function create(int $id, $data){
+    public function create( $data){
         var_dump($this->tableName);
     }
 }
