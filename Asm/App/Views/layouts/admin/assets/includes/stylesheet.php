@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -22,6 +24,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/toastr/toastr.min.css">
+  
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="App/Views/layouts/admin/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -35,3 +38,5 @@
 
 
 
+  <link rel="stylesheet" href="App/Views/layouts/admin/assets/dist/css/custom.css">
+</head>

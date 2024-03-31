@@ -4,11 +4,12 @@ namespace App\Core;
 
 class Route
 {
+    
     public $url;
     public $nameController = "ClientHomeController";
     public $nameMethod = "home";
     public $path = 'App/Controllers/';
-    public $controller;
+    public Object $controller;
     function __construct()
     {
         $this->request();
@@ -78,5 +79,6 @@ class Route
                 }
             }
         }
+        
     }
 }

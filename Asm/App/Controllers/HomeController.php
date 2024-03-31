@@ -19,7 +19,7 @@ class HomeController extends BaseController
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
      * 
-    */
+     */
     function __construct()
     {
         parent::__construct();
@@ -32,7 +32,8 @@ class HomeController extends BaseController
     {
         $this->homePage();
     }
-    
+
+
     function homePage()
     {
         $data = [
@@ -44,7 +45,6 @@ class HomeController extends BaseController
         $this->_renderBase->renderSilder();
         $this->load->render('layouts/admin/dashboard', $data);
         $this->_renderBase->renderAdminFooter();
-        
     }
 
   
