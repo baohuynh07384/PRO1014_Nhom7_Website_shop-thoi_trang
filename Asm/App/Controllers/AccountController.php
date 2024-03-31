@@ -105,7 +105,7 @@ class AccountController extends BaseController
                 } else if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                     $hash_password = password_hash($password, PASSWORD_DEFAULT);
                     $userModel->createUser(['name' => $name, 'email' => $email, 'password' => $hash_password, 'address' => $address, 'phone' => $phone, 'status' => $status, 'role' => $role, 'image' => basename($_FILES["image"]["name"])]);
-                    $_SESSION['success'] = 'Thêm sản phẩm thành công';
+                    $_SESSION['success'] = 'Thêm tài khoản thành công';
                     header('Location: /?url=AccountController/listAccount');
                     exit;
                 } else {
@@ -142,16 +142,6 @@ class AccountController extends BaseController
                 $role = $_POST['role'] ?? "";
                 $new_image = $_FILES['image']['name'];
                 $old_image = $_POST['image_old'];
-                $data = [
-                    'name' => $_POST['name'],
-                    'email' => $_POST['email'],
-                    'password' => $_POST['password'],
-                    'address' => $_POST['address'],
-                    'phone' => $_POST['phone'],
-                    'status' => $_POST['option'],
-                    'role' => $_POST['role'],
-                    'image' => $_FILES["image"]["name"],
-                ];
                 if ($new_image != '') {
                     $update_image = $new_image;
                     if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
@@ -163,30 +153,6 @@ class AccountController extends BaseController
                     }
                 } else {
                     $update_image = $old_image;
-                }
-
-                foreach ($data as $field => $value) {
-                    if (Validation::CheckEmtpy($value)) {
-                        $errors[$field] = "Vui lòng nhập $field";
-                    } else {
-                        if ($field === 'email' && !Validation::ValidationEmail($value)) {
-                            $errors[$field] = "Email không đúng định dạng.";
-                        } else if ($field === 'password' && !Validation::ValidationPassword($value)) {
-                            $errors[$field] = "Mật khẩu phải có ít nhất 8 ký tự, gồm chữ cái viết hoa, chữ cái viết thường và số.";
-                        } else {
-                            if (Validation::CheckEmtpy($phone)) {
-                                $errors['phone'] = "Vui lòng nhập số điện thoại.";
-                            } else if (!Validation::ValidationPhone($phone)) {
-                                $errors['phone'] = "số điện thoại phải là số.";
-                            }
-                        }
-                    }
-                }
-                if (!empty($errors)) {
-                    foreach ($errors as $key => $error) {
-                        Sessions::addSession($key, $error);
-                    }
-                    return $this->redirect("/?url=AccountController/edit/$id");
                 }
                 $userModel = new UserModel;
                 $hash_password = password_hash($password, PASSWORD_DEFAULT);
