@@ -59,7 +59,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-solid fa-bars"></i>
+            <i class="nav-icon fa-brands fa-product-hunt"></i>
             <p>
               Sản phẩm
               <i class="right fas fa-angle-left"></i>
