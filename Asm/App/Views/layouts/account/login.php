@@ -52,5 +52,8 @@ use App\Core\Sessions;
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="App/Views/layouts/account/assets/js/script.js"></script>
+    </body>
+
+</html>

@@ -16,7 +16,7 @@ trait QueryBuilder
     public $insert = '';
     public $leftJoin = '';
     public $groupBy = '';
-
+    public $lastInsertedId = null;
     public $count = '';
 
     public function table($tableName)
@@ -143,7 +143,7 @@ trait QueryBuilder
 
     public function lastId()
     {
-        return $this->lastInsertId();
+        return $this->lastInsertedId;
     }
 
     public function first()

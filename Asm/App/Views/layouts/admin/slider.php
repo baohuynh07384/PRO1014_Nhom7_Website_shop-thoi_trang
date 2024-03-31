@@ -14,8 +14,7 @@
         <img src="App/Views/layouts/admin/assets/dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Men's fashion seller
-        </a>
+        <a href="#" class="d-block">Men Wear
       </div>
     </div>
 

@@ -35,6 +35,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                     <th scope="col">Tên người dùng</th>
                     <th scope="col">Ngày tạo</th>
                     <th scope="col">Trạng thái</th>
+                    <th scope="col">Vai trò</th>
                     <th scope="col">Thao tác</th>
                   </tr>
                 </thead>
@@ -44,6 +45,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
 
                     foreach ($account as $items) :
                       $status = $items['status'] == 1 ? "Hiện" : "Ẩn";
+                      $role = $items['role'] == 2 ? "Nhân viên" : "Người dùng";
                      ?>
                              <tr class="">
                              <td scope="row"><?=  $items['id'] ?> </td>
@@ -53,6 +55,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                              <td><?=$items['name'] ?></td>
                              <td><?= $items['create_at'] ?></td>
                              <td><?= $status ?></td>
+                             <td><?= $role ?></td>
                              <td>
                              <div class="row">
                             <form action="/?url=AccountController/edit/<?=$items["id"] ?>" method="post">
@@ -94,7 +97,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
         </div>
         <form action="/?url=AccountController/delete/<?php echo $items['id'] ?>" method="POST">
           <div class="modal-body">
-            <input type="hidden" name="delete_id" id="" class="delete_id_cate">
+            <input type="hidden" name="delete_id" id="" class="delete_id_user">
             <p>Bạn có chắc chắn muốn xóa ?</p>
           </div>
           <div class="modal-footer justify-content-between">

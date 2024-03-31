@@ -3,7 +3,7 @@
 use App\Core\Sessions;
 ?>
 <div class="content-wrapper">
-    <form action="?url=BlogController/create" enctype="multipart/form-data" method="post" class="container-fluid">
+    <form action="?url=BlogController/create" enctype="multipart/form-data" method="post" class="container-fluid" id="addBlogForm">
         <div class="card card-primary mb-0">
             <div class="card-header">
                 <h3 class="card-title">Thêm bài viết</h3>
@@ -11,7 +11,7 @@ use App\Core\Sessions;
             <div class="card-body ">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tiêu đề</label>
-                    <input type="text" name="name" class="form-control" placeholder="Nhập tên tiêu đề" value="">
+                    <input type="text" name="name" class="form-control" placeholder="Nhập tên tiêu đề" value="" required>
                     <?php if (isset($_SESSION['tiêu đề'])) : ?>
                         <p style="color: red; margin: 0px;">
                             <?php echo Sessions::display_session('tiêu đề'); ?>
@@ -22,9 +22,9 @@ use App\Core\Sessions;
                     <div class="form-group col-6">
                         <label for="exampleInputFile">Ảnh đại diện</label>
                         <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="image" onchange="updateFileName(this)">
-                                <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
+                            <div>
+                                <input type="file" class="custom-file-input" id="customFile" name="image" onchange="updateFileName(this)" required>
+                                <label class="custom-file-label" for="customFile" >Chọn hình ảnh</label>
                             </div>
                         </div>
                         <?php if (isset($_SESSION['ảnh'])) : ?>
@@ -35,7 +35,7 @@ use App\Core\Sessions;
                     </div>
                     <div class="form-group col-6">
                         <label for="quantity">Tác giả</label>
-                        <input type="text" name="author" class="form-control" placeholder="Nhập tác giả" value="">
+                        <input type="text" name="author" class="form-control" placeholder="Nhập tác giả" value="" required>
                         <?php if (isset($_SESSION['tác giả'])) : ?>
                             <p style="color: red; margin: 0px;">
                                 <?php echo Sessions::display_session('tác giả'); ?>
@@ -46,7 +46,7 @@ use App\Core\Sessions;
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="">Thể loại</label>
-                        <input type="text" name="new_type" class="form-control" placeholder="Nhập loại tin" value="">
+                        <input type="text" name="new_type" class="form-control" placeholder="Nhập loại tin" value="" required>
                         <?php if (isset($_SESSION['thể loại'])) : ?>
                             <p style="color: red; margin: 0px;">
                                 <?php echo Sessions::display_session('thể loại'); ?>
@@ -55,7 +55,7 @@ use App\Core\Sessions;
                     </div>
                     <div class="form-group col-6">
                         <label for="status">Trạng thái</label>
-                        <select name="status" class="form-control">
+                        <select name="status" class="form-control" required>
                             <option value="1">Hiện</option>
                             <option value="0">Ẩn</option>
                         </select>
@@ -63,7 +63,7 @@ use App\Core\Sessions;
                 </div>
                 <div class="form-group">
                     <label for="">Nội dung</label>
-                    <textarea id="summernote" name="content"></textarea>
+                    <textarea id="summernote" name="content" required></textarea>
                     <?php if (isset($_SESSION['nội dung'])) : ?>
                         <p style="color: red; margin: 0px;">
                             <?php echo Sessions::display_session('nội dung'); ?>

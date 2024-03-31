@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 
   <?php
@@ -8,11 +7,6 @@
     .error {
       color: red;
     }
-=======
-<?php
-  include_once"App/Views/layouts/admin/assets/includes/stylesheet.php";
-?>
->>>>>>> 6ea4a3d (blog)
 
   </style>
 </head>

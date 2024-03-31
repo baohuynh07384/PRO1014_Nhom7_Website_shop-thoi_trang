@@ -7,6 +7,7 @@ use App\Models\Database;
 use PDO;
 use Exception;
 use App\Models\QueryBuilder;
+use PDOException;
 
 abstract class BaseModel implements CrudInterface
 {

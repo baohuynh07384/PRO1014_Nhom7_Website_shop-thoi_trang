@@ -5,7 +5,7 @@ use App\Core\Sessions;
 
 ?>
 <div class="content-wrapper">
-    <form action="?url=BlogController/update/<?= $datablog['id'] ?>" enctype="multipart/form-data" method="post" class="container-fluid">
+    <form action="?url=BlogController/update/<?= $datablog['id'] ?>" enctype="multipart/form-data" method="post" class="container-fluid" id="editBlogForm">
         <div class="card card-primary mb-0">
             <div class="card-header">
                 <h3 class="card-title">Thêm bài viết</h3>

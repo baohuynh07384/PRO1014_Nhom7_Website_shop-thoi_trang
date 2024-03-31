@@ -17,21 +17,21 @@ use App\Core\Sessions;
 
   <div class="container" id="container">
     <div class="form-container sign-up">
-      <form action="?url=RegristerController/handleRegister" method="post">
+      <form action="?url=RegristerController/handleRegister" method="post" id="register">
         <h1>Đăng ký</h1>
-        <input type="text" placeholder="Email" name="email">
+        <input type="text" placeholder="Email" name="email" required>
         <?php if (isset($_SESSION['email'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('email'); ?>
           </p>
         <?php endif; ?>
-        <input type="password" placeholder="Mật khẩu" name="password">
+        <input type="password" placeholder="Mật khẩu" name="password" required>
         <?php if (isset($_SESSION['password'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('password'); ?>
           </p>
         <?php endif; ?>
-        <input type="text" placeholder="Số điện thoại" name="phone">
+        <input type="text" placeholder="Số điện thoại" name="phone" required>
         <?php if (isset($_SESSION['phone'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('phone'); ?>
@@ -53,7 +53,7 @@ use App\Core\Sessions;
       </div>
     </div>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
   <script src="App/Views/layouts/account/assets/js/script.js"></script>
 </body>
 

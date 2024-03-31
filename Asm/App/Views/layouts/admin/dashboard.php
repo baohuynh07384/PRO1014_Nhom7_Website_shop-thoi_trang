@@ -21,12 +21,12 @@
 
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+            <h3><?= $data['blogs']; ?></h3>
 
-              <p>Đơn hàng</p>
+              <p>Bài viết</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+            <i class="fa-regular fa-newspaper"></i>
             </div>
             <a href="#" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
           </div>
