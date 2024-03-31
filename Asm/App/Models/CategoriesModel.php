@@ -23,7 +23,6 @@ class CategoriesModel extends BaseModel
     {
         $page = ($number - 1) * $offset;
 
-        return $this->get($offset, $page);
     }
 
     public function create(int $id, array $data)

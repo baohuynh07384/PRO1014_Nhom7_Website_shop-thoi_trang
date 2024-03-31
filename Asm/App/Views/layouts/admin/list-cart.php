@@ -38,8 +38,7 @@
                             <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
-                   
-                   
+
                 </tbody>
             </table>
         </div>

@@ -34,15 +34,6 @@ class ClientHomeController extends BaseController
 
     function ClientHomeController()
     {
-        if (isset($_SESSION['user'])) {
-            if ($_SESSION['user']['role'] == 1 || $_SESSION['user']['role'] == 2) {
-                header("Location: /?url=HomeController/homePage");
-                exit();
-            } else if ($_SESSION['user']['role'] == 0) {
-                header("Location: /?url=ClientHomeController/ClientHomePage");
-                exit();
-            }
-        }
         $this->ClientHomePage();
     }
 

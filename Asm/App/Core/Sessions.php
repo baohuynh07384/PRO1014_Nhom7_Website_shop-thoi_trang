@@ -55,7 +55,7 @@ class Sessions {
     
     public static function display_session( $session_name ){
         echo $_SESSION[$session_name];
-        self::remove_session($session_name);    
+        self::remove_session($session_name);
     }
     
     public static function remove_session( $session_name = '' ){

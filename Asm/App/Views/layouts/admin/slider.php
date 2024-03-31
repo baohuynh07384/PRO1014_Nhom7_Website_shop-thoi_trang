@@ -95,7 +95,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="?url=ListaccountController/ListaccountPage" class="nav-link">
+              <a href="?url=AccountController/listAccount" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách tài khoản</p>
               </a>

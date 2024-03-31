@@ -28,9 +28,6 @@ class RenderBase extends BaseController
     public function renderAccount(){
         $this->load->render('layouts/admin/createaccount');
     }
-    public function renderListAccount(){
-        $this->load->render('layouts/admin/list_account');
-    }
 
   
 

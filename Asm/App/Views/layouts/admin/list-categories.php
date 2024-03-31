@@ -72,8 +72,6 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
 
 
                     </tbody>
-                   
-                </tbody>
                 </table>
                
               </div>

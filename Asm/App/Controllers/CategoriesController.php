@@ -108,7 +108,6 @@ class CategoriesController extends BaseController
             $status = $_POST['option'] ?? "";
             $new_image = $_FILES['image']['name'];
             $old_image = $_POST['image_old'];
-        
             if ($new_image != '') {
                 $update_image = $new_image;
                 if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
@@ -121,10 +120,8 @@ class CategoriesController extends BaseController
             } else {
                 $update_image = $old_image;
             }
-        
             $cateModel = new CategoriesModel;
             $updateResult = $cateModel->updateCate(['name' => $name, 'status' => $status, 'image' => $update_image], $id);
-        
             if ($updateResult) {
                 if ($new_image != '') {
                     $target_path = UPLOAD_URL . basename($_FILES["image"]["name"]);
@@ -134,12 +131,12 @@ class CategoriesController extends BaseController
                 $_SESSION['success'] = "Chỉnh sửa thành công";
                 header("Location: " . ROOT_URL . "/?url=CategoriesController/ListCatPage");
             exit();
-               
+
             } else {
                 echo "Có lỗi xảy ra khi cập nhật danh mục.";
             }
-            
+
         }
-        
+
     }
 }
