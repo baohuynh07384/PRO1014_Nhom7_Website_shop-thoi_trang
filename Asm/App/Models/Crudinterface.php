@@ -25,7 +25,7 @@ interface CrudInterface{
 
     /**
      * phương thức delete() dùng để xóa dữ liệu 
-     * @param array $data 
+     * @param array $data
      */
     public function delete();
 

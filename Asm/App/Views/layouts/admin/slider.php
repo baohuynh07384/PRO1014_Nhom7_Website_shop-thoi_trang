@@ -112,16 +112,16 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="?url=CartController/CartPage" class="nav-link ">
             <i class="nav-icon fas fa-solid fa-bars"></i>
             <p>
               Đơn hàng
             </p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
-          <a href="#" class="nav-link active">
+          <a href="#" class="nav-link">
             <i class="nav-icon fa-regular fa-newspaper"></i>
             <p>
               Bài viết

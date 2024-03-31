@@ -38,6 +38,7 @@ class AccountController extends BaseController
         $this->_renderBase->renderAdminFooter();
     }
 
+
     public function listAccount()
     {
         $account = $this->_account->getUsers($_SESSION['user']['id']);
@@ -205,6 +206,7 @@ class AccountController extends BaseController
             exit();
         }
     }
+
 
 
 }
