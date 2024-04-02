@@ -43,7 +43,7 @@ class CategoriesController extends BaseController
 
     public function ListCatPage()
     {
-        $data= $this->_categories->getListCate();
+        $data = $this->_categories->getListCate();
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
         $this->load->render('layouts/admin/list-categories', $data);
@@ -66,11 +66,11 @@ class CategoriesController extends BaseController
             ];
 
             foreach ($data as $field => $value) {
-                if(Validation::CheckEmtpy($value)){
+                if (Validation::CheckEmtpy($value)) {
                     $errors[$field] = "Vui lòng nhập $field";
                 }
             }
-            if(!empty($errors)){
+            if (!empty($errors)) {
                 foreach ($errors as $key => $error) {
                     Sessions::addSession($key, $error);
                 }
@@ -122,6 +122,7 @@ class CategoriesController extends BaseController
             $status = $_POST['option'] ?? "";
             $new_image = $_FILES['image']['name'];
             $old_image = $_POST['image_old'];
+
             if ($new_image != '') {
                 $update_image = $new_image;
                 if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
@@ -134,23 +135,25 @@ class CategoriesController extends BaseController
             } else {
                 $update_image = $old_image;
             }
-            $cateModel = new CategoriesModel;
-            $updateResult = $cateModel->updateCate(['name' => $name, 'status' => $status, 'image' => $update_image], $id);
-            if ($updateResult) {
-                if ($new_image != '') {
-                    $target_path = UPLOAD_URL . basename($_FILES["image"]["name"]);
-                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
-                    unlink(UPLOAD_URL . $old_image);
-                }
-                $_SESSION['success'] = "Chỉnh sửa thành công";
-                header("Location: " . ROOT_URL . "/?url=CategoriesController/ListCatPage");
+        }
+
+        $cateModel = new CategoriesModel;
+        $updateResult = $cateModel->updateCate(['name' => $name, 'status' => $status, 'image' => $update_image], $id);
+
+        if ($updateResult) {
+            if ($new_image != '') {
+                $target_path = UPLOAD_URL . basename($_FILES["image"]["name"]);
+                move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                unlink(UPLOAD_URL . $old_image);
+            }
+            $_SESSION['success'] = "Chỉnh sửa thành công";
+            header("Location: " . ROOT_URL . "/?url=CategoriesController/ListCatPage");
             exit();
 
-            } else {
-                echo "Có lỗi xảy ra khi cập nhật danh mục.";
-            }
-
+        } else {
+            echo "Có lỗi xảy ra khi cập nhật danh mục.";
         }
 
     }
+
 }
