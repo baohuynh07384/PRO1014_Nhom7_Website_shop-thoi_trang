@@ -42,8 +42,6 @@ class AccountController extends BaseController
     public function listAccount()
     {
         $account = $this->_account->getUsers($_SESSION['user']['id']);
-        // var_dump($account);
-        // die;
         $data = ['account' => $account];
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
@@ -192,6 +190,7 @@ class AccountController extends BaseController
     {
         if ($_SESSION['user']['role'] == 1) {
             if (isset($_POST['deleteAccount'])) {
+                $id = $_POST['delete_id_acc'];
                 $users = new UserModel;
                 $resultDelete = $users->deleteUser($id);
 

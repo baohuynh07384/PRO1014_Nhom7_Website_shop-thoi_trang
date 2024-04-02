@@ -62,7 +62,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                               <input type="hidden" name="id_update" value="<?=$items["id"] ?>">
                               <button type="submit" name="updateAccount" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
                             </form>
-                              <button type="button" name="" value="<?=$items["id"] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
+                              <button type="button" name="" value="<?=$items["id"] ?>" class="btn btn-outline-danger btn-sm deletebtn_acc" data-toggle="modal" data-target="#DeleteModalAcc"><i class="fa fa-trash"></i></button>       
                           </div>
                              </td>
                              </tr>
@@ -86,7 +86,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
     <!-- /.container-fluid -->
   </section>
   <!-- Delete-modal -->
-  <div class="modal fade" id="DeleteModal">
+  <div class="modal fade" id="DeleteModalAcc">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -97,7 +97,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
         </div>
         <form action="/?url=AccountController/delete/<?php echo $items['id'] ?>" method="POST">
           <div class="modal-body">
-            <input type="hidden" name="delete_id" id="" class="delete_id_user">
+            <input type="hidden" name="delete_id_acc" id="" class="delete_id_user">
             <p>Bạn có chắc chắn muốn xóa ?</p>
           </div>
           <div class="modal-footer justify-content-between">

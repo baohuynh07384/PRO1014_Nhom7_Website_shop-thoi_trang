@@ -19,19 +19,19 @@ use App\Core\Sessions;
     <div class="form-container sign-up">
       <form action="?url=RegristerController/handleRegister" method="post" id="register">
         <h1>Đăng ký</h1>
-        <input type="text" placeholder="Email" name="email" required>
+        <input type="text" placeholder="Email" name="email" >
         <?php if (isset($_SESSION['email'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('email'); ?>
           </p>
         <?php endif; ?>
-        <input type="password" placeholder="Mật khẩu" name="password" required>
+        <input type="password" placeholder="Mật khẩu" name="password" >
         <?php if (isset($_SESSION['password'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('password'); ?>
           </p>
         <?php endif; ?>
-        <input type="text" placeholder="Số điện thoại" name="phone" required>
+        <input type="text" placeholder="Số điện thoại" name="phone" >
         <?php if (isset($_SESSION['phone'])): ?>
           <p style="color: red; margin: 0px;">
             <?php echo Sessions::display_session('phone'); ?>

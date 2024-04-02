@@ -78,7 +78,7 @@ class UserModel extends BaseModel
 
     public function countUsers()
     {
-        $data = $this->select('COUNT(users.id) AS users')->table('users')->first();
+        $data = $this->select('COUNT(users.id) AS users')->table('users')->where('role', '=', 0)->first();
        
         if ($data) {
             return $data['users']; 

@@ -303,21 +303,19 @@
       var cate_id = $(this).val();
       // console.log(cate_id);
       $('.delete_id_cate').val(cate_id);
-      $('#DeleteModal').modal('show');
+      $('#DeleteModalCate').modal('show');
     });
-    $('.deletebtn').click(function (e) {
+    $('.deletebtn_acc').click(function (e) {
       e.preventDefault();
       var user_id = $(this).val();
-      // console.log(cate_id);
       $('.delete_id_user').val(user_id);
-      $('#DeleteModal').modal('show');
+      $('#DeleteModalAcc').modal('show');
     });
-    $('.deletebtn').click(function (e) {
+    $('.deletebtn_blog').click(function (e) {
       e.preventDefault();
       var blog_id = $(this).val();
-      // console.log(cate_id);
       $('.delete_id_blog').val(blog_id);
-      $('#DeleteModal').modal('show');
+      $('#DeleteModalBlog').modal('show');
     });
 
 

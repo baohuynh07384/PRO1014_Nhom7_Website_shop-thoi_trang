@@ -62,7 +62,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                                                             <input type="hidden" name="id_update" value="<?= $item['id'] ?>">
                                                             <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
                                                         </form>
-                                                        <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn_blog" data-toggle="modal" data-target="#DeleteModalBlog"><i class="fa fa-trash"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -77,7 +77,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
         </div>
     </section>
 
-    <div class="modal fade" id="DeleteModal">
+    <div class="modal fade" id="DeleteModalBlog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -88,7 +88,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
         </div>
         <form action="/?url=BlogController/delete/<?php echo $item['id'] ?>" method="POST">
           <div class="modal-body">
-            <input type="hidden" name="delete_id" id="" class="delete_id_blog">
+            <input type="hidden" name="delete_blog_id" id="" class="delete_id_blog">
             <p>Bạn có chắc chắn muốn xóa ?</p>
           </div>
           <div class="modal-footer justify-content-between">
