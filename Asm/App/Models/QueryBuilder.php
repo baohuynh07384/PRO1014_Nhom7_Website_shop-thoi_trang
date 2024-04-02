@@ -131,7 +131,7 @@ trait QueryBuilder
         return $updateStatus;
     }
 
-    public function delete(int $id)
+    public function delete()
     {
         $whereDelete  = str_replace('WHERE', '', $this->where);
         $whereDelete  = trim($whereDelete);

@@ -33,11 +33,9 @@ abstract class BaseModel implements CrudInterface
         return $this;
     }
 
-<<<<<<< HEAD
+
     public function orderBy( $field,  $order = 'ASC')
-=======
-    public function orderBy(string $field, string $order = 'ASC')
->>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
+
     {
         $this->_query = $this->_query . " ORDER BY " . $order;
 

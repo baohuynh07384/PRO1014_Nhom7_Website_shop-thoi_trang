@@ -9,13 +9,9 @@ class ProductModel extends BaseModel{
     public $tableName = 'products';
 
     public $table = "products";
-<<<<<<< HEAD
     
     public $product_id = null;
-=======
 
-
->>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
     public function __construct(){
   
         parent::__construct();

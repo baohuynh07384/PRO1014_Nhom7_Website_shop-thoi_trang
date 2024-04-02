@@ -1,10 +1,7 @@
 <?php
 
 use App\Core\Sessions;
-<<<<<<< HEAD
 use App\Controllers\ProductController;
-=======
->>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
 ?>
 <div class="content-wrapper">
     <form method="post" enctype="multipart/form-data" class="container-fluid" action="/?url=ProductController/create">
