@@ -81,8 +81,7 @@ abstract class BaseModel implements CrudInterface
             $valueStr = rtrim($valueStr, ',');
             $sql = "INSERT INTO  $table ($fieldStr) VALUES ($valueStr)";
             $status = $this->query($sql);
-            var_dump($this->getInsertLastId());
-            var_dump($status);
+         
             if (!$status)
                 return false;
         }
@@ -129,15 +128,10 @@ abstract class BaseModel implements CrudInterface
     public function query($sql)
     {
         try {
-            $statement = $this->_connection->PDO()->prepare($sql);
+            $conn = $this->_connection->PDO();
+            $statement = $conn->prepare($sql);
             $statement->execute();
-            $this->lastInsertedId = $this->_connection->PDO()->lastInsertId();
-            // echo '$this->lastInsertedId';
-            // var_dump($this->lastInsertedId);
-            // echo '====$this->lastInsertedId';
-            // var_dump($statement);
-
-            // return $this->lastInsertedId;
+            $this->lastInsertedId = $conn->lastInsertId();
             return $statement;
             } catch (Exception $ex) {
             $mess = $ex->getMessage();
@@ -146,7 +140,7 @@ abstract class BaseModel implements CrudInterface
     }
 
     public function getInsertLastId(){
-        return $this->_connection->PDO()->lastInsertId();
+        return $this->lastInsertedId;
        
     }
 

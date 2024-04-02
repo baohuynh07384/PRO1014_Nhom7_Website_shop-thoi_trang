@@ -3,24 +3,33 @@
 namespace App\Controllers;
 
 use App\Core\RenderBase;
+
 use App\Core\Sessions;
 use App\Core\Validation;
 use App\Models\ProductModel;
+
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
+
 
 class ProductController extends BaseController
 {
 
     private $_renderBase;
+
+
+
     private $_categories;
     private $_product;
+
+
+
     /**
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
      * 
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
@@ -28,12 +37,12 @@ class ProductController extends BaseController
         $this->_product = new ProductModel();
     }
 
-    function ProductController()
+    public function ProductController()
     {
         $this->CreateProductPage();
     }
 
-    function CreateProductPage()
+    public function CreateProductPage()
     {
         $data = $this->_categories->getListCate();
         $this->_renderBase->renderAdminHeader();
@@ -42,7 +51,8 @@ class ProductController extends BaseController
         $this->_renderBase->renderAdminFooter();
     }
 
-    function ListProductPage()
+
+    public function ListProductPage()
     {
 
         $this->_renderBase->renderAdminHeader();
@@ -50,7 +60,9 @@ class ProductController extends BaseController
         $this->_renderBase->renderListProduct();
         $this->_renderBase->renderAdminFooter();
     }
-    public function create() {
+
+    function create()
+    {
         if (isset($_POST['upload'])) {
             $name = $_POST['name'];
             $price = $_POST['price'];
@@ -58,12 +70,23 @@ class ProductController extends BaseController
             $category = $_POST['category'];
             $description = $_POST['description'];
             $status = $_POST['status'];
-            $image = $_FILES['image']['name'];
-            
+            $images = array();
+            for ($index = 0; $index < sizeof($_FILES['image']['name']); $index++) {
+                $arrayItem = array(
+                    "name" => $_FILES['image']['name'][$index],
+                    "type" => $_FILES['image']['type'][$index],
+                    "tmp_name" => $_FILES['image']['tmp_name'][$index],
+                    "error" => $_FILES['image']['error'][$index],
+                    "size" => $_FILES['image']['size'][$index],
+                );
+                array_push($images, $arrayItem);
+            }
+            $error = $_FILES['image']['error'];
+
             $ProductModel = new ProductModel();
-            
+
             // Thêm sản phẩm vào cơ sở dữ liệu và lấy ID của sản phẩm vừa thêm
-           $r= $ProductModel->create([
+            $insert = $ProductModel->create([
                 'name' => $name,
                 'price' => $price,
                 'status' => $status,
@@ -71,86 +94,74 @@ class ProductController extends BaseController
                 'description' => $description,
                 'categories_id' => $category
             ]);
+           
+                
+                if ($insert) {
+                    $idpro = $ProductModel->product_id;
+                    for ($index = 0; $index < sizeof($images); $index++) {
+                        $file = $images[$index]['name'];
+                        $error = $images[$index]['error'];
+                        if ($error === 0) {
+                            $imageModel = new ImagesModel();
+
+                            $imageModel->create(['path' => $file, 'product_id' => $idpro]);
+                        }
+                    }
+                }
                 // $idpro = $ProductModel->product_id;
-            var_dump($r);
                 // $imageModel = new ImagesModel();
 
                 // $imageModel->create(['path' => $_FILES['image']['name'], 'product_id' => $idpro]);
 
 
-            }
-            // Kiểm tra xem đã có ID của sản phẩm hay chưa
-            // if ($productId) {
-           
-            //     // Thêm dữ liệu hình ảnh vào cơ sở dữ liệu với product_id là ID của sản phẩm vừa thêm
-                
+            
+            // $errors = [];
+            // $data = [
+            //     'tên sản phẩm' => $name,
+            //     'ảnh' => $image,
+            //     'giá' => $price,
+            //     'số lượng' => $quantity,
+            //     'danh mục'  => $category,
+            //     'mô tả' => $description,
+            //     'trạng thái' => $status,
 
-            }
+            // ];
+            // foreach ($data as $field => $value) {
+            //     if (Validation::CheckEmtpy($value)) {
+            //         $errors[$field] = "Vui lòng nhập $field.";
+            //     }
+            //     if (Validation::CheckEmtpy($value == $image)) {
+            //         Sessions::addSession('ảnh', 'Vui lòng tải ảnh.');
+            //     }
+            // }
+            // if (!empty($errors)) {
+            //     foreach ($errors as $key => $error) {
+            //         Sessions::addSession($key, $error);
+            //     }
+            //     return $this->redirect("/?url=ProductController/CreateProductPage");
+            // } else {
+
+            // $listthumbnail = $BlogModel->checkimageexit($_FILES['image']['name']);
+            // if ($listthumbnail) {
+            //     $imagename = basename($_FILES['image']['name']);
+            //     $i = 1;
+            //     $newImageName = $imagename;
+            //     $info = pathinfo($imagename);
+            //     while (file_exists(UPLOAD_URL . $newImageName)) {
+            //         $newImageName = $info['filename'] . "($i)." . $info['extension'];
+            //         $i++;
+            //     }
+
+            //     move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
+            //     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
+            //     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
+            // } else {
+            // move_uploaded_file($_FILES['image']['tmp_name'], $image);
+
+
+            // Rest of your code
+
+            // header("Location: " . ROOT_URL . "/?url=ProductController/ListProductPage");
         }
-    // function create()
-    // {
-    //     if (isset($_POST['upload'])) {
-    //         $name = $_POST['name'];
-    //         $price = $_POST['price'];
-    //         $quantity = $_POST['qty'];
-    //         $category = $_POST['category'];
-    //         $description = $_POST['description'];
-    //         $status = $_POST['status'];
-    //         $image = $_FILES['image']['name'];
-    //         // $errors = [];
-    //         // $data = [
-    //         //     'tên sản phẩm' => $name,
-    //         //     'ảnh' => $image,
-    //         //     'giá' => $price,
-    //         //     'số lượng' => $quantity,
-    //         //     'danh mục'  => $category,
-    //         //     'mô tả' => $description,
-    //         //     'trạng thái' => $status,
-
-    //         // ];
-    //         // foreach ($data as $field => $value) {
-    //         //     if (Validation::CheckEmtpy($value)) {
-    //         //         $errors[$field] = "Vui lòng nhập $field.";
-    //         //     }
-    //         //     if (Validation::CheckEmtpy($value == $image)) {
-    //         //         Sessions::addSession('ảnh', 'Vui lòng tải ảnh.');
-    //         //     }
-    //         // }
-    //         // if (!empty($errors)) {
-    //         //     foreach ($errors as $key => $error) {
-    //         //         Sessions::addSession($key, $error);
-    //         //     }
-    //         //     return $this->redirect("/?url=ProductController/CreateProductPage");
-    //         // } else {
-    //             $ProductModel = new ProductModel();
-    //             // $listthumbnail = $BlogModel->checkimageexit($_FILES['image']['name']);
-    //             // if ($listthumbnail) {
-    //             //     $imagename = basename($_FILES['image']['name']);
-    //             //     $i = 1;
-    //             //     $newImageName = $imagename;
-    //             //     $info = pathinfo($imagename);
-    //             //     while (file_exists(UPLOAD_URL . $newImageName)) {
-    //             //         $newImageName = $info['filename'] . "($i)." . $info['extension'];
-    //             //         $i++;
-    //             //     }
-
-    //             //     move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
-    //             //     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
-    //             //     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
-    //             // } else {
-    //             // move_uploaded_file($_FILES['image']['tmp_name'], $image);
-    //             $productid = $ProductModel->create(['name' => $name, 'price' => $price, 'status' => $status, 'quantity' => $quantity, 'description' => $description, 'categories_id' => $category]);
-    //             $idpro = $ProductModel->getidpro();
-    //             foreach($idpro as $items){
-    //                 if($productid){
-    //                     $imageModel = new ImagesModel();
-    //                     $imageModel->create(['path' => $image, 'product_id' => $items]);
-    //                 }
-    //             }
-                
-    //                 // Rest of your code
-           
-    //             // header("Location: " . ROOT_URL . "/?url=ProductController/ListProductPage");
-    //         }
-    //     }
-    
+    }
+}

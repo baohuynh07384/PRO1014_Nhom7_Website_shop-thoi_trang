@@ -38,10 +38,8 @@ class ProductModel extends BaseModel{
     }
     public function create(array $data){
         $insertResult = $this->insert($this->table, $data);
-        var_dump($insertResult);
         if($insertResult) {
             $this->product_id = $this->getInsertLastId();
-            var_dump( $this->product_id);
             return $this->product_id;
         } else {
             return false;

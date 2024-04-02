@@ -36,7 +36,7 @@ class ImagesModel extends BaseModel{
         return $this->select()->where('id', '=', $id)->first();
     }
     public function create(array $data){
-        return$this->insert($this->table,$data);
+        return $this->insert($this->table,$data);
         
     }
       
