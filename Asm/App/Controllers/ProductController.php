@@ -12,10 +12,12 @@ use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
 
 
+
 class ProductController extends BaseController
 {
 
     private $_renderBase;
+
 
 
 
@@ -54,7 +56,6 @@ class ProductController extends BaseController
 
     public function ListProductPage()
     {
-
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
         $this->_renderBase->renderListProduct();
@@ -163,5 +164,8 @@ class ProductController extends BaseController
 
             // header("Location: " . ROOT_URL . "/?url=ProductController/ListProductPage");
         }
+
     }
 }
+
+
