@@ -82,7 +82,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-bars"></i>
+          <i class="nav-icon fa-solid fa-user"></i>
             <p>
               Tài khoản
               <i class="right fas fa-angle-left"></i>
@@ -107,7 +107,7 @@
         </li>
         <li class="nav-item">
           <a href="?url=HomeController/homePage" class="nav-link ">
-            <i class="nav-icon fas fa-solid fa-bars"></i>
+            <i class="nav-icon fa-solid fa-chart-simple"></i>
             <p>
               Thống kê
             </p>

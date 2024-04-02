@@ -102,10 +102,12 @@ class BlogController extends BaseController
 
                     move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
+                    $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
                 } else {
                     move_uploaded_file($_FILES['image']['tmp_name'], $image);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($_FILES['image']['name']), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
+                    $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
                 }
             }
@@ -154,6 +156,20 @@ class BlogController extends BaseController
             exit();
         } else {
             echo "Có lỗi xảy ra khi cập nhật danh mục.";
+        }
+    }
+    public function delete($id)
+    {
+        if (isset($_POST['deleteBlog'])) {
+            $id = $_POST['delete_blog_id'];
+
+            $blog = new BlogModel;
+            $resultDelete = $blog->deleteBlog($id);
+            if (!$resultDelete) {
+                die("Không thể xóa dữ liệu!");
+            }
+            $_SESSION['success'] = 'Xóa bài viết thành công';
+            header("Location:" . ROOT_URL . "/?url=BlogController/ListBlogPage");
         }
     }
 }

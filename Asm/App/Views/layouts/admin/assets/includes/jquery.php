@@ -106,8 +106,21 @@
       var cate_id = $(this).val();
       // console.log(cate_id);
       $('.delete_id_cate').val(cate_id);
-      $('#DeleteModal').modal('show');
+      $('#DeleteModalCate').modal('show');
     });
+    $('.deletebtn_acc').click(function (e) {
+      e.preventDefault();
+      var user_id = $(this).val();
+      $('.delete_id_user').val(user_id);
+      $('#DeleteModalAcc').modal('show');
+    });
+    $('.deletebtn_blog').click(function (e) {
+      e.preventDefault();
+      var blog_id = $(this).val();
+      $('.delete_id_blog').val(blog_id);
+      $('#DeleteModalBlog').modal('show');
+    });
+
 
   
 
