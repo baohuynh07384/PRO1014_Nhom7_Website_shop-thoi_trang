@@ -6,15 +6,22 @@ use App\Core\RenderBase;
 use App\Core\Sessions;
 use App\Core\Validation;
 use App\Models\ProductModel;
+<<<<<<< HEAD
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
+=======
+>>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
 
 class ProductController extends BaseController
 {
 
     private $_renderBase;
+<<<<<<< HEAD
     private $_categories;
     private $_product;
+=======
+    private $_categories
+>>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
     /**
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
@@ -44,7 +51,6 @@ class ProductController extends BaseController
 
     function ListProductPage()
     {
-
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
         $this->_renderBase->renderListProduct();
