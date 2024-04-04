@@ -79,11 +79,13 @@ class RegristerController extends BaseController
             $userModel = new UserModel();
             $user = $userModel->checkUserExist($email);
             if ($user) {
-                echo '<script>alert("Tài khoản đã tồn tại!"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
+                $_SESSION['success'] = 'Tài khoản đã tồn tại';
+                header( "' . ROOT_URL . '/?url=RegristerController/RegristerPage");
             } else {
                 $hash_password = password_hash($password, PASSWORD_DEFAULT);
                 $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => '', 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
-                echo '<script>alert("Đăng kí thành công"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
+                $_SESSION['success'] = 'Tạo tài khoản thành công';
+                header( "' . ROOT_URL . '/?url=RegristerController/RegristerPage");
             }
         }
     }

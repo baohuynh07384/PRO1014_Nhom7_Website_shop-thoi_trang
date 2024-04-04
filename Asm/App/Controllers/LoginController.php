@@ -70,35 +70,33 @@ class LoginController extends BaseController
 
 
                 if (!$user) {
-                    echo '<script>alert("Người dùng không tồn tại")</script>';
+                    $_SESSION['success'] = 'Người dùng không tồn tại';
                     $this->LoginPage();
                 } else {
                     if (password_verify($password, $user['password'])) {
                         $_SESSION['user'] = $user;
                         if ($_SESSION['user']['role'] == 1 || $_SESSION['user']['role'] == 2) {
-                            echo '<script>alert("Đăng nhập thành công")</script>';
+                            $_SESSION['success'] = 'Đăng nhập thành công';
                             header("Location: " . ROOT_URL . "/?url=HomeController/homePage");
                             exit();
                         } else {
-                            echo '<script>alert("Đăng nhập thành công")</script>';
+                            $_SESSION['success'] = 'Đăng nhập thành công';
                             header("Location: " . ROOT_URL . "/?url=ClientHomeController/ClientHomePage");
                             exit();
                         }
 
                     } else {
                         // Hiển thị form đăng nhập với thông báo lỗi
-                        echo '<script>alert("Đăng nhập không thành công")</script>';
+                        $_SESSION['success'] = 'Đăng nhập không thành công';
                         $this->LoginPage();
                     }
                 }
             }
         }else if
              ($_SESSION['user']['role'] == 1 || $_SESSION['user']['role'] == 2) {
-                echo '<script>alert("Đăng nhập thành công")</script>';
                 header("Location: " . ROOT_URL . "/?url=HomeController/homePage");
                 exit();
             } else {
-                echo '<script>alert("Đăng nhập thành công")</script>';
                 header("Location: " . ROOT_URL . "/?url=ClientHomeController/ClientHomePage");
                 exit();
             }

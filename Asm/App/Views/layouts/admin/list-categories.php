@@ -46,7 +46,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
                         foreach ($data as $item) :
                           $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
                          ?>
-                            
+  
                              <tr class="">
                              <td scope="row"><?= $item['id']  ?></td>
                              <td>

@@ -43,7 +43,7 @@ class CategoriesController extends BaseController
 
     public function ListCatPage()
     {
-        $data= $this->_categories->getListCate();
+        $data = $this->_categories->getListCate();
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
         $this->load->render('layouts/admin/list-categories', $data);
