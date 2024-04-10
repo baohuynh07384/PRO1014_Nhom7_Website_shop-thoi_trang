@@ -60,7 +60,7 @@ class AccountController extends BaseController
                 $phone = $_POST['phone'];
                 $status = $_POST['option'];
                 $role = $_POST['role'];
-                $target_file = UPLOAD_URL . basename($_FILES["image"]["name"]);
+                $target_file = ROOT_PATH . basename($_FILES["image"]["name"]);
 
                 $data = [
                     'name' => $_POST['name'],

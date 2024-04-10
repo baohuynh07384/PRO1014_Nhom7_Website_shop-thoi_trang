@@ -28,6 +28,9 @@ class ProductModel extends BaseModel{
         return $this->select(' products.id, description, price, quantity, path, categories.name as cateName, products.name as proName')->join('images', 'images.product_id = products.id')->join('categories', 'categories.id = products.categories_id')->where('products.id', ' = ',  $id)->fetch();
     }
 
+    public function getProductID($id){
+        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->where('products.id' , '=', $id)->first();
+    }
     public function checkimageexit(string $image){
         return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
     }

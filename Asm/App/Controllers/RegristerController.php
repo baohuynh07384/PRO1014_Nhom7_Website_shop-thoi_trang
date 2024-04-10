@@ -47,6 +47,7 @@ class RegristerController extends BaseController
             $errors = [];
             $phone = $_POST['phone'];
             $email = $_POST['email'];
+            $username = strstr($email, '@', true);
             $password = $_POST['password'];
             $data = [
                 'phone' => $_POST['phone'],
@@ -82,7 +83,7 @@ class RegristerController extends BaseController
                 echo '<script>alert("Tài khoản đã tồn tại!"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
             } else {
                 $hash_password = password_hash($password, PASSWORD_DEFAULT);
-                $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => '', 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
+                $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => $username, 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
                 echo '<script>alert("Đăng kí thành công"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
             }
         }
