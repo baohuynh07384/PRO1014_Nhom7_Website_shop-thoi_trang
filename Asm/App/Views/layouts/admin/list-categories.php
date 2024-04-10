@@ -59,7 +59,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
                              <div class="row">
                             <form action="/?url=CategoriesController/edit/<?= $item['id'] ?>" method="post">
                               <input type="hidden" name="id_update" value="<?= $item['id'] ?>">
-                              <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>                           
+                              <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
                             </form>
                               <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>       
                           </div>

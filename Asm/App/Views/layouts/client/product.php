@@ -1,4 +1,4 @@
-<?php include "header.php"  ?>
+
 
 
 <!-- /BREADCRUMB -->
@@ -8,24 +8,17 @@
     <!-- container -->
     <div class="container">
         <!-- row -->
+        
         <div class="row">
             <!-- Product main img -->
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
+                    
+                <?php foreach ($data as $item) : ?>
                     <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-1-copy-2_eb32b8491d0142c19fd8e3102042f810_1024x1024.png" alt="">
+                        <img src="<?= PUBLIC_URL . $item['path']?>" alt="">
                     </div>
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-3-copy-2_d95398ac04a24afa96ee65f0348040cb_1024x1024.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-6-copy-2_cfeca0da4752486b88f9d2873fba6700_1024x1024.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-4-copy-2_b8bba52d6aba4bb4979e5e759401c854_1024x1024.png" alt="">
-                    </div>
+                <?php endforeach; ?>
 
 
                 </div>
@@ -35,46 +28,42 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
+                <?php foreach ($data as $item) : ?>
                     <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-3-copy-2_d95398ac04a24afa96ee65f0348040cb_1024x1024.png" alt="">
+                        <img src="<?= PUBLIC_URL . $item['path']?>" alt="">
                     </div>
-
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-6-copy-2_cfeca0da4752486b88f9d2873fba6700_1024x1024.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="https://product.hstatic.net/1000357687/product/essentialartboard-4-copy-2_b8bba52d6aba4bb4979e5e759401c854_1024x1024.png" alt="">
-                    </div>
+                <?php endforeach; ?>
 
                 </div>
             </div>
             <!-- /Product thumb imgs -->
-
+         
             <!-- Product details -->
-            <div class="col-md-5">
+            <form class="col-md-5" method="post" enctype="multipart/form-data" action="?url=ClientHomeController/addCart">
+            <input type="hidden" name="userid" value="<?= $_SESSION['user']['id'] ?>">
+            <input type="hidden" name="status" value="1">
                 <div class="product-details">
-                    <h2 class="product-name">Áo thun Grimm DC Essential // Winter caribou</h2>
+                <input type="hidden" name="proid" value="<?= $data[0]['id'] ?>">
+                    <h2 class="product-name"><?= $data[0]['proName'] ?></h2>
                     <div>
-                      
-                        <a class="review-link" href="#">10 Đánh giá</a>
-                    </div>
-                    <div>
-                        <h3 class="product-price">169,000₫ <del class="product-old-price">320,000₫ </del></h3>
+                        <h3 class="product-price"><?= number_format($data[0]['price'])?>₫ </h3>
+                        <input type="hidden" name="price" value="<?= $data[0]['price'] ?>">
+                        <?php if($data[0]['quantity'] != 0): ?>
                         <span class="product-available">Còn hàng</span>
+                        <?php else : ?>
+                        <span class="product-available">Hết hàng</span>
+                        <?php endif;?>
                     </div>
-                    <p>Winter caribou dịch ra là Tuần Lộc tuyết hay Tuần Lộc mùa đông. Thật kì lạ khi màu sắc của mẫu áo mới này hoàn toàn trùng khớp với màu lông của những chú Tuần Lộc Alaska băng giá. <br>
-
-                        Giữa tuyết trắng, thiên nhiên hoang dã trải rộng đến cuối trời, nơi những đàn Tuần Lộc sải bước dưới luồng gió lạnh rít gào qua những hàng Vân Sam cổ thụ và đá tảng trồi lên khỏi mặt tuyết. Một bức tranh hoàn hảo của từng mảng nâu trầm - một chút xám - cùng ánh rêu nhẹ.</p>
+                    <?= $data[0]['description'] ?>
 
                     <div class="product-options">
                         <label>
                             Kích thước
-                            <select class="input-select">
-                                <option value="0">M</option>
-                                <option value="0">L</option>
-                                <option value="0">XL</option>
-                                <option value="0">XXL</option>
+                            <select name="size" class="input-select">
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </label>
 
@@ -84,13 +73,13 @@
                         <div class="qty-label">
                             Qty
                             <div class="input-number">
-                                <input type="number" value="1">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
+                                <input name="qty" id="quantityInput" type="number" value="1">
+                                <span id="increaseBtn" class="qty-up">+</span>
+                                <span id="decreaseBtn" class="qty-down">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <a href="?url=ClientHomeController/ClientCartPage">
+                        <button class="add-to-cart-btn" type="submit" name="submit">
+                            <a >
                                 <i class="fa fa-shopping-cart"></i>Thêm giỏ hàng
                             </a>
                         </button>
@@ -100,15 +89,15 @@
 
                     <ul class="product-links">
                         <li>Danh mục:</li>
-                        <li><a href="#">Áo thun</a></li>
+                        <li><a href="#"><?= $data[0]['cateName'] ?></a></li>
                     </ul>
 
 
 
                 </div>
-            </div>
+            </form>
+           
             <!-- /Product details -->
-
             <!-- Product tab -->
             <div class="col-md-12">
                 <div id="product-tab">
@@ -233,6 +222,7 @@
             </div>
             <!-- /product tab -->
         </div>
+
         <!-- /row -->
     </div>
     <!-- /container -->
@@ -362,5 +352,3 @@
 <!-- /Section -->
 
 <!-- /NEWSLETTER -->
-
-<?php include "footer.php" ?>

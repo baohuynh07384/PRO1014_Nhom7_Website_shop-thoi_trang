@@ -165,12 +165,10 @@
 							}
 						}
 					 ?>
-					 
 						<a href="">
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 
-										
 										<div class="product-img">
 											<img src="<?= PUBLIC_URL . $image['path'] ?>" alt="">
 										</div>
@@ -182,7 +180,7 @@
 										</h4>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Xem chi tiết</button>
+										<a href="?url=ClientHomeController/ClientProductPage/<?= $items['id'] ?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Xem chi tiết</button></a>
 									</div>
 								</div>
 							</div>
