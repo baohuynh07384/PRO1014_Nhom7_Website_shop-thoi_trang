@@ -18,20 +18,19 @@ class Mailer
     {
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
-
         try {
             //Server settings
             $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->CharSet = 'utf-8';
             $mail->Host = 'sandbox.smtp.mailtrap.io';
             $mail->SMTPAuth = true;
             $mail->Port = 2525;
-            $mail->Username = '16d76d0546c5f4';
-            $mail->Password = 'ff39c8f5bed041';                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->CharSet = 'utf-8';
+            $mail->Username = '510895682c00db';
+            $mail->Password = '71305805533bad';               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-            //Recipients
-            $mail->setFrom('phu526714@gmail.com', 'DiatP');
+
+            $mail->setFrom('hcb2k4@gmail.com', 'bao');
             $mail->addAddress($addressMail);     //Add a recipient
 
             //Content
@@ -39,7 +38,9 @@ class Mailer
             $mail->Subject = $title;
             $mail->Body = $content;
 
+
             $mail->send();
+
             echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

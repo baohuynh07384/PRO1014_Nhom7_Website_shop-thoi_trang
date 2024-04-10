@@ -279,7 +279,7 @@ class SMTP
             return;
         }
         //Is this a PSR-3 logger?
-        if ($this->Debugoutput instanceof \Psr\Log\LoggerInterface) {
+        if ($this->Debugoutput ) {
             $this->Debugoutput->debug($str);
 
             return;

@@ -76,6 +76,7 @@ class ForgotController extends BaseController
 
                 $_SESSION['mail'] = $email;
                 $_SESSION['code'] = $code;
+               
                 header("Location: " . ROOT_URL . "/?url=ForgotController/loadPageConfirm");
             }
 

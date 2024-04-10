@@ -25,10 +25,7 @@ class UserModel extends BaseModel
 
     public function checkUserExist($email)
     {
-        return $this->select()->where('email', '=', $email)
-            ->where('status', '=', 1)
-            ->where('role', '=', 1)
-            ->first();
+        return $this->select()->where('email', '=', $email)->first();
     }
     public function getOneUser($id)
     {

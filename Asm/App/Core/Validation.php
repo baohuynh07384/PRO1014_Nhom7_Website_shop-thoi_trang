@@ -17,15 +17,13 @@ class Validation
 
     public static function ValidationPhone($value)
     {
-
-
-
         if (!preg_match('/^[Z0-9]+$/', $value)) {
             return false;
         }
 
         return true;
     }
+    
     public static function ValidationPassword($value)
     {
 
@@ -36,14 +34,15 @@ class Validation
             preg_match('/\d/', $value)
         )
             return true;
-
     }
-
+    
     public static function required($value)
     {
-        return empty($value);
+        return empty($value);   
     }
 
-
-
+    public static function isNumber ($value){
+        return is_numeric($value) && $value;
+    }
+    
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\RenderBase;
+use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\UserModel;
 
@@ -15,30 +16,33 @@ class HomeController extends BaseController
 
     private $_users;
 
+    private $_blog;
     /**
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
      * 
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
         $this->_categories = new CategoriesModel();
         $this->_users = new UserModel();
+        $this->_blog = new BlogModel();
     }
 
-    function HomeController()
+    public function HomeController()
     {
         $this->homePage();
     }
 
 
-    function homePage()
+    public function homePage()
     {
         $data = [
             'categories' =>  $this->_categories->countCategories(),
             'users' => $this->_users->countUsers(),
+            'blogs' => $this->_blog->countBlog()
         ];
         
         $this->_renderBase->renderAdminHeader();

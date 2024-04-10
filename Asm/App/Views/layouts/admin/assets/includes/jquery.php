@@ -9,6 +9,21 @@
 </script>
 <script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 -->
+>
+<!-- AdminLTE for demo purposes -->
+
+<script src="App/Views/layouts/admin/assets/dist/js/demo.js"></script>
+<script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script src="App/Views/layouts/admin/assets/dist/js/pages/dashboard.js"></script>
 <script src="App/Views/layouts/admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="App/Views/layouts/admin/assets/plugins/chart.js/Chart.min.js"></script>
@@ -39,15 +54,27 @@
 <script src="App/Views/layouts/admin/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="App/Views/layouts/admin/assets/plugins/summernote/summernote-bs4.js"></script>
 <script src="App/Views/layouts/admin/assets/plugins/summernote/lang/summernote-vi-VN.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="App/Views/layouts/admin/assets/dist/js/demo.js"></script>
-<script src="https://kit.fontawesome.com/7d138f26d0.js" crossorigin="anonymous"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="App/Views/layouts/admin/assets/dist/js/pages/dashboard.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
-<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
+<script>
+  const inputElement = document.querySelector('.filepond');
+  const pond = FilePond.create(inputElement, {
+    allowMultiple: true, // Cho phép tải lên nhiều tệp
+    server: {
+       // Đường dẫn URL của máy chủ để xử lý tải lên
+      process: {
+        method: 'POST', // Phương thức HTTP để gửi dữ liệu tải lên (POST)
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}' // Thêm CSRF token nếu cần
+        }
+      }
+    },
+    plugins: [
+      FilePondPluginFileEncode, // Plugin để mã hóa dữ liệu tệp
+      FilePondPluginFileValidateSize, // Plugin để kiểm tra kích thước tệp
+      FilePondPluginFileValidateType // Plugin để kiểm tra loại tệp
+    ]
+  });
+</script>
 <script>
   $(document).ready(function() {
     $("#ValidateCateForm").validate({
@@ -71,50 +98,34 @@
         option: {
           required: true
         },
-       
+
 
       },
       messages: {
         name: "Vui lòng nhập tên danh mục",
         option: "Vui lòng chọn trạng thái",
-  
+
       }
     });
 
   })
-  Dropzone.options.myGreatDropzone = { // camelized version of the `id`
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    accept: function(file, done) {
-      if (file.name == "justinbieber.jpg") {
-        done("Naha, you don't.");
-      }
-      else { done(); }
-    }
-  };
-  $("#example1").DataTable({
-    "responsive": true,
-    "lengthChange": false,
-    "autoWidth": false,
-    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 </script>
 <script>
-  $(document).ready(function(){
-    $('.deletebtn').click(function(e){
+  $(document).ready(function() {
+    $('.deletebtn').click(function(e) {
       e.preventDefault();
       var cate_id = $(this).val();
       // console.log(cate_id);
       $('.delete_id_cate').val(cate_id);
       $('#DeleteModalCate').modal('show');
     });
-    $('.deletebtn_acc').click(function (e) {
+    $('.deletebtn_acc').click(function(e) {
       e.preventDefault();
       var user_id = $(this).val();
       $('.delete_id_user').val(user_id);
       $('#DeleteModalAcc').modal('show');
     });
-    $('.deletebtn_blog').click(function (e) {
+    $('.deletebtn_blog').click(function(e) {
       e.preventDefault();
       var blog_id = $(this).val();
       $('.delete_id_blog').val(blog_id);
@@ -122,24 +133,24 @@
     });
 
 
-  
+
 
   });
 </script>
 <?php
 if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-    echo $_SESSION['success'];
+  echo $_SESSION['success'];
 ?>
-    <script>
-        swal({
-            title: "<?php echo $_SESSION['success'] ?>",
-            text: "You clicked the button!",
-            icon: "success",
-            button: "OK",
-        });
-    </script>
+  <script>
+    swal({
+      title: "<?php echo $_SESSION['success'] ?>",
+      text: "You clicked the button!",
+      icon: "success",
+      button: "OK",
+    });
+  </script>
 <?php
-unset($_SESSION['success']);
+  unset($_SESSION['success']);
 }
 
 ?>
@@ -149,9 +160,9 @@ unset($_SESSION['success']);
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
-   
+
     $('#summernote').summernote({
-      lang: 'vi-VN', 
+      lang: 'vi-VN',
       placeholder: 'Nhập nội dung....',
       tabsize: 2,
       height: 200,
@@ -194,14 +205,13 @@ unset($_SESSION['success']);
         theme: 'monokai'
       }
     });
-    
+
   })
 </script>
-
 <script>
-function updateFileName(input) {
+  function updateFileName(input) {
     var fileName = input.files[0].name;
     var label = input.nextElementSibling;
     label.innerText = fileName;
-}
+  }
 </script>

@@ -35,8 +35,16 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
+          <a href="?url=HomeController/homePage" class="nav-link ">
+            <i class="nav-icon fa-solid fa-chart-simple"></i>
+            <p>
+              Thống kê
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-bars"></i>
+            <i class="nav-icon fa bi bi-grid"></i>
             <p>
               Danh mục
               <i class="right fas fa-angle-left"></i>
@@ -59,7 +67,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-bars"></i>
+            <i class="nav-icon fa-brands fa-product-hunt"></i>
             <p>
               Sản phẩm
               <i class="right fas fa-angle-left"></i>
@@ -82,7 +90,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-          <i class="nav-icon fa-solid fa-user"></i>
+            <i class="nav-icon fa-solid fa-user"></i>
             <p>
               Tài khoản
               <i class="right fas fa-angle-left"></i>
@@ -105,14 +113,6 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a href="?url=HomeController/homePage" class="nav-link ">
-            <i class="nav-icon fa-solid fa-chart-simple"></i>
-            <p>
-              Thống kê
-            </p>
-          </a>
-        </li>
         <!-- <li class="nav-item">
           <a href="?url=CartController/CartPage" class="nav-link ">
             <i class="nav-icon fas fa-solid fa-bars"></i>
@@ -123,29 +123,6 @@
         </li> -->
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fa-regular fa-newspaper"></i>
-            <p>
-              Bài viết
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="?url=BlogController/CreateBlogPage" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Tạo bài viết</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="?url=BlogController/ListBlogPage" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Danh sách sách bài viết</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
             <i class="nav-icon fa-regular fa-newspaper"></i>
             <p>
               Bài viết

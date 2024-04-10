@@ -64,14 +64,26 @@ class ProductController extends BaseController
 
     function create()
     {
+
+
         if (isset($_POST['upload'])) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_FILES['files'])) {
+                    $files = $_FILES['files'];
+
+                    var_dump($files);
+                } else {
+                    echo 'FilePond không tải dữ liệu lên.';
+                }
+            }
+
             $name = $_POST['name'];
             $price = $_POST['price'];
             $quantity = $_POST['qty'];
             $category = $_POST['category'];
             $description = $_POST['description'];
             $status = $_POST['status'];
-            $images = array();
+            $image = array();
             for ($index = 0; $index < sizeof($_FILES['image']['name']); $index++) {
                 $arrayItem = array(
                     "name" => $_FILES['image']['name'][$index],
@@ -80,92 +92,66 @@ class ProductController extends BaseController
                     "error" => $_FILES['image']['error'][$index],
                     "size" => $_FILES['image']['size'][$index],
                 );
-                array_push($images, $arrayItem);
+                array_push($image, $arrayItem);
             }
-            $error = $_FILES['image']['error'];
+            $errors = [];
+            $data = [
+                'tên sản phẩm' => $name,
+                'ảnh' => $image,
+                'giá' => $price,
+                'số lượng' => $quantity,
+                'danh mục'  => $category,
+                'mô tả' => $description,
+                'trạng thái' => $status,
 
-            $ProductModel = new ProductModel();
-
-            // Thêm sản phẩm vào cơ sở dữ liệu và lấy ID của sản phẩm vừa thêm
-            $insert = $ProductModel->create([
-                'name' => $name,
-                'price' => $price,
-                'status' => $status,
-                'quantity' => $quantity,
-                'description' => $description,
-                'categories_id' => $category
-            ]);
-           
-                
-                if ($insert) {
-                    $idpro = $ProductModel->product_id;
-                    for ($index = 0; $index < sizeof($images); $index++) {
-                        $file = $images[$index]['name'];
-                        $error = $images[$index]['error'];
-                        if ($error === 0) {
-                            $imageModel = new ImagesModel();
-
-                            $imageModel->create(['path' => $file, 'product_id' => $idpro]);
+            ];
+            foreach ($data as $field => $value) {
+                if (Validation::CheckEmtpy($value)) {
+                    $errors[$field] = "Vui lòng nhập $field.";
+                } else {
+                    if ($field == 'giá' || $field == 'số lượng') { // Chỉ kiểm tra giá và số lượng
+                        if (!Validation::isNumber($value)) {
+                            $errors[$field] = "$field phải là một số.";
                         }
                     }
                 }
-                // $idpro = $ProductModel->product_id;
-                // $imageModel = new ImagesModel();
-
-                // $imageModel->create(['path' => $_FILES['image']['name'], 'product_id' => $idpro]);
-
-
-            
-            // $errors = [];
-            // $data = [
-            //     'tên sản phẩm' => $name,
-            //     'ảnh' => $image,
-            //     'giá' => $price,
-            //     'số lượng' => $quantity,
-            //     'danh mục'  => $category,
-            //     'mô tả' => $description,
-            //     'trạng thái' => $status,
-
-            // ];
-            // foreach ($data as $field => $value) {
-            //     if (Validation::CheckEmtpy($value)) {
-            //         $errors[$field] = "Vui lòng nhập $field.";
-            //     }
-            //     if (Validation::CheckEmtpy($value == $image)) {
-            //         Sessions::addSession('ảnh', 'Vui lòng tải ảnh.');
-            //     }
-            // }
-            // if (!empty($errors)) {
-            //     foreach ($errors as $key => $error) {
-            //         Sessions::addSession($key, $error);
-            //     }
-            //     return $this->redirect("/?url=ProductController/CreateProductPage");
-            // } else {
-
-            // $listthumbnail = $BlogModel->checkimageexit($_FILES['image']['name']);
-            // if ($listthumbnail) {
-            //     $imagename = basename($_FILES['image']['name']);
-            //     $i = 1;
-            //     $newImageName = $imagename;
-            //     $info = pathinfo($imagename);
-            //     while (file_exists(UPLOAD_URL . $newImageName)) {
-            //         $newImageName = $info['filename'] . "($i)." . $info['extension'];
-            //         $i++;
-            //     }
-
-            //     move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
-            //     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
-            //     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
-            // } else {
-            // move_uploaded_file($_FILES['image']['tmp_name'], $image);
+                // if (Validation::CheckEmtpy($value == $image)) {
+                //     Sessions::addSession('ảnh', 'Vui lòng tải ảnh.');
+                // } 
+            }
+            if (!empty($errors)) {
+                foreach ($errors as $key => $error) {
+                    Sessions::addSession($key, $error);
+                }
+                return $this->redirect("/?url=ProductController/CreateProductPage");
+            } else {
 
 
-            // Rest of your code
+                $ProductModel = new ProductModel();
+                $insert = $ProductModel->create([
+                    'name' => $name,
+                    'price' => $price,
+                    'status' => $status,
+                    'quantity' => $quantity,
+                    'description' => $description,
+                    'categories_id' => $category
+                ]);
 
-            // header("Location: " . ROOT_URL . "/?url=ProductController/ListProductPage");
+
+                if ($insert) {
+                    $idpro = $ProductModel->product_id;
+                    for ($index = 0; $index < sizeof($image); $index++) {
+                        $file = $image[$index]['name'];
+                        $error = $image[$index]['error'];
+                        if ($error === 0) {
+
+                            $imageModel = new ImagesModel();
+
+                            $imageModel->create(['path' => $image, 'product_id' => $idpro]);
+                        }
+                    }
+                }
+            }
         }
-
     }
 }
-
-

@@ -39,5 +39,19 @@ class BlogModel extends BaseModel{
         return $this->insert($this->table,$data);
         
     }
-   
+    public function deleteBlog($id)
+    {
+        return $this->table('blog')->where('id', '=', $id)->delete();
+    }
+    public function countBlog()
+    {
+        $data = $this->select('COUNT(blog.id) AS blog')->table('blog')->first();
+       
+        if ($data) {
+            return $data['blog']; 
+        } else {
+            return 0; 
+        }
+        
+    }
 }
