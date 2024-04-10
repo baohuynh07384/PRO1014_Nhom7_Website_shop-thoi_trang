@@ -62,6 +62,30 @@
 });
 	});
 </script>
+<script>
+    // Lấy thẻ input và nút tăng/giảm
+    var quantityInput = document.getElementById('quantityInput');
+    var increaseBtn = document.getElementById('increaseBtn');
+    var decreaseBtn = document.getElementById('decreaseBtn');
+
+    // Xử lý sự kiện khi nhấn nút tăng
+    increaseBtn.addEventListener('click', function() {
+        // Tăng giá trị của input lên 1
+        quantityInput.value = parseInt(quantityInput.value) + 0;
+        console.log(quantityInput.value)
+    });
+
+    // Xử lý sự kiện khi nhấn nút giảm
+    decreaseBtn.addEventListener('click', function() {
+        // Kiểm tra giá trị của input để đảm bảo không âm
+        if (parseInt(quantityInput.value) > 0) {
+            // Giảm giá trị của input đi 1
+            quantityInput.value = parseInt(quantityInput.value) -0;
+            console.log(quantityInput.value)
+        }
+    });
+    
+</script>
 
 
 

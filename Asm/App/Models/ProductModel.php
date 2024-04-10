@@ -22,7 +22,10 @@ class ProductModel extends BaseModel{
         return $this->getAll()->fetch();
     }
     public function getProduct(){
-        return $this->select(' products.id, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->fetch();
+        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->fetch();
+    }
+    public function getDetailProduct($id){
+        return $this->select(' products.id, description, price, quantity, path, categories.name as cateName, products.name as proName')->join('images', 'images.product_id = products.id')->join('categories', 'categories.id = products.categories_id')->where('products.id', ' = ',  $id)->fetch();
     }
 
     public function checkimageexit(string $image){

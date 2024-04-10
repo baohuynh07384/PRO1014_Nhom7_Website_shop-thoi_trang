@@ -10,6 +10,7 @@ use App\Core\Sessions;
 use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
+use App\Models\OrderModel;
 
 class ClientHomeController extends BaseController
 {
@@ -25,8 +26,9 @@ class ClientHomeController extends BaseController
     private $_category;
 
     private $_image;
+    private $_order;
 
-    
+
 
     /**
      * Thuốc trị đau lưng
@@ -42,6 +44,7 @@ class ClientHomeController extends BaseController
         $this->_product = new ProductModel();
         $this->_category = new CategoriesModel();
         $this->_image = new ImagesModel();
+        $this->_order = new OrderModel();
     }
 
 
@@ -59,9 +62,13 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientFooter();
     }
 
-    public function ClientProductPage()
+    public function ClientProductPage($id)
     {
-        $this->_renderBase->renderProductPage();
+        $products = $this->_product->getDetailProduct($id);
+        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/product', $products);
+        $this->_renderBase->renderClientFooter();
+
     }
 
     public function ClientHomeController()
@@ -71,14 +78,47 @@ class ClientHomeController extends BaseController
 
     public function ClientHomePage()
     {
-        
-        
+
+
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/home');
         $this->_renderBase->renderClientFooter();
     }
 
+    public function ClientCartPage()
+    {
+        $orders = $this->_order->getCart($_SESSION['user']['id']);
+        $images = $this->_image->getImages();
+        
+        $data = [
+            'images' => $images,
+            'orders' => $orders
+        ];
+        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/cart', $data);
+        $this->_renderBase->renderClientFooter();
+    }
 
+    public function addCart()
+    {
+        if (isset($_POST['submit'])) {
+            $user_id = $_POST['userid'];
+            $pro_id = $_POST['proid'];
+            $status = $_POST['status'];
+            $price = $_POST['price'];
+            $size = $_POST['size'];
+            $qty = $_POST['qty'];
+            $order = new OrderModel();
+            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id ]);
+            if ($insert){
+                $order_id = $order->order_id;
+                $order->insertOrderdetial(['price' => $price, 'size' => $size, 'total' => '0', 'quantity' => $qty , 'order_id' => $order_id]);
+                $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
+                header('Location: /?url=ClientHomeController/ClientCartPage');
+            }
+
+        }
+    }
 
     public function ClientCheckoutPage()
     {
@@ -100,17 +140,14 @@ class ClientHomeController extends BaseController
     {
         $this->_renderBase->renderContactPage();
     }
-    function ClientCartPage()
-    {
-        $this->_renderBase->renderCartPage();
-    }
+
 
     //Phần này là của Account client
 
     public function showAccount()
     {
-        $userData = $_SESSION['user']; 
-        $data = $this->_user->getOneUser($userData['id']);  
+        $userData = $_SESSION['user'];
+        $data = $this->_user->getOneUser($userData['id']);
         $this->load->render('layouts/client/account', $data);
     }
 
@@ -120,10 +157,11 @@ class ClientHomeController extends BaseController
         $userData = $_SESSION['user'];
         $data = $this->_user->getOneUser($userData['id']);
         $this->load->render('layouts/client/update_account', $data);
-        
+
     }
 
-    public function updateAccount(){
+    public function updateAccount()
+    {
         if (isset($_POST['save'])) {
             $user_id = $_POST['user_id'];
             $name = $_POST['name'];
@@ -169,8 +207,9 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderChangePass();
     }
 
-    public function changePass(){
-        if(isset($_POST['save'])){
+    public function changePass()
+    {
+        if (isset($_POST['save'])) {
             $old_pass = $_POST['old_pass'];
             $new_pass = $_POST['new_pass'];
             $repass = $_POST['repass'];
@@ -185,10 +224,10 @@ class ClientHomeController extends BaseController
             foreach ($data as $field => $value) {
                 if (Validation::CheckEmtpy($value)) {
                     $errors[$field] = "Vui lòng nhập $field";
-                }else {
+                } else {
                     if ($field === 'mật khẩu mới' && !Validation::ValidationPassword($new_pass)) {
                         $errors[$field] = "Mật khẩu phải có ít nhất 8 ký tự, gồm chữ cái viết hoa, chữ cái viết thường và số.";
-                    } 
+                    }
                 }
             }
             if (!empty($errors)) {
@@ -198,19 +237,18 @@ class ClientHomeController extends BaseController
                 return $this->redirect("/?url=ClientHomeController/changePassAccount");
             }
             $userData = $_SESSION['user']['password'];
-            
+
             $password_verify = password_verify($old_pass, $userData);
 
-            if($password_verify === false){
+            if ($password_verify === false) {
                 $_SESSION['error'] = "Mật khẩu cũ không đúng";
                 header('Location: ?url=ClientHomeController/changePassAccount');
                 exit;
-            }
-            elseif($new_pass !== $repass){
+            } elseif ($new_pass !== $repass) {
                 $_SESSION['error'] = "Mật khẩu mới và Xác nhận mật khẩu phải giống nhau";
                 header('Location: ?url=ClientHomeController/changePassAccount');
                 exit;
-            }else{
+            } else {
                 $userModel = $this->_user;
                 $updateResult = $userModel->updateUser(['password' => password_hash($new_pass, PASSWORD_DEFAULT)], $_SESSION['user']['id']);
                 if ($updateResult) {
@@ -225,7 +263,7 @@ class ClientHomeController extends BaseController
             }
 
 
-            
+
         }
     }
 
@@ -234,7 +272,8 @@ class ClientHomeController extends BaseController
         $this->load->render('layouts/client/order_page');
     }
 
-    public function blogPage(){
+    public function blogPage()
+    {
         $this->load->render('layouts/client/blog_page');
     }
 }
