@@ -103,7 +103,6 @@ abstract class BaseModel implements CrudInterface
             }
             $updateStr = rtrim($updateStr, ',');
             $sql = "UPDATE $table SET $updateStr";
-            var_dump($sql);
             if (!empty($condition)) {
                 $sql = "UPDATE $table SET $updateStr WHERE $condition";
             }

@@ -17,8 +17,8 @@ class ImagesModel extends BaseModel{
         
     }
 
-    public function getlistblog(){
-        return $this->getAll()->get();
+    public function getImages(){
+        return $this->getAll()->fetch();
     }
 
     public function checkimageexit(string $image){

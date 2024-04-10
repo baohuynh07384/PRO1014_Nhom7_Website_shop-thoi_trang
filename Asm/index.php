@@ -6,8 +6,10 @@ session_start();
 
 require_once "vendor\autoload.php";
 
-define("ROOT_URL", "http://127.0.0.1:5000/");
-define('UPLOAD_URL', __DIR__.'/public/uploads/');
+define("ROOT_URL", "http://duan1/");
+define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/");
+define("UPLOAD_PATH", ROOT_PATH . "public/uploads/");
+define('UPLOAD_URL',ROOT_URL.'/public/uploads/');
 define('PUBLIC_URL', ROOT_URL.'/public/uploads/');
 
 use App\Core\Route;

@@ -18,10 +18,13 @@ class ProductModel extends BaseModel{
         
     }
 
-    public function getlistblog(){
-        return $this->getAll()->get();
+    public function getProduct(){
+        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->fetch();
     }
 
+    public function getProductID($id){
+        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->where('products.id' , '=', $id)->first();
+    }
     public function checkimageexit(string $image){
         return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
     }

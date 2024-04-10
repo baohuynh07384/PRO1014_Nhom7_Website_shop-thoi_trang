@@ -55,26 +55,7 @@
 <script src="App/Views/layouts/admin/assets/plugins/summernote/summernote-bs4.js"></script>
 <script src="App/Views/layouts/admin/assets/plugins/summernote/lang/summernote-vi-VN.min.js"></script>
 
-<script>
-  const inputElement = document.querySelector('.filepond');
-  const pond = FilePond.create(inputElement, {
-    allowMultiple: true, // Cho phép tải lên nhiều tệp
-    server: {
-       // Đường dẫn URL của máy chủ để xử lý tải lên
-      process: {
-        method: 'POST', // Phương thức HTTP để gửi dữ liệu tải lên (POST)
-        headers: {
-          'X-CSRF-TOKEN': '{{ csrf_token() }}' // Thêm CSRF token nếu cần
-        }
-      }
-    },
-    plugins: [
-      FilePondPluginFileEncode, // Plugin để mã hóa dữ liệu tệp
-      FilePondPluginFileValidateSize, // Plugin để kiểm tra kích thước tệp
-      FilePondPluginFileValidateType // Plugin để kiểm tra loại tệp
-    ]
-  });
-</script>
+
 <script>
   $(document).ready(function() {
     $("#ValidateCateForm").validate({
@@ -154,6 +135,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
 }
 
 ?>
+
 <script>
   $(function() {
     $('.select2').select2()

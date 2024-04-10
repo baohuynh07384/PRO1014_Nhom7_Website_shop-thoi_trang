@@ -57,7 +57,7 @@ class CategoriesController extends BaseController
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $option = $_POST['option'];
-            $target_file = UPLOAD_URL . basename($_FILES["image"]["name"]);
+            $target_file = ROOT_PATH . basename($_FILES["image"]["name"]);
 
             $data = [
                 'name' => $_POST['name'],
