@@ -16,9 +16,8 @@ trait QueryBuilder
     public $insert = '';
     public $leftJoin = '';
     public $groupBy = '';
-    public $lastInsertedId = null;
     public $count = '';
-
+    public $lastInsertId = null;
     public function table($tableName)
     {
         $this->tableName = $tableName;
@@ -77,7 +76,7 @@ trait QueryBuilder
      * $this->db->orderBy('id','DESC')
      * $this->db->orderBy('id desc, name asc')
      */
-    public function orderBy(string $field, string $type = 'ASC')
+    public function orderBy( $field,  $type = 'ASC')
     {
         $fileArr = array_filter(explode(',', $field));
         if (!empty($fileArr && count($fileArr) >= 2)) {
@@ -141,10 +140,6 @@ trait QueryBuilder
         return $whereDelete;
     }
 
-    public function lastId()
-    {
-        return $this->lastInsertedId;
-    }
 
     public function first()
     {

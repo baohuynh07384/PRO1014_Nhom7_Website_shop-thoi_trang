@@ -43,6 +43,9 @@ class Validation
     {
         return empty($value);
     }
+    public static function isNumber ($value){
+        return is_numeric($value) && $value;
+    }
 
 
 

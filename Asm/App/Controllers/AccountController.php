@@ -42,12 +42,9 @@ class AccountController extends BaseController
     public function listAccount()
     {
         $account = $this->_account->getUsers($_SESSION['user']['id']);
-        // var_dump($account);
-        // die;
-        $data = ['account' => $account];
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
-        $this->load->render('layouts/admin/list_account', $data);
+        $this->load->render('layouts/admin/list_account', $account);
         $this->_renderBase->renderAdminFooter();
     }
 
@@ -206,7 +203,6 @@ class AccountController extends BaseController
             exit();
         }
     }
-
 
 
 }

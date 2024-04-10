@@ -88,7 +88,10 @@ class RenderBase extends BaseController
     public function renderCartPage(){
         $this->load->render('layouts/client/cart');
     }
- 
+
+    public function renderChangePass(){
+        $this->load->render('layouts/client/change_password');
+    }
      /**
      * từ chổ này là phương thức render của form 
      * 

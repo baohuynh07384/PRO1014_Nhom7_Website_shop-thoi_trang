@@ -30,3 +30,76 @@
 <script src="App/Views/layouts/client/assets/js/jquery.zoom.min.js"></script>
 <script src="App/Views/layouts/client/assets/js/main.js">
 </script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#updateAccountForm').validate({
+    rules: {
+        name: "required",
+		address: "required",
+        email: {
+            required: true,
+            email: true
+        },
+        phone: {
+            required: true,
+			digits: true //các ký tự số
+        }
+    },
+    messages: {
+        name: "Vui lòng nhập tên của bạn",
+		address: "Vui lòng nhập địa chỉ",
+        email: {
+            required: "Vui lòng nhập địa chỉ email của bạn",
+            email: "Vui lòng nhập địa chỉ email hợp lệ"
+        },
+        phone: {
+          required: "Vui lòng nhập số điện thoại",
+          digits: "Số điện thoại chỉ được chứa các ký tự số."
+        },
+    }
+});
+	});
+</script>
+
+
+
+
+
+
+
+<?php
+if (isset($_SESSION['error']) && $_SESSION['error'] != '') {
+  echo $_SESSION['error'];
+  ?>
+  <script>
+    swal({
+      title: "<?php echo $_SESSION['error'] ?>",
+      text: "You clicked the button!",
+      icon: "error",
+      button: "OK",
+    });
+  </script>
+  <?php
+  unset($_SESSION['error']);
+}
+
+?>
+<?php
+if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+  echo $_SESSION['success'];
+  ?>
+  <script>
+    swal({
+      title: "<?php echo $_SESSION['success'] ?>",
+      text: "You clicked the button!",
+      icon: "success",
+      button: "OK",
+    });
+  </script>
+  <?php
+  unset($_SESSION['success']);
+}
+
+?>

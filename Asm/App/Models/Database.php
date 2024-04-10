@@ -38,15 +38,15 @@ class Database
         }
     }
 
-    public function query($sql)
-    {
-        try {
-            $statement = $this->PDO()->prepare($sql);
-            $statement->execute();
-            return $statement;
-        } catch (Exception $ex) {
-            $mess = $ex->getMessage();
-            echo $mess;
-        }
-    }
+    // public function query($sql)
+    // {
+    //     try {
+    //         $statement = $this->PDO()->prepare($sql);
+    //         $statement->execute();
+    //         return $statement;
+    //     } catch (Exception $ex) {
+    //         $mess = $ex->getMessage();
+    //         echo $mess;
+    //     }
+    // }
 }

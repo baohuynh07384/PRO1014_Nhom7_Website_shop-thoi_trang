@@ -39,7 +39,6 @@ class ForgotController extends BaseController
     {
         if (isset($_POST['forgot'])) {
             $email = $_POST['email'];
-
             $data = [
                 'email' => $_POST['email']
             ];
@@ -60,7 +59,6 @@ class ForgotController extends BaseController
                 }
                 return $this->redirect("/?url=ForgotController/loadPageForgot");
             }
-
             $user = new UserModel();
             $result = $user->checkUserExist($email);
             if (!$result) {
@@ -73,6 +71,7 @@ class ForgotController extends BaseController
 
                 $mail = new Mailer;
                 $mail->sendMail($title, $content, $email);
+               
 
                 $_SESSION['mail'] = $email;
                 $_SESSION['code'] = $code;
@@ -88,6 +87,25 @@ class ForgotController extends BaseController
     {
 
         if (isset($_POST['confirm'])) {
+            $text = $_POST['text'];
+            $data = [
+                'text' => $_POST['text']
+            ];
+            foreach ($data as $field => $value) {
+                if (Validation::CheckEmtpy($value)) {
+                    $errors[$field] = "Vui lòng nhập $field";
+                } else {
+                    if (Validation::CheckEmtpy($text)) {
+                        $errors['text'] = "Vui lòng nhập mã xác nhận.";
+                    } 
+                }
+            }
+            if (!empty($errors)) {
+                foreach ($errors as $key => $error) {
+                    Sessions::addSession($key, $error);
+                }
+                return $this->redirect("/?url=ForgotController/loadPageForgot");
+            }
             if ($_POST['text'] != $_SESSION['code']) {
                 Sessions::addSession("text", "Mã xác nhận không hợp lệ !");
                 return $this->redirect("/?url=ForgotController/loadPageConfirm");

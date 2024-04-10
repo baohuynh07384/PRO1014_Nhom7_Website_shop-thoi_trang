@@ -12,6 +12,7 @@ use App\Core\Sessions;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Modern Login Page | AsmrProg</title>
     <link rel="stylesheet" href="App/Views/layouts/account/assets/css/style.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 
 <body>
@@ -22,6 +23,9 @@ use App\Core\Sessions;
 
             <form action="/?url=LoginController/handleLogin" method="post" id="form">
                 <h1>Đăng nhập</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
                 <input type="text" placeholder="Tên đăng nhập" name="email" value="" id="email">
                 <?php if (isset($_SESSION['email'])): ?>
                     <p style="color: #DC143C; margin: 0px;">
