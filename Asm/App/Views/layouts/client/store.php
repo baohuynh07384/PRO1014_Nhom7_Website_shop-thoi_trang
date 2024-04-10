@@ -150,12 +150,10 @@
 					</ul>
 				</div>
 				<!-- /store top filter -->
-
 				<!-- store products -->
 				<div class="row">
 					<!-- product -->
-					<?php
-					
+					<?php					
 					 foreach ($data['products'] as $items): 
 						foreach ($data['images'] as $image) {
 							

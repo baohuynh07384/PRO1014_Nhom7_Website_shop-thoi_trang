@@ -23,9 +23,6 @@ use App\Core\Sessions;
 
             <form action="/?url=LoginController/handleLogin" method="post" id="form">
                 <h1>Đăng nhập</h1>
-                <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                </div>
                 <input type="text" placeholder="Tên đăng nhập" name="email" value="" id="email">
                 <?php if (isset($_SESSION['email'])): ?>
                     <p style="color: #DC143C; margin: 0px;">

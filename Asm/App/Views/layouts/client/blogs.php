@@ -9,16 +9,15 @@
                 <h3 class="title">Tin tức</h3>
             </div>
             <?php foreach ($data as $item) : ?>
-            <a href="?url=ClientHomeController/blogPage">
+            <a href="?url=ClientHomeController/ClientBlogDetailPage/<?= $item['id']  ?>">
                 <div class="col-md-4 col-xs-6" style="margin-bottom: 2rem;">
                     <div class="blog">
                         <div class="blog-img">
-                            <img src="<?= PUBLIC_URL . $items['thumbnail'] ?>" style="height: 300px;" width="100%">
+                            <img src="<?= PUBLIC_URL . $item['thumbnail'] ?>" style="height: 300px;" width="100%">
                         </div>
                         <div class="blog-body">
-                            <h3 class="blog-title"><a href="#">Nón Bình Dương, chiếc nón</a></h3>
-                            <p class="text-left">
-                                Với mỗi bước đi trên hành trình, cũng như mỗi vùng đất mình đặt chân đến, chúng...</p>
+                            <h3 class="blog-title"><a href="#"><?= $item['title'] ?></a></h3>
+                            
                         </div>
                     </div>
                 </div>

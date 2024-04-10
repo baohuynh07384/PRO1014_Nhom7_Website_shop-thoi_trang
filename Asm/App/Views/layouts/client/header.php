@@ -141,7 +141,7 @@ include "App/Views/layouts/client/stylesheet.php";
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="?url=ClientHomeController/ClientHomePage">Trang chủ</a></li>
+					<li><a href="?url=ClientHomeController/ClientHomePage">Trang chủ</a></li>
 					<li><a href="?url=ClientHomeController/ClientCategoriesPage">Sản phẩm</a></li>
 					<li><a href="?url=ClientHomeController/ClientBlogsPage">Tin tức</a></li>
 					<li><a href="#">Giới thiệu</a></li>

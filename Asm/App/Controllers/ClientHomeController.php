@@ -128,8 +128,12 @@ class ClientHomeController extends BaseController
     public function ClientBlogsPage()
     {
         $data = $this->_blog->getlistblog();
-
         $this->load->render('layouts/client/blogs', $data);
+    }
+
+    public function ClientBlogDetailPage($id){
+        $data = $this->_blog->getwithid($id);
+        $this->load->render('layouts/client/blog_detail',$data);
     }
 
     function ClientContactPage()
@@ -170,7 +174,7 @@ class ClientHomeController extends BaseController
             if ($new_image != '') {
                 $update_image = $new_image;
                 if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
-                    echo '<script>alert("Ảnh đã tồn tại")</script>';
+                    $_SESSION['error'] = "Ảnh đã tồn tại";
                     header("Location:" . ROOT_URL . "/?url=ClientHomeController/showUpdateAccount");
                     exit();
                 } else {
@@ -187,7 +191,7 @@ class ClientHomeController extends BaseController
                     move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
                     unlink(UPLOAD_URL . $old_image);
                 }
-                echo '<script>alert("Cập nhật thành công")</script>';
+                $_SESSION['success'] = "Cập nhật thành công";
                 header("Location: " . ROOT_URL . "/?url=ClientHomeController/showAccount");
                 exit();
             } else {
