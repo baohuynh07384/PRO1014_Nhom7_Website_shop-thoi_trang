@@ -43,8 +43,8 @@
             <input type="text" class="form-control" placeholder="Nhập mã giảm giá" aria-describedby="basic-addon2">
             <span class="input-group-addon" id="basic-addon2">Xác nhận</span>
         </div>
-        <div class="text-right" style="margin-top: 2rem;">
-        <button type="button" class="btn btn-danger"><a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán</a></button>
+        <div>
+            
         </div>
 
         <!-- /row -->

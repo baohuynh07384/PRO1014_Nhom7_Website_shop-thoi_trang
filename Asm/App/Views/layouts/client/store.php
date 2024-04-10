@@ -150,12 +150,10 @@
 					</ul>
 				</div>
 				<!-- /store top filter -->
-
 				<!-- store products -->
 				<div class="row">
 					<!-- product -->
-					<?php
-					
+					<?php					
 					 foreach ($data['products'] as $items): 
 						foreach ($data['images'] as $image) {
 							
@@ -164,13 +162,10 @@
 								break;
 							}
 						}
-					 ?>
-					 
+					 ?>					 
 						<a href="">
 							<div class="col-md-4 col-xs-6">
-								<div class="product">
-
-										
+								<div class="product">								
 										<div class="product-img">
 											<img src="<?= PUBLIC_URL . $image['path'] ?>" alt="">
 										</div>

@@ -27,12 +27,12 @@ class Mailer
             $mail->Host = 'sandbox.smtp.mailtrap.io';
             $mail->SMTPAuth = true;
             $mail->Port = 2525;
-            $mail->Username = '16d76d0546c5f4';
-            $mail->Password = 'ff39c8f5bed041';                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Username = '510895682c00db';
+            $mail->Password = '71305805533bad';                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('phu526714@gmail.com', 'DiatP');
-            $mail->addAddress($addressMail);   
+            $mail->setFrom('baohcpc07384@fpt.edu.vn', 'Bảo');
+            $mail->addAddress($addressMail);
 
 
             //Content
