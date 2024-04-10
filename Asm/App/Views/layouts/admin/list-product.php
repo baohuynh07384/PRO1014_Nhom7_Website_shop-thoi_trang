@@ -17,56 +17,56 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                                <table  id="example1" class="table table-bordered table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Mã số</th>
-                                            <th scope="col">Hình ảnh</th>
-                                            <th scope="col">Tên sản phẩm</th>
-                                            <th scope="col">Ngày tạo</th>
-                                            <th scope="col">Số lượng</th>
-                                            <th scope="col">Trạng thái</th>
-                                            <th scope="col">Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <td scope="row">1</td>
-                                            <td>
-                                                <img src="https://product.hstatic.net/1000357687/product/a_uo-khoa_uc-lu___eaartboard-2_2_aaa93827d6ef4c248cc2b27915fa381a_1024x1024.png"
-                                                    alt="" width="100" height="100">
-                                            </td>
-                                            <td>Áo khoác SINCITY</td>
-                                            <td>15-3-1024</td>
-                                            <td>100</td>
-                                            <td>Hiện</td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary btn-sm"><i
-                                                        class="fa fa-edit"></i></button>
-                                                <button type="button" class="btn btn-outline-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td scope="row">1</td>
-                                            <td>
-                                                <img src="https://product.hstatic.net/1000357687/product/7-layout-whiteartboard-1_0f277bc392394f71a52e57e15b845360_1024x1024.png"
-                                                    alt="" width="100" height="100">
-                                            </td>
-                                            <td>Collab BMWSG x GRIMMDC // White</td>
-                                            <td>15-3-1024</td>
-                                            <td>100</td>
-                                            <td>Hiện</td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary btn-sm"><i
-                                                        class="fa fa-edit"></i></button>
-                                                <button type="button" class="btn btn-outline-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </td>
-                                        </tr>
+                            <table id="example1" class="table table-bordered table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Mã số</th>
+                                        <th scope="col">Hình ảnh</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Tên danh mục</th>
+                                        <th scope="col">Ngày tạo</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                    </tbody>
-                                </table>
+                                    <?php
+
+                                    foreach ($data['products'] as $items) :
+                                        foreach ($data['images'] as $image) {
+
+                                            if ($image['product_id'] == $items['id']) {
+
+                                                break;
+                                            }
+                                        }
+
+                                        $status = $items['status'] == 1 ? "Hiện" : "Ẩn";
+                                    ?>
+                                        <tr class="">
+                                            <td scope="row"><?= $items['id'] ?></td>
+                                            <td>
+                                                <img src="<?= PUBLIC_URL . $image['path'] ?>" alt="" width="100" height="100">
+                                            </td>
+                                            <td><?= $items['proName'] ?></td>
+                                            <td><?= $items['cateName'] ?></td>
+                                            <td><?= $items['create_at'] ?></td>
+                                            <td><?= $items['quantity'] ?></td>
+                                            <td><?= $status ?></td>
+                                            <td>
+                                                <div class="row">
+                                                    <form action="/?url=ProductController/edit/<?= $items['id'] ?>" method="post">
+                                                        <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
+                                                    </form>
+                                                    <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

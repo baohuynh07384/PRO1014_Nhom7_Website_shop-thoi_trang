@@ -49,9 +49,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
+
 <script>
-  $(document).ready(function () {
-    //form tạo danh mục
+  $(document).ready(function() {
     $("#ValidateCateForm").validate({
       rules: {
         name: "required",
@@ -341,6 +341,7 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
 }
 
 ?>
+
 <script>
   $(function () {
     $('.select2').select2()

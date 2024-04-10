@@ -47,6 +47,7 @@ class RegristerController extends BaseController
             $errors = [];
             $phone = $_POST['phone'];
             $email = $_POST['email'];
+            $username = strstr($email, '@', true);
             $password = $_POST['password'];
             $data = [
                 'phone' => $_POST['phone'],
