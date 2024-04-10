@@ -8,7 +8,11 @@ use App\Core\Sessions;
     <form action="?url=BlogController/update/<?= $datablog['id'] ?>" enctype="multipart/form-data" method="post" class="container-fluid" id="editBlogForm">
         <div class="card card-primary mb-0">
             <div class="card-header">
+<<<<<<< HEAD
+                <h3 class="card-title">Cập nhật bài viết</h3>
+=======
                 <h3 class="card-title">Thêm bài viết</h3>
+>>>>>>> db94819a99d81f6b2b4d5d6c1bb71fe1a4bb91f5
             </div>
             <div class="card-body row">
 
@@ -79,8 +83,9 @@ use App\Core\Sessions;
                                 <input type="file" class="custom-file-input" id="customFile" name="thumbnail"  onchange="updateFileName(this)">
                                 <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
                             </div>
-                            <img src="<?php echo PUBLIC_URL . $datablog['thumbnail'] ?>" class="img-fluid" alt="..">
+                           
                         </div>
+                        <img src="<?php echo PUBLIC_URL . $datablog['thumbnail'] ?>" class="img-fluid" alt="..">
                         <?php if (isset($_SESSION['ảnh'])) : ?>
                             <p style="color: red; margin: 0px;">
                                 <?php echo Sessions::display_session('ảnh'); ?>

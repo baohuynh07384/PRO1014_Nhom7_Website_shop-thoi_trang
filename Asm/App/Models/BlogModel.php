@@ -43,7 +43,7 @@ class BlogModel extends BaseModel{
     {
         return $this->table('blog')->where('id', '=', $id)->delete();
     }
-    public function countBlogs()
+    public function countBlog()
     {
         $data = $this->select('COUNT(blog.id) AS blog')->table('blog')->first();
        
@@ -54,5 +54,4 @@ class BlogModel extends BaseModel{
         }
         
     }
-   
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\RenderBase;
+use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\UserModel;
 use App\Models\BlogModel;
@@ -23,7 +24,7 @@ class HomeController extends BaseController
      * Copy lại là hết đau lưng
      * 
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
@@ -32,18 +33,18 @@ class HomeController extends BaseController
         $this->_blogs = new BlogModel();
     }
 
-    function HomeController()
+    public function HomeController()
     {
         $this->homePage();
     }
 
 
-    function homePage()
+    public function homePage()
     {
         $data = [
             'categories' =>  $this->_categories->countCategories(),
             'users' => $this->_users->countUsers(),
-            'blogs' => $this->_blogs->countBlogs(),
+            'blogs' => $this->_blogs->countBlog(),
         ];
         
         $this->_renderBase->renderAdminHeader();
