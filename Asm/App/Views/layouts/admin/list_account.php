@@ -41,9 +41,10 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                 </thead>
                 <tbody>
                   <?php
+ 
 
-
-                    foreach ($account as $items) :
+                    foreach ($data as $items) :
+                      
                       $status = $items['status'] == 1 ? "Hiện" : "Ẩn";
                       $role = $items['role'] == 2 ? "Nhân viên" : "Người dùng";
                      ?>

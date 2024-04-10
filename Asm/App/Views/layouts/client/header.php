@@ -44,13 +44,30 @@ include "App/Views/layouts/client/stylesheet.php";
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<!-- Wishlist -->
+							<?php
+								if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 0):
+							?>
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+									<i class="fa fa-user-o"></i>
+									<span>Tài khoản</span>
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-btns">
+										<a href="?url=ClientHomeController/showAccount">Tài khoản</a>
+										<a href="?url=LoginController/Logout">Đăng xuất<i
+												class="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<?php else : ?>
 							<div>
 								<a href="?url=LoginController/LoginPage">
 									<i class="fa fa-user-o"></i>
 									<span>Đăng nhập</span>
-
 								</a>
 							</div>
+							<?php endif;?>
 							<!-- /Wishlist -->
 
 							<!-- Cart -->

@@ -18,6 +18,9 @@
     .error {
       color: red;
     }
+    label.error {
+        color: red; 
+    }
 
  
    

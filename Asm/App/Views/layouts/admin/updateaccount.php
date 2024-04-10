@@ -72,7 +72,7 @@ use App\Core\Sessions;
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh người dùng</label>
                     <input name="image" type="file" class="form-control"/>
-                    <input type="hidden" name="image_old" value="<?php echo $data['image']; ?>">
+                    <input type="text" name="image_old" value="<?php echo $data['image']; ?>">
                     <img src="<?php echo PUBLIC_URL . $data['image'] ?>" class="img-thumbnail w-25 h-25" alt="...">
                 </div>
             </div>

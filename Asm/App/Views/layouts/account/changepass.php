@@ -21,7 +21,7 @@ use App\Core\Sessions;
         <div class="form-container sign-in">
 
             <form action="/?url=ForgotController/changePass" method="post" id="form">
-                <h1>Mã xác nhận</h1>
+                <h1>Đổi mật khẩu</h1>
                 <input type="text" placeholder="Nhập mật khẩu mới" name="newpass" value="" id="">
                 <?php if (isset($_SESSION['newpass'])): ?>
                     <p style="color: #DC143C; margin: 0px;">

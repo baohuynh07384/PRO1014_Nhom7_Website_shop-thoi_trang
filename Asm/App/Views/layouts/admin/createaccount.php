@@ -84,7 +84,7 @@ use App\Core\Sessions;
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh</label>
-                    <input name="image" type="file" multiple  class="form-control"  required/>
+                    <input name="image" type="file" multiple  class="form-control" />
                     <?php if (isset($_SESSION['image'])) : ?>
                         <p style="color: red;">
                             <?php echo Sessions::display_session('image'); ?>

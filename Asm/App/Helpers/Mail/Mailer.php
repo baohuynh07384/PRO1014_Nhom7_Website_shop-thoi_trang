@@ -20,7 +20,7 @@ class Mailer
         $mail = new PHPMailer(true);
 
         try {
-            //Server settings
+            //Server settings 
             $mail = new PHPMailer();
             $mail->isSMTP();
             $mail->CharSet = 'utf-8';
@@ -32,7 +32,8 @@ class Mailer
 
             //Recipients
             $mail->setFrom('phu526714@gmail.com', 'DiatP');
-            $mail->addAddress($addressMail);     //Add a recipient
+            $mail->addAddress($addressMail);   
+
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML

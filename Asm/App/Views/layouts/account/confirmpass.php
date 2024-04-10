@@ -1,5 +1,4 @@
 <?php
-ob_start();
 use App\Core\Sessions;
 
 ?>
@@ -19,18 +18,15 @@ use App\Core\Sessions;
 
 <div class="container" id="container">
         <div class="form-container sign-in">
-
             <form action="/?url=ForgotController/confirmVerification" method="post" id="form">
                 <h1>Mã xác nhận</h1>
-                <input type="text" placeholder="Nhập mã xác nhận" name="text" value="" id="email">
+                <input type="text" placeholder="Nhập mã xác nhận" name="text" value="" id="">
                 <?php if (isset($_SESSION['text'])): ?>
                     <p style="color: #DC143C; margin: 0px;">
                         <?php echo Sessions::display_session('text'); ?>
                     </p>
                 <?php endif; ?>
-                
                 <button type="submit" name="confirm">Xác nhận</button>
-
             </form>
         </div>
         <div class="toggle-container">
