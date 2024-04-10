@@ -25,6 +25,7 @@ class LoginController extends BaseController
 
     public function LoginController()
     {
+
         $this->LoginPage();
     }
 

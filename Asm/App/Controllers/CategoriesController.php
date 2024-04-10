@@ -91,7 +91,7 @@ class CategoriesController extends BaseController
 
     public function delete($id)
     {
-        if (isset($_POST['deleteCate'])) {
+        if (isset($_POST['deleteCate'])){
             $category = new CategoriesModel;
             $resultDelete = $category->deleteCate($id);
 

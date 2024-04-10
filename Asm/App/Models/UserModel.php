@@ -79,9 +79,9 @@ class UserModel extends BaseModel
         $data = $this->select('COUNT(users.id) AS users')->table('users')->first();
        
         if ($data) {
-            return $data['users']; 
+            return $data['users'];
         } else {
-            return 0; 
+            return 0;
         }
         
     }

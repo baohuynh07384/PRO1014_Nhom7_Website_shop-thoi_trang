@@ -28,7 +28,6 @@ use App\Core\Sessions;
                         <?php echo Sessions::display_session('email'); ?>
                     </p>
                 <?php endif; ?>
-                
                 <button type="submit" name="forgot">Gửi</button>
 
             </form>

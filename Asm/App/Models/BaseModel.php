@@ -130,12 +130,18 @@ abstract class BaseModel implements CrudInterface
     public function query($sql)
     {
         try {
-            $statement = $this->_connection->PDO()->prepare($sql);
+            $conn = $this->_connection->PDO();
+            $statement = $conn->prepare($sql);
             $statement->execute();
+            $this->lastInsertedId = $conn->lastInsertId();
             return $statement;
             } catch (Exception $ex) {
             $mess = $ex->getMessage();
             echo $mess;
         }
+    }
+    public function getInsertLastId(){
+        return $this->lastInsertedId;
+       
     }
 }

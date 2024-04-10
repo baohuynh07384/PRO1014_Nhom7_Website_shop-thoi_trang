@@ -28,7 +28,6 @@ use App\Core\Sessions;
                         <?php echo Sessions::display_session('text'); ?>
                     </p>
                 <?php endif; ?>
-                
                 <button type="submit" name="confirm">Xác nhận</button>
 
             </form>

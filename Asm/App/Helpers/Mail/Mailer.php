@@ -21,17 +21,16 @@ class Mailer
 
         try {
             //Server settings
-            $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->CharSet = 'utf-8';
-            $mail->Host = 'sandbox.smtp.mailtrap.io';
-            $mail->SMTPAuth = true;
-            $mail->Port = 2525;
-            $mail->Username = '16d76d0546c5f4';
-            $mail->Password = 'ff39c8f5bed041';                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $phpmailer = new PHPMailer();
+            $phpmailer->isSMTP();
+            $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+            $phpmailer->SMTPAuth = true;
+            $phpmailer->Port = 2525;
+            $phpmailer->Username = '86fb95b88ada02';
+            $phpmailer->Password = 'b77792fa5e3426';                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('phu526714@gmail.com', 'DiatP');
+            $mail->setFrom('daodinhhay@gmail.com', 'HinD');
             $mail->addAddress($addressMail);     //Add a recipient
 
             //Content

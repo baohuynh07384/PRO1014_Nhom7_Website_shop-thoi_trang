@@ -39,8 +39,6 @@ use App\Core\Sessions;
                         <?php echo Sessions::display_session('fail'); ?>
                     </p>
                 <?php endif; ?>
-                
-                
                 <button type="submit" name="submit">Xác nhận</button>
 
             </form>

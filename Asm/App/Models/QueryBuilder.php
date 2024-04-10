@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 
-trait QueryBuilder 
+trait QueryBuilder
 {
     public $tableName = '';
     public $where = '';

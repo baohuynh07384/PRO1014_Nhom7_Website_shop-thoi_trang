@@ -36,7 +36,7 @@ class ProductController extends BaseController
     function ListProductPage(){
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
-        $this->_renderBase->renderListProduct();
+        $this->load->render('layouts/admin/list-product');
         $this->_renderBase->renderAdminFooter();
     }
 

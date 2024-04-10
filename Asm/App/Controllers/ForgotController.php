@@ -126,7 +126,7 @@ class ForgotController extends BaseController
                 Sessions::addSession("fail", "Nhập lại mật khẩu không khớp !");
                 return $this->redirect("/?url=ForgotController/loadPageChangePass");
             } else {
-                $newpass = $_POST['newpass']; 
+                $newpass = $_POST['newpass'];
                 $user = new UserModel;
                 $hash_password = password_hash($newpass, PASSWORD_DEFAULT);
                 $result = $user->changePass(['password' => $hash_password], $_SESSION['mail']);
