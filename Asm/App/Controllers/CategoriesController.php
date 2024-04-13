@@ -99,7 +99,7 @@ class CategoriesController extends BaseController
             if (!$resultDelete) {
                 die("Không thể xóa dữ liệu!");
             }
-            $_SESSION['success'] = 'Xóa sản phẩm thành công';
+            $_SESSION['success'] = 'Xóa danh mục thành công';
             header("Location:" . ROOT_URL . "/?url=CategoriesController/ListCatPage");
         }
     }

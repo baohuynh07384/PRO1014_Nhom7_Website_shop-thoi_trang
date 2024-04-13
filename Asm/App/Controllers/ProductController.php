@@ -157,7 +157,8 @@ class ProductController extends BaseController
                             $imageModel = new ImagesModel();
                             move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
                             $imageModel->create(['path' => $file, 'product_id' => $idpro]);
-                            echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
+                            $_SESSION['success'] = 'Thêm sản phẩm thành công';
+                            echo '<script> window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
                         }
                     }
                 }
@@ -237,7 +238,8 @@ class ProductController extends BaseController
                             $imageModel = new ImagesModel();
                             move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
                             $imageModel->create(['path' => $file, 'product_id' => $idpro]);
-                            echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
+                            $_SESSION['success'] = 'Cập nhật sản phẩm thành công';
+                            echo '<script> window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
                         }
                     }
                 }
@@ -245,6 +247,20 @@ class ProductController extends BaseController
                 header('Location: /?url=ProductController/ListProductPage');
                 exit;
             }
+        }
+    }
+    public function delete($id)
+    {
+        if (isset($_POST['deletePro'])) {
+            $id = $_POST['delete_id'];
+            $product = new ProductModel;
+            $resultDelete = $product->deletePro($id);
+
+            if (!$resultDelete) {
+                die("Không thể xóa dữ liệu!");
+            }
+            $_SESSION['success'] = 'Xóa sản phẩm thành công';
+            header("Location:" . ROOT_URL . "/?url=ProductController/ListProductPage");
         }
     }
 }

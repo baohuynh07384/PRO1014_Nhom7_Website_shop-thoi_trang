@@ -305,6 +305,13 @@
       $('.delete_id_cate').val(cate_id);
       $('#DeleteModalCate').modal('show');
     });
+    $('.deletebtn_pro').click(function (e) {
+      e.preventDefault();
+      var pro_id = $(this).val();
+      // console.log(cate_id);
+      $('.delete_id_pro').val(pro_id);
+      $('#DeleteModalPro').modal('show');
+    });
     $('.deletebtn_acc').click(function (e) {
       e.preventDefault();
       var user_id = $(this).val();

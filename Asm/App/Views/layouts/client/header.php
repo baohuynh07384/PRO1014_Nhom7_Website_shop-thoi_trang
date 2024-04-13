@@ -33,10 +33,10 @@ include "App/Views/layouts/client/stylesheet.php";
 									<option value="1">Nón</option>
 									<option value="1">Quần</option>
 								</select>
-								<input class="input" placeholder="Nhập vào tìm kiếm..." name="keyword" type="text" onchange="searchForm()">
-								<button class="search-btn" type="submit" >Tìm</button>
+								<input class="input" placeholder="Nhập vào tìm kiếm..." name="keyword" type="text">
+								<button class="search-btn" type="submit">Tìm</button>
 							</form>
-							
+						
 						</div>
 					</div>
 					<!-- /SEARCH BAR -->
@@ -65,7 +65,7 @@ include "App/Views/layouts/client/stylesheet.php";
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty"><?=$data['count']?></div>
+										<div class="qty"><?=$data['count'] ?></div>
 									</a>	
 									<div class="cart-dropdown">
 										<div class="cart-list">

@@ -57,13 +57,13 @@ abstract class BaseModel implements CrudInterface
     }
 
 
-    public function limit($number, $offset = 0)
-    {
-        $stmt = $this->_connection->PDO()->prepare($this->_query);
-        $result = $stmt->execute();
+    // public function limit($number, $offset = 0)
+    // {
+    //     $stmt = $this->_connection->PDO()->prepare($this->_query);
+    //     $result = $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
 
     // public function update( array $data  ){
     //     return true;

@@ -56,48 +56,42 @@ class ClientHomeController extends BaseController
 
     public function ClientCategoriesPage()
     {
-        if(isset($_GET['keyword'])){
-            $keyword = $_GET['keyword'];
-            $products = $this->_product->productGetKeyword($keyword);       
-        }else if(isset($_GET['price'])){
-            $price = $_GET['price'];
-            $products = $this->_product->productGetPrice($price);
-            var_dump($products);
-            die;
-        }else{
-            $products = $this->_product->getProduct();
-        }
+        
+        $products = $this->_product->getProduct();   
+        $totalPages = $this->_product->productPagne();
         $images = $this->_image->getImages();
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'totalPages' => $totalPages
         ];
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/store', $data);
         $this->_renderBase->renderClientFooter();
     }
 
-    public function ClientCategoriesPageID($id){
+    public function ClientCategoriesPageID($id)
+    {
         $images = $this->_image->getImages();
-        if(isset($_GET['keyword'])){
+        if (isset($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
             $products = $this->_product->productGetKeyword($keyword);
-        }else if(isset($_GET['price'])){
+        } else if (isset($_GET['price'])) {
             $price = $_GET['price'];
             $products = $this->_product->productGetPrice($price);
-        }else{
+        } else {
             $products = $this->_product->getProductCate($id);
         }
-        
+
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
             'products' => $products,
             'categories' => $categories
         ];
-        
+
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/categories', $data);
         $this->_renderBase->renderClientFooter();
@@ -125,9 +119,18 @@ class ClientHomeController extends BaseController
 
     public function ClientHomePage()
     {
-
         $images = $this->_image->getImages();
-        $products = $this->_product->getProduct();
+        if (isset($_GET['keyword'])) {
+            $keyword = $_GET['keyword'];
+            $products = $this->_product->productGetKeyword($keyword);
+
+        } else if (isset($_GET['price'])) {
+            $price = $_GET['price'];
+            $products = $this->_product->productGetPrice($price);
+
+        } else {
+            $products = $this->_product->getProduct();
+        }
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,

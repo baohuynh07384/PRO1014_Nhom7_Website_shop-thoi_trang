@@ -22,8 +22,25 @@ class ProductModel extends BaseModel{
         return $this->getAll()->fetch();
     }
     public function getProduct(){
-        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->fetch();
+        return $this
+        ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
+        ->join('categories', 'categories.id = products.categories_id')
+        ->where('products.status', ' = ',  '1')
+        ->limit(3,0)
+        ->fetch();
     }
+
+    public function productPagne(){
+        $data = $this->select('COUNT(*) AS item')->table('products')->fetch();
+       
+        if ($data) {
+            return $data; 
+        } else {
+            return 0; 
+        }
+    }
+
+
     public function getDetailProduct($id){
         return $this->select(' products.id, description, price, quantity, path, categories.name as cateName, products.name as proName')->join('images', 'images.product_id = products.id')->join('categories', 'categories.id = products.categories_id')->where('products.id', ' = ',  $id)->fetch();
     }
@@ -31,6 +48,7 @@ class ProductModel extends BaseModel{
     public function getProductID($id){
         return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->where('products.id' , '=', $id)->first();
     }
+
     public function checkimageexit(string $image){
         return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
     }
@@ -38,6 +56,10 @@ class ProductModel extends BaseModel{
     {
         
         return $this->table('blog')->where('id', ' = ',  $id)->update($data);
+    }
+    public function deletePro($id)
+    {
+        return $this->table('products')->where('id', '=', $id)->delete();
     }
     public function getAllWithPaginate(int $limit = 10,int  $offset = 0){
         // return $this->select()->where('email', '=', $email)->first();
@@ -97,4 +119,6 @@ class ProductModel extends BaseModel{
         ->where('products.categories_id', '=', $id)
         ->fetch();
     }
+
+
 }

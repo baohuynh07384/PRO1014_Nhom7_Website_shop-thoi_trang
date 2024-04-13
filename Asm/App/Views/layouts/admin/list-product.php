@@ -60,7 +60,7 @@
                                                     <form action="/?url=ProductController/edit/<?= $items['id'] ?>" method="post">
                                                         <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
                                                     </form>
-                                                    <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" name="" value="<?= $items['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn_pro" data-toggle="modal" data-target="#DeleteModalPro"><i class="fa fa-trash"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -73,6 +73,30 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="DeleteModalPro">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Thông báo</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/?url=ProductController/delete/<?php echo $items['id'] ?>" method="POST">
+            <div class="modal-body">
+              <input type="hidden" name="delete_id" id="" class="delete_id_pro">
+              <p>Bạn có chắc chắn muốn xóa ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="deletePro">Delete</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
 
     <!-- /.content -->
 </div>

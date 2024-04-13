@@ -31,9 +31,9 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                                         <tr>
                                             <th scope="col">Mã số</th>
                                             <th colspan="1">Bài viết</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Tiêu đề</th>
+                                            <th scope="col">Thể loại</th>
+                                            <th scope="col">Tác giả</th>
                                             <th scope="col">Ngày tạo</th>
                                             <th scope="col">Trạng thái</th>
                                             <th scope="col">Thao tác</th>

@@ -115,15 +115,7 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Mẫu áo thun Streetwear Basic tốt nhất trên thị trường:
-
-                                        . Chất liệu: GRDC™ Streetvibe Fabric: 100% cotton 2 chiều, định lượng 250 gsm, dày dặn, hầu như không chảy nhão, bo cổ bền bỉ, thấm hút cực tốt và mát mẻ. Giặt máy thoải mái.
-
-                                        . Thiết kế tối giản, với Grimm DC Brand name và Signature box logo.
-
-                                        . Chi tiết in: kéo lụa mực plastisol.
-
-                                        . Box logo thêu tỉ mỉ và tinh tế.</p>
+                                    <p><?= $data['products'][0]['description'] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -133,15 +125,7 @@
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Mẫu áo thun Streetwear Basic tốt nhất trên thị trường:
-
-                                        . Chất liệu: GRDC™ Streetvibe Fabric: 100% cotton 2 chiều, định lượng 250 gsm, dày dặn, hầu như không chảy nhão, bo cổ bền bỉ, thấm hút cực tốt và mát mẻ. Giặt máy thoải mái.
-
-                                        . Thiết kế tối giản, với Grimm DC Brand name và Signature box logo.
-
-                                        . Chi tiết in: kéo lụa mực plastisol.
-
-                                        . Box logo thêu tỉ mỉ và tinh tế.</p>
+                                    <p><?= $data['products'][0]['description'] ?>.</p>
                                 </div>
                             </div>
                         </div>
@@ -216,13 +200,11 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-
             <div class="col-md-12">
                 <div class="section-title text-center">
                     <h3 class="title">Sản phẩm liên quan</h3>
                 </div>
             </div>
-
             <!-- product -->
             <div class="col-md-3 col-xs-6">
                 <div class="product">

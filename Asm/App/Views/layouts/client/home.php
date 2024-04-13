@@ -63,8 +63,6 @@
                                         </a>
                                     </div>
                                 <?php endforeach; ?>
-
-
                             </div>
                             <div id="slick-nav-1" class="products-slick-nav"></div>
                         </div>
@@ -114,7 +112,7 @@
             <div class="clearfix visible-lg visible-md"></div>
         </div>
         <div class="row">
-            <a href="./?action=product">
+            <a href="/?url=ClientHomeController/ClientCategoriesPage">
                 <button type="submit" class="btn btn-warning" style="background-color:#D10024; margin-left: 555px; padding: 10px;">Xem Thêm</button>
             </a>
         </div>
