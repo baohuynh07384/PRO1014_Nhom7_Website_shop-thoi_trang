@@ -10,7 +10,7 @@ use App\Core\Sessions;
 use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
-use App\Models\OrderModel;
+// use App\Models\OrderModel;
 use App\Models\CommentsModel;
 use App\Models\CartsModel;
 
@@ -29,6 +29,7 @@ class ClientHomeController extends BaseController
 
     private $_image;
     private $_order;
+    private $_cart;
 
     private $_comment;
 
@@ -48,8 +49,9 @@ class ClientHomeController extends BaseController
         $this->_product = new ProductModel();
         $this->_category = new CategoriesModel();
         $this->_image = new ImagesModel();
-        $this->_order = new OrderModel();
         $this->_comment = new CommentsModel();
+        $this->_cart = new CartsModel();
+        // $this->_order = new OrderModel();
     }
 
 
@@ -129,13 +131,13 @@ class ClientHomeController extends BaseController
     public function ClientCartPage()
     {
         $id = $_SESSION['user']['id'];
-        $orders = $this->_order->getCart($id);
+        $carts = $this->_cart->getCart($id);
         $images = $this->_image->getImages();
         $data = [
             'images' => $images,
-            'orders' => $orders,
+            'carts' => $carts,
         ];
-        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/header');
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
@@ -210,6 +212,7 @@ class ClientHomeController extends BaseController
         if (isset($_POST['submit'])) {
             $user_id = $_POST['userid'];
             $pro_id = $_POST['proid'];
+            $name = $_POST['name'];
             $price = $_POST['price'];
             $size = $_POST['size'];
             $qty = $_POST['qty'];
@@ -221,11 +224,17 @@ class ClientHomeController extends BaseController
                 $cart->updatecart(['quantity' => $new_qty], $pro_id, $size);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
             } else {
-                $cart->create(['product_id' => $pro_id, 'user_id' => $user_id, 'price' => $price, 'size' => $size, 'quantity' => $qty]);
+                $cart->create(['product_id' => $pro_id, 'user_id' => $user_id, 'price' => $price, 'size' => $size, 'quantity' => $qty, 'name' => $name]);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
             }
             header('Location: /?url=ClientHomeController/ClientCartPage');
 
+
+        }
+    }
+    public function updateCart()
+    {
+        if (isset($_POST['submit'])) {
 
         }
     }

@@ -59,10 +59,10 @@
                         <label>
                             Kích thước
                             <select name="size" class="input-select">
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
+                                <option value="1">M</option>
+                                <option value="2">L</option>
+                                <option value="3">XL</option>
+                                <option value="4">XXL</option>
                             </select>
                         </label>
 

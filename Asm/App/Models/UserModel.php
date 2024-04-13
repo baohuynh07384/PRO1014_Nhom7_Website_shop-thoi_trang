@@ -82,7 +82,6 @@ class UserModel extends BaseModel
         } else {
             return 0; 
         }
-        
     }
 }
 
