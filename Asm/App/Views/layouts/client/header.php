@@ -45,77 +45,79 @@ include "App/Views/layouts/client/stylesheet.php";
 						<div class="header-ctn">
 							<!-- Wishlist -->
 							<?php
-								if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 0):
-							?>
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
-									<i class="fa fa-user-o"></i>
-									<span>Tài khoản</span>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-btns">
-										<a href="?url=ClientHomeController/showAccount">Tài khoản</a>
-										<a href="?url=LoginController/Logout">Đăng xuất<i
-												class="fa fa-arrow-circle-right"></i></a>
+							if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 0):
+								?>
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-user-o"></i>
+										<span>Tài khoản</span>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-btns">
+											<a href="?url=ClientHomeController/showAccount">Tài khoản</a>
+											<a href="?url=LoginController/Logout">Đăng xuất<i
+													class="fa fa-arrow-circle-right"></i></a>
+										</div>
 									</div>
 								</div>
-							</div>
-							<?php else : ?>
-							<div>
-								<a href="?url=LoginController/LoginPage">
-									<i class="fa fa-user-o"></i>
-									<span>Đăng nhập</span>
-								</a>
-							</div>
-							<?php endif;?>
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Giỏ hàng</span>
+										<div class="qty"></div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
+														alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>150.000đ</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
+														alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">3x</span>150.000đ</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+										</div>
+										<div class="cart-summary">
+											<small>3 sản phẩm</small>
+											<h5>TỔNG: 300.000đ</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="?url=ClientHomeController/ClientCartPage">Giỏ hàng</a>
+											<a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán<i
+													class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+							<?php else: ?>
+								<div>
+									<a href="?url=LoginController/LoginPage">
+										<i class="fa fa-user-o"></i>
+										<span>Đăng nhập</span>
+									</a>
+								</div>
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Giỏ hàng</span>
+									</a>
+								</div>
+							<?php endif; ?>
 							<!-- /Wishlist -->
-
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-									<i class="fa fa-shopping-cart"></i>
-									<span>Giỏ hàng</span>
-									<div class="qty">3</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">1x</span>150.000đ</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">3x</span>150.000đ</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 sản phẩm</small>
-										<h5>TỔNG: 300.000đ</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="?url=ClientHomeController/ClientCartPage">Giỏ hàng</a>
-										<a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán<i
-												class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<!-- /Cart -->
-
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
 								<a href="#">

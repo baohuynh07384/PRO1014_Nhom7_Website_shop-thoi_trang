@@ -76,13 +76,11 @@ class UserModel extends BaseModel
     public function countUsers()
     {
         $data = $this->select('COUNT(users.id) AS users')->table('users')->first();
-       
         if ($data) {
             return $data['users'];
         } else {
             return 0;
         }
-        
     }
 }
 
