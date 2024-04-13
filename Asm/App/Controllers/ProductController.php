@@ -153,7 +153,7 @@ class ProductController extends BaseController
                         $file = $image[$index]['name'];
                         $error = $image[$index]['error'];
                         if ($error === 0) {
-                            $uploadDir = ROOT_PATH . basename($file = $image[$index]['name']);
+                            $uploadDir = UPLOAD_PATH . basename($file = $image[$index]['name']);
                             $imageModel = new ImagesModel();
                             move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
                             $imageModel->create(['path' => $file, 'product_id' => $idpro]);

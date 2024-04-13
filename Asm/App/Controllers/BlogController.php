@@ -61,7 +61,7 @@ class BlogController extends BaseController
     {
         if (isset($_POST['upload'])) {
             $name = $_POST['name'];
-            $image = UPLOAD_URL . basename($_FILES['image']['name']);
+            $image = UPLOAD_PATH . basename($_FILES['image']['name']);
             $author = $_POST['author'];
             $new_type = $_POST['new_type'];
             $status = $_POST['status'];
@@ -95,12 +95,12 @@ class BlogController extends BaseController
                     $i = 1;
                     $newImageName = $imagename;
                     $info = pathinfo($imagename);
-                    while (file_exists(UPLOAD_URL . $newImageName)) {
+                    while (file_exists(UPLOAD_PATH . $newImageName)) {
                         $newImageName = $info['filename'] . "($i)." . $info['extension'];
                         $i++;
                     }
 
-                    move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
+                    move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_PATH . $newImageName);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
                     $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
@@ -126,7 +126,7 @@ class BlogController extends BaseController
 
             if ($new_image != '') {
                 $update_image = $new_image;
-                if (file_exists(UPLOAD_URL . basename($_FILES["thumbnail"]["name"]))) {
+                if (file_exists(UPLOAD_PATH . basename($_FILES["thumbnail"]["name"]))) {
                     echo '<script>alert("Ảnh đã tồn tại")</script>';
                     header("Location:" . ROOT_URL . "/?url=BlogController/ListBlogPage");
                     exit();
@@ -152,9 +152,9 @@ class BlogController extends BaseController
 
         if ($updateResult) {
             if ($new_image != '') {
-                $target_path = UPLOAD_URL . basename($_FILES["thumbnail"]["name"]);
+                $target_path = UPLOAD_PATH . basename($_FILES["thumbnail"]["name"]);
                 move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path);
-                unlink(UPLOAD_URL . $old_image);
+                unlink(UPLOAD_PATH . $old_image);
             }
             $_SESSION['success'] = "Chỉnh sửa thành công";
             header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");

@@ -14,17 +14,19 @@
                             <th scope="col" class="text-center">Giá tiền</th>
                             <th scope="col" class="text-center">Size</th>
                             <th scope="col" class="text-center">Số lượng</th>
+                            <th scope="col" class="text-center">Tổng tiền</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
+                    $cart = 0;
                     foreach ($data['orders'] as $items):
                        foreach ($data['images'] as $image) {
                            if ($image['product_id'] == $items['id']) {
                                break;
                            }
                        }
-
+                       $total = $items['quantity']*$items['price'];
                     ?>
                         <tr class="">
                             <td scope="row"><i class="fa-solid fa-trash"></i></td>
@@ -35,24 +37,24 @@
                             <td><?= $items['name'] ?></td>
                             <td><?= number_format($items['price']) ?>đ</td>
                             <td>
-                            <?php if($items['size'] = 'M'){
+                            <?php if($items['size'] == 'M'){
                                 echo '<select name="size" class="input-select">
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
                                 <option value="XXL">XXL</option>
                                 </select>';
-                            }elseif($items['size'] = 'L'){
+                            }elseif($items['size'] == 'L'){
                                 echo '<select name="size" class="input-select">
                                 <option value="L">L</option>
                                 <option value="M">M</option>
                                 <option value="XL">XL</option>
                                 <option value="XXL">XXL</option>
                                 </select>';
-                            }elseif($items['size'] = 'XL'){
+                            }elseif($items['size'] == 'XL'){
                                 echo '<select name="size" class="input-select">
                                 <option value="XL">XL</option>
-                                <option value="M">M</option>
+<option value="M">M</option>
                                 <option value="L">L</option>
                                 <option value="XXL">XXL</option>
                                 </select>';
@@ -73,8 +75,11 @@
                                     <span id="decreaseBtn" class="qty-down">-</span>
                                 </div>
                             </td>
+                            <td><?= $total ?></td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php 
+                         $cart += $total;
+                    endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -82,18 +87,17 @@
             <div class="row">
                 <h3 class="col-sm-6">Tổng tiền của bạn:</h3>
                 <input type="hidden" class="form-control" >
-                <span class="col-sm-6 text-right" id="basic-addon2">Xác nhận</span>
+                <span class="col-sm-6 text-right" id="basic-addon2"><?= $cart?></span>
             </div>
             <hr style="height:2px;background-color:gray; margin:0">
             
-            <div class="" style="margin-top: 0.5rem; margin-left:62rem; postion: relative">
-                <button type="button" class="btn btn-danger"><a
-                        href="?url=ClientHomeController/ClientCheckoutPage">Cập nhập</a></button>
+            <div class="" style="margin-top: 0.5rem; margin-left:62rem; position: absolute">
+                <button type="button" class="btn btn-danger"><a href="?url=ClientHomeController/ClientCheckoutPage">Cập nhập</a></button>
             </div>
         </form>
-        <form action=""  style="position: absolute; top: 35.5rem; margin-left:68.8rem" method="post">
-            <button type="button" class="btn btn-danger col-1"><a
-                    href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán</a></button>
+        <form action="" style="position: relative; top: 0.5rem; margin-left:68.8rem" method="post">
+            <input type="hidden" value="<?= $cart ?>" class="form-control">
+            <button type="button" class="btn btn-danger col-1"><a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán</a></button>
         </form>
     </div>
 

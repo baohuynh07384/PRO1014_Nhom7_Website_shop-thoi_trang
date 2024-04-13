@@ -84,7 +84,7 @@ class RegristerController extends BaseController
             } else {
                 $hash_password = password_hash($password, PASSWORD_DEFAULT);
                 $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => $username, 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
-                echo '<script>alert("Đăng kí thành công"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
+                echo '<script>alert("Đăng kí thành công"); window.location.href = "' . ROOT_URL . '/?url=LoginController/LoginPage";</script>';
             }
         }
     }

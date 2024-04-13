@@ -11,6 +11,7 @@ use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
 use App\Models\OrderModel;
+use App\Models\CommentsModel;
 
 class ClientHomeController extends BaseController
 {
@@ -27,6 +28,8 @@ class ClientHomeController extends BaseController
 
     private $_image;
     private $_order;
+
+    private $_comment;
 
 
 
@@ -45,28 +48,71 @@ class ClientHomeController extends BaseController
         $this->_category = new CategoriesModel();
         $this->_image = new ImagesModel();
         $this->_order = new OrderModel();
+        $this->_comment = new CommentsModel();
     }
 
 
 
     public function ClientCategoriesPage()
     {
+        if(isset($_GET['keyword'])){
+            $keyword = $_GET['keyword'];
+            $products = $this->_product->productGetKeyword($keyword);       
+        }else if(isset($_GET['price'])){
+            $price = $_GET['price'];
+            $products = $this->_product->productGetPrice($price);
+            var_dump($products);
+            die;
+        }else{
+            $products = $this->_product->getProduct();
+        }
         $images = $this->_image->getImages();
-        $products = $this->_product->getProduct();
+        $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories
         ];
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/store', $data);
         $this->_renderBase->renderClientFooter();
     }
 
+    public function ClientCategoriesPageID($id){
+        $images = $this->_image->getImages();
+        if(isset($_GET['keyword'])){
+            $keyword = $_GET['keyword'];
+            $products = $this->_product->productGetKeyword($keyword);
+        }else if(isset($_GET['price'])){
+            $price = $_GET['price'];
+            $products = $this->_product->productGetPrice($price);
+        }else{
+            $products = $this->_product->getProductCate($id);
+        }
+        
+        $categories = $this->_category->getCateClient();
+        $data = [
+            'images' => $images,
+            'products' => $products,
+            'categories' => $categories
+        ];
+        
+        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/categories', $data);
+        $this->_renderBase->renderClientFooter();
+    }
+
     public function ClientProductPage($id)
     {
         $products = $this->_product->getDetailProduct($id);
+        $comments = $this->_comment->getAllComments($id);
+        $data = [
+            'comments' => $comments,
+            'products' => $products
+        ];
+
         $this->_renderBase->renderClientHeader();
-        $this->load->render('layouts/client/product', $products);
+        $this->load->render('layouts/client/product', $data);
         $this->_renderBase->renderClientFooter();
 
     }
@@ -79,22 +125,31 @@ class ClientHomeController extends BaseController
     public function ClientHomePage()
     {
 
+        $images = $this->_image->getImages();
+        $products = $this->_product->getProduct();
+        $categories = $this->_category->getCateClient();
+        $data = [
+            'images' => $images,
+            'products' => $products,
+            'categories' => $categories
+        ];
 
         $this->_renderBase->renderClientHeader();
-        $this->load->render('layouts/client/home');
+        $this->load->render('layouts/client/home', $data);
         $this->_renderBase->renderClientFooter();
     }
 
+
     public function ClientCartPage()
     {
-        $orders = $this->_order->getCart($_SESSION['user']['id']);
+        $id = $_SESSION['user']['id'];
+        $orders = $this->_order->getCart($id);
         $images = $this->_image->getImages();
-        
         $data = [
             'images' => $images,
-            'orders' => $orders
+            'orders' => $orders,
         ];
-        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/header');
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
@@ -109,10 +164,10 @@ class ClientHomeController extends BaseController
             $size = $_POST['size'];
             $qty = $_POST['qty'];
             $order = new OrderModel();
-            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id ]);
-            if ($insert){
+            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id, 'total' => '0']);
+            if ($insert) {
                 $order_id = $order->order_id;
-                $order->insertOrderdetial(['price' => $price, 'size' => $size, 'total' => '0', 'quantity' => $qty , 'order_id' => $order_id]);
+                $order->insertOrderdetial(['price' => $price, 'size' => $size, 'quantity' => $qty, 'order_id' => $order_id]);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
                 header('Location: /?url=ClientHomeController/ClientCartPage');
             }
@@ -131,9 +186,10 @@ class ClientHomeController extends BaseController
         $this->load->render('layouts/client/blogs', $data);
     }
 
-    public function ClientBlogDetailPage($id){
+    public function ClientBlogDetailPage($id)
+    {
         $data = $this->_blog->getwithid($id);
-        $this->load->render('layouts/client/blog_detail',$data);
+        $this->load->render('layouts/client/blog_detail', $data);
     }
 
     function ClientContactPage()
@@ -173,7 +229,7 @@ class ClientHomeController extends BaseController
 
             if ($new_image != '') {
                 $update_image = $new_image;
-                if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
+                if (file_exists(UPLOAD_PATH . basename($_FILES["image"]["name"]))) {
                     $_SESSION['error'] = "Ảnh đã tồn tại";
                     header("Location:" . ROOT_URL . "/?url=ClientHomeController/showUpdateAccount");
                     exit();
@@ -187,9 +243,9 @@ class ClientHomeController extends BaseController
             $updateResult = $userModel->updateUser(['name' => $name, 'email' => $email, 'address' => $address, 'phone' => $phone, 'image' => $update_image], $user_id);
             if ($updateResult) {
                 if ($new_image != '') {
-                    $target_path = UPLOAD_URL . basename($_FILES["image"]["name"]);
+                    $target_path = UPLOAD_PATH . basename($_FILES["image"]["name"]);
                     move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
-                    unlink(UPLOAD_URL . $old_image);
+                    unlink(UPLOAD_PATH . $old_image);
                 }
                 $_SESSION['success'] = "Cập nhật thành công";
                 header("Location: " . ROOT_URL . "/?url=ClientHomeController/showAccount");

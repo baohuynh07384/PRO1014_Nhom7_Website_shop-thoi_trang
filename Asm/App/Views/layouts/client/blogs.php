@@ -17,7 +17,7 @@
                         </div>
                         <div class="blog-body">
                             <h3 class="blog-title"><a href="#"><?= $item['title'] ?></a></h3>
-                            
+                            <p><? ?></p>
                         </div>
                     </div>
                 </div>

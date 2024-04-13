@@ -56,10 +56,8 @@ class CategoriesModel extends BaseModel
         return $this->table('categories')->where('id', ' = ',  $id)->update($data);
     }
 
-    public function findCate($field, $value)
-    {
-        $result = $this->table('categories')->where($field, ' = ', $value)->first();
-        return $result;
+    public function getCateClient(){
+        return $this->table('categories')->where('status', '=', '1')->fetch();
     }
 
     public function countCategories()
