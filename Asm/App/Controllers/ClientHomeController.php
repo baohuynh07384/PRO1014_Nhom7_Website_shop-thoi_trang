@@ -304,7 +304,7 @@ class ClientHomeController extends BaseController
     public function blogPage()
     {
         $this->_renderBase->renderClientHeader();
-        $this->load->render('layouts/client/blog_page');
+        $this->load->render('layouts/client/blog_detail');
         $this->_renderBase->renderClientFooter();
     }
 }
