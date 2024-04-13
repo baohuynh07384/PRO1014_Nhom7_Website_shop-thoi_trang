@@ -119,7 +119,10 @@ include "App/Views/layouts/client/stylesheet.php";
 								</div>
 							<?php endif; ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<!-- /Wishlist -->
+=======
+>>>>>>> 434a72b (fix)
 =======
 >>>>>>> 434a72b (fix)
 							<!-- Menu Toogle -->
