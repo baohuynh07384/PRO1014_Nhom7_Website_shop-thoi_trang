@@ -99,7 +99,8 @@ class BlogController extends BaseController
                         $newImageName = $info['filename'] . "($i)." . $info['extension'];
                         $i++;
                     }
-                    move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
+
+                    move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_PATH . $newImageName);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
                     $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
