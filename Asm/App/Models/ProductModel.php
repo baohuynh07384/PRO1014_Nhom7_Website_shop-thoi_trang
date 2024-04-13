@@ -58,7 +58,43 @@ class ProductModel extends BaseModel{
     public function getidpro(){
         return $this->select('id')->fetch();
     }
-    // public function edit($data, $id){
-    //     return $this->select('id',)->fetch();
-    // }
+
+    public function countProducts()
+    {
+        $data = $this->select('COUNT(products.id) AS products')->table('products')->first();
+       
+        if ($data) {
+            return $data['products']; 
+        } else {
+            return 0; 
+        }
+        
+    }
+
+    public function productGetKeyword($value){
+        return $this
+        ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
+        ->join('categories', 'categories.id = products.categories_id')
+        ->where('products.status', ' = ',  '1')
+        ->orderBy('products.name',  $value)
+        ->fetch();
+    }
+
+    public function productGetPrice($value){
+        return $this
+        ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
+        ->join('categories', 'categories.id = products.categories_id')
+        ->where('products.status', ' = ',  '1')
+        ->orderBy('price',  $value)
+        ->fetch();
+    }
+
+    public function getProductCate($id){
+        return $this
+        ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
+        ->join('categories', 'categories.id = products.categories_id')
+        ->where('products.status', ' = ',  '1')
+        ->where('products.categories_id', '=', $id)
+        ->fetch();
+    }
 }

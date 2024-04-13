@@ -2,7 +2,7 @@
 
 
 <!-- /BREADCRUMB -->
-
+<?php  ?>
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -14,7 +14,7 @@
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
                     
-                <?php foreach ($data as $item) : ?>
+                <?php foreach ($data['products'] as $item) : ?>
                     <div class="product-preview">
                         <img src="<?= PUBLIC_URL . $item['path']?>" alt="">
                     </div>
@@ -28,7 +28,7 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
-                <?php foreach ($data as $item) : ?>
+                <?php foreach ($data['products'] as $item) : ?>
                     <div class="product-preview">
                         <img src="<?= PUBLIC_URL . $item['path']?>" alt="">
                     </div>
@@ -47,15 +47,15 @@
                 <input type="hidden" name="name" value="<?= $data[0]['proName'] ?>">
                     <h2 class="product-name"><?= $data[0]['proName'] ?></h2>
                     <div>
-                        <h3 class="product-price"><?= number_format($data[0]['price'])?>₫ </h3>
+                        <h3 class="product-price"><?= number_format($data['products'][0]['price'])?>₫ </h3>
                         <input type="hidden" name="price" value="<?= $data[0]['price'] ?>">
-                        <?php if($data[0]['quantity'] != 0): ?>
+                        <?php if($data['products'][0]['quantity'] != 0): ?>
                         <span class="product-available">Còn hàng</span>
                         <?php else : ?>
                         <span class="product-available">Hết hàng</span>
                         <?php endif;?>
                     </div>
-                    <?= $data[0]['description'] ?>
+                    <?= $data['products'][0]['description'] ?>
 
                     <div class="product-options">
                         <label>
@@ -90,7 +90,7 @@
 
                     <ul class="product-links">
                         <li>Danh mục:</li>
-                        <li><a href="#"><?= $data[0]['cateName'] ?></a></li>
+                        <li><a href="#"><?= $data['products'][0]['cateName'] ?></a></li>
                     </ul>
 
 
@@ -159,36 +159,17 @@
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
-                                            <li>
+                                            <?php foreach ($data['comments'] as $item): ?>                                               
+                                            <li>                                               
                                                 <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                 
+                                                    <h5 class="name"><?=$item['name']  ?></h5>
+                                                    <p class="date"><?=$item['create_at']  ?></p>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p><?=$item['content']  ?></p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                   
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                   
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
+                                            <?php endforeach; ?>                                          
                                         </ul>
                                         <ul class="reviews-pagination">
                                             <li class="active">1</li>

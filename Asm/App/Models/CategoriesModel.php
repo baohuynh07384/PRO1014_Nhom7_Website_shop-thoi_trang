@@ -59,6 +59,9 @@ class CategoriesModel extends BaseModel
         $result = $this->table($this->table)->where($field, ' = ', $value)->first();
         return $result;
     }
+    public function getCateClient(){
+        return $this->table('categories')->where('status', '=', '1')->fetch();
+    }
 
     public function countCategories()
     {
