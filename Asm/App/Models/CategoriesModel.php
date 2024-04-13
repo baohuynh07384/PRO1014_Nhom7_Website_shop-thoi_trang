@@ -42,7 +42,7 @@ class CategoriesModel extends BaseModel
 
     public function deleteCate($id)
     {
-        return $this->table('categories')->where('id', '=', $id)->delete();
+        return $this->table($this->table)->where('id', '=', $id)->delete();
     }
     public function getOneCate($id)
     {
@@ -51,19 +51,18 @@ class CategoriesModel extends BaseModel
 
     public function updateCate($data, $id)
     {
-        
-        return $this->table('categories')->where('id', ' = ',  $id)->update($data);
+        return $this->table($this->table)->where('id', ' = ',  $id)->update($data);
     }
 
     public function findCate($field, $value)
     {
-        $result = $this->table('categories')->where($field, ' = ', $value)->first();
+        $result = $this->table($this->table)->where($field, ' = ', $value)->first();
         return $result;
     }
 
     public function countCategories()
     {
-        $data = $this->select('COUNT(categories.id) AS categories')->table('categories')->first();
+        $data = $this->select('COUNT(categories.id) AS categories')->table($this->table)->first();
        
         if ($data) {
             return $data['categories']; 
