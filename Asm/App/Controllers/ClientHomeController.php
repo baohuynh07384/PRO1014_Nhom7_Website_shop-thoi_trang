@@ -149,7 +149,7 @@ class ClientHomeController extends BaseController
             'images' => $images,
             'orders' => $orders,
         ];
-        $this->load->render('layouts/client/header');
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
@@ -177,24 +177,32 @@ class ClientHomeController extends BaseController
 
     public function ClientCheckoutPage()
     {
+        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderCheckoutPage();
+        $this->_renderBase->renderClientFooter();
     }
 
     public function ClientBlogsPage()
     {
         $data = $this->_blog->getlistblog();
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/blogs', $data);
+        $this->_renderBase->renderClientFooter();
     }
 
     public function ClientBlogDetailPage($id)
     {
         $data = $this->_blog->getwithid($id);
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/blog_detail', $data);
+        $this->_renderBase->renderClientFooter();
     }
 
     function ClientContactPage()
     {
+        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderContactPage();
+        $this->_renderBase->renderClientFooter();
     }
 
 
@@ -204,7 +212,9 @@ class ClientHomeController extends BaseController
     {
         $userData = $_SESSION['user'];
         $data = $this->_user->getOneUser($userData['id']);
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/account', $data);
+        $this->_renderBase->renderClientFooter();
     }
 
     public function showUpdateAccount()
@@ -212,7 +222,9 @@ class ClientHomeController extends BaseController
 
         $userData = $_SESSION['user'];
         $data = $this->_user->getOneUser($userData['id']);
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/update_account', $data);
+        $this->_renderBase->renderClientFooter();
 
     }
 
@@ -260,7 +272,9 @@ class ClientHomeController extends BaseController
 
     public function changePassAccount()
     {
+        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderChangePass();
+        $this->_renderBase->renderClientFooter();
     }
 
     public function changePass()
@@ -325,11 +339,15 @@ class ClientHomeController extends BaseController
 
     public function orderPage()
     {
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/order_page');
+        $this->_renderBase->renderClientFooter();
     }
 
     public function blogPage()
     {
-        $this->load->render('layouts/client/blog_page');
+        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/blog_detail');
+        $this->_renderBase->renderClientFooter();
     }
 }

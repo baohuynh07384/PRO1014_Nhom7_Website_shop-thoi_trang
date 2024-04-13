@@ -1,5 +1,4 @@
 <?php use App\Core\Sessions; ?>
-<?php include "header.php" ?>
 
 <section class="section">
     <div class="container">
@@ -56,5 +55,3 @@
             </div>
         </div>
 </section>
-
-<?php include "footer.php" ?>
