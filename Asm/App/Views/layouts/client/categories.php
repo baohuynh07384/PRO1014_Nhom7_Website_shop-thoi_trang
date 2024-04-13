@@ -4,6 +4,9 @@
 
 <!-- /BREADCRUMB -->
 <!-- SECTION -->
+<?php
+
+?>
 <div class="section">
 	<!-- container -->
 	<div class="container">
@@ -75,10 +78,10 @@
 			<div id="store" class="col-md-9">
 				<!-- store top filter -->
 				<div class="store-filter clearfix">
-					<form class="store-sort" id="sortForm">
+					<div class="store-sort">
 						<label>
 							Sắp xếp theo:
-							<select class="input-select" onchange="sortForm()">
+							<select class="input-select" >
 								<option value="0">Chọn phân loại</option>
 								<option value="?keyword=new">Mới nhất</option>
 								<option value="?keyword=old">Cũ nhất</option>
@@ -86,7 +89,7 @@
 								<option value="?price=desc">Giá giảm dần</option>
 							</select>
 						</label>
-					</form>
+					</div>
 					<ul class="store-grid">
 						<li class="active"><i class="fa fa-th"></i></li>
 						<li><a href="#"><i class="fa fa-th-list"></i></a></li>

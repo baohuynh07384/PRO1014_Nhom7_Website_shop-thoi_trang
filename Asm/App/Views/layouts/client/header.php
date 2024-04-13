@@ -26,16 +26,17 @@ include "App/Views/layouts/client/stylesheet.php";
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form action="?url=ClientHomeController/ClientCategoriesPage" method="GET" id="formSearch">
 								<select class="input-select">
 									<option value="0">Sản phẩm</option>
 									<option value="1">Áo</option>
 									<option value="1">Nón</option>
 									<option value="1">Quần</option>
 								</select>
-								<input class="input" placeholder="Nhập vào tìm kiếm...">
-								<button class="search-btn">Tìm</button>
+								<input class="input" placeholder="Nhập vào tìm kiếm..." name="keyword" type="text" onchange="searchForm()">
+								<button class="search-btn" type="submit" >Tìm</button>
 							</form>
+							
 						</div>
 					</div>
 					<!-- /SEARCH BAR -->
@@ -117,7 +118,10 @@ include "App/Views/layouts/client/stylesheet.php";
 									</a>
 								</div>
 							<?php endif; ?>
+<<<<<<< HEAD
 							<!-- /Wishlist -->
+=======
+>>>>>>> 434a72b (fix)
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
 								<a href="#">
