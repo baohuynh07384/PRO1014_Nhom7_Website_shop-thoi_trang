@@ -12,6 +12,7 @@ use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
 use App\Models\OrderModel;
 use App\Models\CommentsModel;
+use App\Models\CartsModel;
 
 class ClientHomeController extends BaseController
 {
@@ -159,18 +160,22 @@ class ClientHomeController extends BaseController
         if (isset($_POST['submit'])) {
             $user_id = $_POST['userid'];
             $pro_id = $_POST['proid'];
-            $status = $_POST['status'];
             $price = $_POST['price'];
             $size = $_POST['size'];
             $qty = $_POST['qty'];
-            $order = new OrderModel();
-            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id, 'total' => '0']);
-            if ($insert) {
-                $order_id = $order->order_id;
-                $order->insertOrderdetial(['price' => $price, 'size' => $size, 'quantity' => $qty, 'order_id' => $order_id]);
+            $cart = new CartsModel();
+            $check = $cart->checkcart($pro_id, $size);
+
+            if ($check) {
+                $new_qty = $check['quantity'] + $qty;
+                $cart->updatecart(['quantity' => $new_qty], $pro_id, $size);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
-                header('Location: /?url=ClientHomeController/ClientCartPage');
+            } else {
+                $cart->create(['product_id' => $pro_id, 'user_id' => $user_id, 'price' => $price, 'size' => $size, 'quantity' => $qty]);
+                $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
             }
+            header('Location: /?url=ClientHomeController/ClientCartPage');
+
 
         }
     }
