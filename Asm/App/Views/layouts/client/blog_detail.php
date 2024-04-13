@@ -1,4 +1,4 @@
-<?php include "header.php" ?>
+
 <?php use App\Controllers\ClientHomeController; ?>
 <div class="section">
     <!-- container -->
@@ -18,4 +18,3 @@
     </div>
     <!-- /container -->
 </div>
-<?php include "footer.php" ?>

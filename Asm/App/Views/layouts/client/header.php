@@ -59,16 +59,25 @@ include "App/Views/layouts/client/stylesheet.php";
 												class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
-							</div>
-							<?php else : ?>
-							<div>
-								<a href="?url=LoginController/LoginPage">
-									<i class="fa fa-user-o"></i>
-									<span>Đăng nhập</span>
-								</a>
-							</div>
-							<?php endif;?>
-							<!-- /Wishlist -->
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Giỏ hàng</span>
+										<div class="qty"><?=$data['count']?></div>
+									</a>	
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
+														alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>150.000đ</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
 
 							<!-- Cart -->
 							<div class="dropdown">
