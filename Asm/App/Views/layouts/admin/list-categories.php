@@ -41,7 +41,6 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                 </thead>
                 <tbody>
                 <?php
-               
                         foreach ($data as $item) :
                           $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
                          ?>

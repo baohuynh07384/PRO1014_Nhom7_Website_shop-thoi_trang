@@ -10,7 +10,9 @@ use App\Core\Sessions;
 use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
-use App\Models\OrderModel;
+use App\Models\CartsModel;
+
+// use App\Models\OrderModel;
 
 class ClientHomeController extends BaseController
 {
@@ -27,6 +29,7 @@ class ClientHomeController extends BaseController
 
     private $_image;
     private $_order;
+    private $_cart;
 
 
 
@@ -44,7 +47,8 @@ class ClientHomeController extends BaseController
         $this->_product = new ProductModel();
         $this->_category = new CategoriesModel();
         $this->_image = new ImagesModel();
-        $this->_order = new OrderModel();
+        $this->_cart = new CartsModel();
+        // $this->_order = new OrderModel();
     }
 
 
@@ -80,21 +84,22 @@ class ClientHomeController extends BaseController
     {
 
 
-        $this->_renderBase->renderClientHeader();
+
+        $this->load->render('layouts/client/header');
         $this->load->render('layouts/client/home');
         $this->_renderBase->renderClientFooter();
     }
 
     public function ClientCartPage()
     {
-        $orders = $this->_order->getCart($_SESSION['user']['id']);
+        $id = $_SESSION['user']['id'];
+        $carts = $this->_cart->getCart($id);
         $images = $this->_image->getImages();
-        
         $data = [
             'images' => $images,
-            'orders' => $orders
+            'carts' => $carts,
         ];
-        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/header');
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
@@ -104,21 +109,29 @@ class ClientHomeController extends BaseController
         if (isset($_POST['submit'])) {
             $user_id = $_POST['userid'];
             $pro_id = $_POST['proid'];
-            $status = $_POST['status'];
+            $name = $_POST['name'];
             $price = $_POST['price'];
             $size = $_POST['size'];
             $qty = $_POST['qty'];
-            $total = $price * $qty;
-            $order = new OrderModel();
-            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id, 'total' => '0' ]);
-            if ($insert){
-                $order_id = $order->order_id;
-                $order->insertOrderdetial(['price' => $total, 'size' => $size,  'quantity' => $qty , 'order_id' => $order_id]);
-            
+            $cart = new CartsModel();
+            $check = $cart->checkcart($pro_id, $size);
 
+            if ($check) {
+                $new_qty = $check['quantity'] + $qty;
+                $cart->updatecart(['quantity' => $new_qty], $pro_id, $size);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
-                header('Location: /?url=ClientHomeController/ClientCartPage');
+            } else {
+                $cart->create(['product_id' => $pro_id, 'user_id' => $user_id, 'price' => $price, 'size' => $size, 'quantity' => $qty, 'name' => $name]);
+                $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
             }
+            header('Location: /?url=ClientHomeController/ClientCartPage');
+
+
+        }
+    }
+    public function updateCart()
+    {
+        if (isset($_POST['submit'])) {
 
         }
     }
@@ -138,7 +151,8 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientFooter();
     }
 
-    public function ClientBlogDetailPage($id){
+    public function ClientBlogDetailPage($id)
+    {
         $data = $this->_blog->getwithid($id);
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/blog_detail', $data);
