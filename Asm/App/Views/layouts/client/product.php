@@ -44,6 +44,7 @@
             <input type="hidden" name="status" value="1">
                 <div class="product-details">
                 <input type="hidden" name="proid" value="<?= $data[0]['id'] ?>">
+                <input type="hidden" name="name" value="<?= $data[0]['proName'] ?>">
                     <h2 class="product-name"><?= $data[0]['proName'] ?></h2>
                     <div>
                         <h3 class="product-price"><?= number_format($data[0]['price'])?>₫ </h3>
