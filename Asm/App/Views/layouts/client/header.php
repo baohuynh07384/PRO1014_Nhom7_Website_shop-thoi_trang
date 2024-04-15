@@ -64,7 +64,7 @@ include "App/Views/layouts/client/stylesheet.php";
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty"><?=$data['count']?></div>
+										<div class="qty"><?=$data['count'] ?></div>
 									</a>	
 									<div class="cart-dropdown">
 										<div class="cart-list">

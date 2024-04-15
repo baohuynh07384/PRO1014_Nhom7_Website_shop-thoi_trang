@@ -82,9 +82,6 @@ class ClientHomeController extends BaseController
 
     public function ClientHomePage()
     {
-
-
-
         $this->load->render('layouts/client/header');
         $this->load->render('layouts/client/home');
         $this->_renderBase->renderClientFooter();

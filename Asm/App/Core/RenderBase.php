@@ -82,7 +82,7 @@ class RenderBase extends BaseController
     public function renderClientHeader(){
         if(isset($_SESSION['user'])){
         $count = $this->_cart->countCart($_SESSION['user']['id']);
-        $this->load->render('layouts/client/header', ['count' => $count]);
+        $this->load->render('layouts/client/header',['count' => $count]);
         } else {
             $this->load->render('layouts/client/header');
         }
