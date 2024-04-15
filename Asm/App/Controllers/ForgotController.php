@@ -15,7 +15,7 @@ class ForgotController extends BaseController
 
     private $_renderBase;
 
-
+ 
     function __construct()
     {
         parent::__construct();
