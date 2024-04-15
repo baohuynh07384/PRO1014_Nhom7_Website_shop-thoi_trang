@@ -84,7 +84,7 @@ class RegristerController extends BaseController
                 header( "' . ROOT_URL . '/?url=RegristerController/RegristerPage");
             } else {
                 $hash_password = password_hash($password, PASSWORD_DEFAULT);
-                $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => '', 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
+                $userModel->registerUser(['email' => $email, 'password' => $hash_password, 'address' => '', 'name' => $username, 'phone' => $phone, 'status' => '1','role' => '0','image' => '' ]);
                 $_SESSION['success'] = 'Tạo tài khoản thành công';
                 header( "' . ROOT_URL . '/?url=RegristerController/RegristerPage");
             }

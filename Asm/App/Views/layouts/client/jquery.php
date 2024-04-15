@@ -3,38 +3,17 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
-<script>
-  var slideIndex = 1;
-  showDivs(slideIndex);
 
-  function plusDivs(n) {
-    showDivs(slideIndex += n);
-  }
-
-  function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) {
-      slideIndex = 1
-    }
-    if (n < 1) {
-      slideIndex = x.length
-    }
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    x[slideIndex - 1].style.display = "block";
-  }
-</script>
 <script src="App/Views/layouts/client/assets/js/jquery.min.js"></script>
 <script src="App/Views/layouts/client/assets/js/bootstrap.min.js"></script>
 <script src="App/Views/layouts/client/assets/js/slick.min.js"></script>
 <script src="App/Views/layouts/client/assets/js/nouislider.min.js"></script>
 <script src="App/Views/layouts/client/assets/js/jquery.zoom.min.js"></script>
-<script src="App/Views/layouts/client/assets/js/main.js">
-</script>
+<script src="App/Views/layouts/client/assets/js/main.js"></script>
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script> -->
 <script>
   $(document).ready(function() {
     $('#updateAccountForm').validate({
@@ -66,6 +45,85 @@
   });
 </script>
 <script>
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+      slideIndex = x.length
+    }
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex - 1].style.display = "block";
+  }
+</script>
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectProvinElement = document.querySelector('#provin');
+        const selectDistrictElement = document.querySelector('#district');
+
+        selectProvinElement.addEventListener('change', () => {
+            const selectedProvinId = selectProvinElement.value;
+
+            const formData = new FormData();
+            formData.append('provinId', selectedProvinId);
+
+            fetch('index.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Xóa các tùy chọn hiện có trong select huyện
+                selectDistrictElement.innerHTML = '';
+
+                // Thêm các tùy chọn mới dựa trên dữ liệu nhận được từ máy chủ
+                data.forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district.code;
+                    option.textContent = district.name;
+                    selectDistrictElement.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        });
+    });
+</script> -->
+<script>
+  var app = angular.module("myApp", []);
+app.controller("location", function($scope, $http) {
+    $scope.data = {};
+
+    $scope.addData = function() {
+        $http({
+            method: "POST",
+            url: "process.php", // Đường dẫn tới file PHP trên máy chủ của bạn
+            data: $scope.data // Dữ liệu cần gửi
+        }).then(function(response) {
+            console.log("Dữ liệu đã gửi lên:", $scope.data);
+            console.log("Phản hồi từ server:", response.data);
+        });
+    };
+});
+</script>
+<script>
   // Lấy thẻ input và nút tăng/giảm
   var quantityInput = document.getElementById('quantityInput');
   var increaseBtn = document.getElementById('increaseBtn');
@@ -88,35 +146,6 @@
     }
   });
 </script>
-<!-- //chức năng lọc -->
-<script>
-  $(document).ready(function() {
-    var active = location.search; //?kytu=asc
-    // alert(active)
-    $('.input-select option[value="' + active + '"]').attr('selected', 'selected');
-  })
-
-  $('.input-select').change(function() {
-    var ROOT_URL = 'http://duan1.local/?url=ClientHomeController/ClientCategoriesPage/';
-    var value = ROOT_URL + $(this).find(':selected').val();
-    // alert(value);
-    if (value != 0) {
-      var url = value;
-      // alert(url);
-      window.location.replace(url);
-    } else {
-      alert('Hãy lọc sản phẩm');
-    }
-
-  })
-</script>
-
-
-
-
-
-
-
 <?php
 if (isset($_SESSION['error']) && $_SESSION['error'] != '') {
   echo $_SESSION['error'];

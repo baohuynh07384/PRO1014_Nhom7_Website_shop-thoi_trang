@@ -4,6 +4,8 @@
             "App\\":"App"
         }
     
+    },
+    "require": {
+        "nguyenary/vietnam-address-api": "^2.1"
     }
-
 }

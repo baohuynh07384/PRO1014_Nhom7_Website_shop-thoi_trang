@@ -18,5 +18,3 @@ use App\Core\Route;
 
 new Route;
 
-
-

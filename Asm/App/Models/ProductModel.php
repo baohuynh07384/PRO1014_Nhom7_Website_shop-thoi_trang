@@ -70,10 +70,9 @@ class ProductModel extends BaseModel{
         }
         
     }
-
     public function productGetKeyword($value){
         return $this
-        ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
+        ->select(' products.id, products.status,  products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')
         ->join('categories', 'categories.id = products.categories_id')
         ->where('products.status', ' = ',  '1')
         ->orderBy('products.name',  $value)
@@ -96,5 +95,9 @@ class ProductModel extends BaseModel{
         ->where('products.status', ' = ',  '1')
         ->where('products.categories_id', '=', $id)
         ->fetch();
+    }
+    public function deletePro($id)
+    {
+        return $this->table('products')->where('id', '=', $id)->delete();
     }
 }

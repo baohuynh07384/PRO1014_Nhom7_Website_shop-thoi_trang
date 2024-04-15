@@ -47,7 +47,7 @@ class HomeController extends BaseController
         $data = [
             'categories' =>  $this->_categories->countCategories(),
             'users' => $this->_users->countUsers(),
-            'blogs' => $this->_blogs->countBlogs(),
+            'blogs' => $this->_blogs->countBlog(),
             'products' => $this->_products->countProducts()
         ];
         
