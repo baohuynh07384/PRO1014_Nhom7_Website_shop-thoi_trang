@@ -53,7 +53,6 @@ class ClientHomeController extends BaseController
         $this->_image = new ImagesModel();
         $this->_cart = new CartsModel();
         // $this->_order = new OrderModel();
-        $this->_order = new OrderModel();
         $this->_comment = new CommentsModel();
     }
 
@@ -111,9 +110,9 @@ class ClientHomeController extends BaseController
     public function ClientProductPage($id)
     {
         $products = $this->_product->getDetailProduct($id);
-        $comments = $this->_comment->getAllComments($id);
+        // $comments = $this->_comment->getAllComments($id);    
         $data = [
-            'comments' => $comments,
+            // 'comments' => $comments,
             'products' => $products
         ];
 
@@ -149,13 +148,13 @@ class ClientHomeController extends BaseController
     public function ClientCartPage()
     {
         $id = $_SESSION['user']['id'];
-        $orders = $this->_order->getCart($id);
+        $carts = $this->_cart->getcart($id);
         $images = $this->_image->getImages();
         $data = [
             'images' => $images,
-            'orders' => $orders,
+            'carts' => $carts,
         ];
-        $this->load->render('layouts/client/header');
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
