@@ -164,7 +164,7 @@ class BlogController extends BaseController
     public function delete($id)
     {
         if (isset($_POST['deleteBlog'])) {
-            $id = $_POST['delete_id'];
+            $id = $_POST['delete_blog_id'];
 
             $blog = new BlogModel;
             $resultDelete = $blog->deleteBlog($id);

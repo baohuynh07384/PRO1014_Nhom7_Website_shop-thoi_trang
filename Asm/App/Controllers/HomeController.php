@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\RenderBase;
+use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\UserModel;
 use App\Models\BlogModel;

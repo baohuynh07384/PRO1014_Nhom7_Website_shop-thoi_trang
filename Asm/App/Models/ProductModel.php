@@ -58,7 +58,4 @@ class ProductModel extends BaseModel{
     public function getidpro(){
         return $this->select('id')->fetch();
     }
-    // public function edit($data, $id){
-    //     return $this->select('id',)->fetch();
-    // }
 }
