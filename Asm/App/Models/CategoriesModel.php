@@ -38,7 +38,7 @@ class CategoriesModel extends BaseModel
 
     public function getListCate()
     {
-        return $this->getAll()->fetch();
+        return $this->getAll()->where('status', '=', 1)->fetch();
     }
 
     public function deleteCate($id)

@@ -10,9 +10,13 @@ use App\Core\Sessions;
 use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
+use App\Models\CartsModel;
+use NguyenAry\VietnamAddressAPI\Address;
+
+
 // use App\Models\OrderModel;
 use App\Models\CommentsModel;
-use App\Models\CartsModel;
+
 
 class ClientHomeController extends BaseController
 {
@@ -56,7 +60,7 @@ class ClientHomeController extends BaseController
 
 
 
-    public function ClientCategoriesPage()
+    public function ClientAllProductPage()
     {
         
         $products = $this->_product->getProduct();   
@@ -102,7 +106,6 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/product', $data);
         $this->_renderBase->renderClientFooter();
-
     }
 
     public function ClientHomeController()
@@ -137,7 +140,8 @@ class ClientHomeController extends BaseController
             'images' => $images,
             'carts' => $carts,
         ];
-        $this->load->render('layouts/client/header');
+        // var_dump($data);
+        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/cart', $data);
         $this->_renderBase->renderClientFooter();
     }
@@ -232,21 +236,91 @@ class ClientHomeController extends BaseController
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
             }
             header('Location: /?url=ClientHomeController/ClientCartPage');
-
-
         }
     }
-    public function updateCart()
+    public function Cart()
     {
-        if (isset($_POST['submit'])) {
-
+        if (isset($_POST['update'])) {
+            if (isset($_POST['idupdate'])) {
+                $idupdate = $_POST['idupdate'];
+                $idcart = $_POST['idcart'];
+                $quantities = $_POST['qty'];
+                $sizes = $_POST['size'];
+                $data = [];
+                foreach ($idupdate as $itemId) {
+                    // Kiểm tra xem id có tồn tại trong $idcart không
+                    if (in_array($itemId, $idcart)) {
+                        // Tìm chỉ mục của itemId trong mảng $idcart
+                        $index = array_search($itemId, $idcart);
+                        $quantity = $quantities[$index];
+                        $size = $sizes[$index];
+                        $itemData = [
+                            'id' => $itemId,
+                            'size' => $size,
+                            'quantity' => $quantity
+                        ];
+                        $data[] = $itemData;
+                    }
+                }
+                foreach ($data as $value) {
+                    $cartModel = new CartsModel;
+                    $cartModel->updateCartSubmit(['size' => $value['size'], 'quantity' => $value['quantity']], $value['id']);
+                }
+                echo '<script>alert("Cập nhật giỏ hàng thành công"); window.location.href = "' . ROOT_URL . '/?url=ClientHomeController/ClientCartPage";</script>';
+            } else {
+                return $this->redirect("/?url=ClientHomeController/ClientCartPage");
+            }
+        } elseif (isset($_POST['pay'])) {
+            if (isset($_POST['idupdate'])) {
+                $idpay = $_POST['idupdate'];
+                $cartModel = new CartsModel;
+                
+                $cartModel->insertdataorder(['user_id' => $_SESSION['user']['id'], 'status' => '1', 'province_id' => '1', 'district_id' => '1', 'wards_id' => '1']);
+                $idoder = $cartModel->order_id;
+                foreach ($idpay as $value) {
+                    $cartModel = new CartsModel;
+                    $reuslt = $cartModel->getcartwithid($value);
+                    foreach ($reuslt as $value) {
+                        $cartModel->insertdataorderdetail(['order_id' => $idoder, 'size' => $value['size'], 'quantity' => $value['quantity'], 'name' => $value['name'], 'price' => $value['price'], 'total' => '1']);
+                    }
+                }
+                foreach($idpay as $value) {
+                    $cartModel->deletecart($value);
+                }
+                header('Location: /?url=ClientHomeController/ClientCheckoutPage');
+            } else {
+                return $this->redirect("/?url=ClientHomeController/ClientCartPage");
+            }
         }
     }
 
+    public function deleteCart($id)
+    {
+
+        $cart = new CartsModel;
+
+        $resultDelete = $cart->deletecart($id);
+        if (!$resultDelete) {
+            die("Không thể xóa dữ liệu!");
+        }
+        $_SESSION['success'] = 'Xóa sản phẩm thành công';
+        header("Location:" . ROOT_URL . "/?url=ClientHomeController/ClientCartPage");
+    }
     public function ClientCheckoutPage()
-    {
+    {   
+        $address = new Address();
+        $provinces = $address->getProvinces();
+        $order = $this->_cart->getOrder();
+    
+        $orderdetail = $this->_cart->getorderdetail($_SESSION['user']['id']);
+        $data = [
+            'provinces' => $provinces,
+            'orders' => $order,
+            'orderdetails' => $orderdetail
+          
+        ];
         $this->_renderBase->renderClientHeader();
-        $this->_renderBase->renderCheckoutPage();
+        $this->load->render('layouts/client/checkout', $data);
         $this->_renderBase->renderClientFooter();
     }
 
@@ -293,7 +367,6 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/update_account', $data);
         $this->_renderBase->renderClientFooter();
-
     }
 
     public function updateAccount()
@@ -399,9 +472,6 @@ class ClientHomeController extends BaseController
                     exit;
                 }
             }
-
-
-
         }
     }
 

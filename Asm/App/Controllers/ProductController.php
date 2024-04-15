@@ -84,7 +84,7 @@ class ProductController extends BaseController
         $this->load->render('layouts/admin/updateproduct', $data);
         $this->_renderBase->renderAdminFooter();
     }
-    public function create()
+    public function create() 
     {
         if (isset($_POST['upload'])) {
             $name = $_POST['name'];
@@ -229,7 +229,7 @@ class ProductController extends BaseController
                     'price' => $price,
                     'status' => $status,
                     'quantity' => $quantity,
-                    'description' => $description,
+                    'description' => $description, 
                     'categories_id' => $category
                 ]);
 
@@ -255,6 +255,7 @@ class ProductController extends BaseController
             }
         }
     }
+
     public function delete($id)
     {
         if (isset($_POST['deletePro'])) {

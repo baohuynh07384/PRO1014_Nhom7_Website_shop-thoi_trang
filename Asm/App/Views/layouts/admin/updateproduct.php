@@ -106,7 +106,9 @@ use App\Controllers\ProductController;
                                 <label class="custom-file-label" for="exampleInputFile">Chọn hình ảnh</label>
                             </div>
                         </div>
-                    </div>
+                        <input type="hidden" name="idimg[]" value="<?= $item['idimg'] ?>">
+                        <img src="<?= PUBLIC_URL . $item['path'] ?>" alt="" style="max-width: 100%;">
+                    <?php endforeach ?>
                 </div>
             </div>
             <div class="card-footer">

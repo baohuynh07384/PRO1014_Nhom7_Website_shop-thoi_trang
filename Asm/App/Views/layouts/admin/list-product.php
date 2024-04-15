@@ -100,5 +100,27 @@
 
     <!-- /.content -->
 </div>
-
-<!-- /.content-wrapper -->
+<div class="modal fade" id="DeleteModalPro">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông báo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/?url=ProductController/delete/<?php echo $items['id'] ?>" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="delete_id" id="" class="delete_id_pro">
+                    <p>Bạn có chắc chắn muốn xóa ?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="deletePro">Delete</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

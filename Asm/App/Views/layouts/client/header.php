@@ -46,33 +46,34 @@ include "App/Views/layouts/client/stylesheet.php";
 						<div class="header-ctn">
 							<!-- Wishlist -->
 							<?php
-							if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 0):
-								?>
+							if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 0) :
+							?>
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-user-o"></i>
 										<span>Tài khoản</span>
 									</a>
-									<div class="cart-dropdown">
+									<div class="cart-dropdown" style="width: auto;">
 										<div class="cart-btns">
-											<a href="?url=ClientHomeController/showAccount">Tài khoản</a>
-											<a href="?url=LoginController/Logout">Đăng xuất<i
-													class="fa fa-arrow-circle-right"></i></a>
+											<a href="?url=ClientHomeController/showAccount" style="display: block; width: 200px; text-decoration: none;">Tài khoản</a>
+											<a href="?url=LoginController/Logout" style="display: block; width: 200px; text-decoration: none;">
+												Đăng xuất <i class="fa fa-arrow-circle-right" style="margin-left: 5px;"></i>
+											</a>
 										</div>
 									</div>
+
 								</div>
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty"><?=$data['count'] ?></div>
-									</a>	
+										<div class="qty"><?= $data['count'] ?></div>
+									</a>
 									<div class="cart-dropdown">
-										<div class="cart-list">
+										<!-- <div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
-														alt="">
+													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -83,8 +84,7 @@ include "App/Views/layouts/client/stylesheet.php";
 
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png"
-														alt="">
+													<img src="https://product.hstatic.net/1000357687/product/raglangartboard-13_076e1be1e0e047ad94232fa3eaacadf0_1024x1024.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -96,15 +96,14 @@ include "App/Views/layouts/client/stylesheet.php";
 										<div class="cart-summary">
 											<small>3 sản phẩm</small>
 											<h5>TỔNG: 300.000đ</h5>
-										</div>
+										</div> -->
 										<div class="cart-btns">
 											<a href="?url=ClientHomeController/ClientCartPage">Giỏ hàng</a>
-											<a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán<i
-													class="fa fa-arrow-circle-right"></i></a>
+											<a href="?url=ClientHomeController/ClientCheckoutPage">Thanh toán<i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
-							<?php else: ?>
+							<?php else : ?>
 								<div>
 									<a href="?url=LoginController/LoginPage">
 										<i class="fa fa-user-o"></i>
@@ -144,10 +143,11 @@ include "App/Views/layouts/client/stylesheet.php";
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="?url=ClientHomeController/ClientHomePage">Trang chủ</a></li>
-					<li><a href="?url=ClientHomeController/ClientCategoriesPage">Sản phẩm</a></li>
-					<li><a href="?url=ClientHomeController/ClientBlogsPage">Tin tức</a></li>
+					<!-- <li><a href="?url=ClientHomeController/ClientCategoriesPage">Sản phẩm</a></li> -->
+					<li><a href="?url=ClientHomeController/ClientAllProductPage">Sản phẩm</a></li>
+					<!-- <li><a href="?url=ClientHomeController/ClientBlogsPage">Tin tức</a></li>
 					<li><a href="#">Giới thiệu</a></li>
-					<li><a href="?url=ClientHomeController/ClientContactPage">Liên hệ</a></li>
+					<li><a href="?url=ClientHomeController/ClientContactPage">Liên hệ</a></li> -->
 
 				</ul>
 				<!-- /NAV -->

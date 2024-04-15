@@ -1,87 +1,74 @@
+<div class="section" ng-app="myApp">
 
-		<!-- /NAVIGATION -->
+	<div class="container">
 
-		<!-- BREADCRUMB -->
-	
-		<!-- /BREADCRUMB -->
+		<div class="row">
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
+			<div class="col-md-7">
 
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">Thông tin đặt hàng</h3>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="Họ">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Tên">
-							</div>
-							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Địa chỉ">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Số điện thoại">
-							</div>
-						</div>
-						<!-- /Billing Details -->
-
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Ghi chú</h3>
-							</div>
-						</div>
-						<!-- /Shiping Details -->
-
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
+				<div class="billing-details">
+					<div class="section-title">
+						<h3 class="title">Thông tin đặt hàng</h3>
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" value="<?= $data['orders']['0']["name"] ?>" name="first-name" placeholder="Họ và Tên">
+					</div>
+					<div class="form-group">
+						<input class="input" type="tel" value="0<?= $data['orders']['0']['phone'] ?>" name="tel" placeholder="Số điện thoại">
+					</div>
+					<div class="form-group">
+						<input class="input" type="email" value="<?= $data['orders']['0']['email'] ?>" name="email" placeholder="Email">
 					</div>
 
-					<!-- Order Details -->
-					<div class="col-md-5 order-details margin-top">
-						<div class="section-title text-center">
-							<h3 class="title">Đơn hàng</h3>
-						</div>
-						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>Sản phẩm</strong></div>
-								<div><strong>Giá tiền</strong></div>
-							</div>
-							<div class="order-products">
-								<div class="order-col">
-									<div>Áo thun trơn Fresh tee // Chocolate martini</div>
-									<div>169.000đ</div>
-								</div>
-							</div>
-							<div class="order-col">
-								<div><strong>Tổng tiền</strong></div>
-								<div><strong class="order-total">169.000đ</strong></div>
-							</div>
-						</div>
-			
-						<a href="#" class="primary-btn order-submit">Xác nhận</a>
-					</div>
-					<!-- /Order Details -->
 				</div>
-				<!-- /row -->
+
+				<div class="shiping-details">
+					<div class="section-title">
+						<h3 class="title">Ghi chú</h3>
+					</div>
+				</div>
+
+				<div class="order-notes">
+					<textarea class="input" name="address" placeholder="Order Notes">
+
+					</textarea>
+				</div>
+
 			</div>
-			<!-- /container -->
+
+			<div class="col-md-5 order-details margin-top">
+				<div class="section-title text-center">
+					<h3 class="title">Đơn hàng</h3>
+				</div>
+				<div class="order-summary">
+					<div class="order-col">
+						<div><strong>Sản phẩm</strong></div>
+						<div><strong>Giá tiền</strong></div>
+					</div>
+					<div class="order-products">
+
+						<?php $cart = 0;
+						foreach ($data['orderdetails'] as $items) :
+							$total = $items['price'] * $items['quantity'] ?>
+							<div class="order-col">
+								<div><?= $items['name'] ?></div>
+								<div><?= number_format($total) ?>đ</div>
+							</div>
+
+						<?php $cart += $total;
+						endforeach; ?>
+					</div>
+					<div class="order-col">
+						<div><strong>Tổng tiền</strong></div>
+						<div><strong class="order-total"><?= number_format($cart) ?>đ</strong></div>
+					</div>
+				</div>
+
+				<a href="#" class="primary-btn order-submit">Xác nhận</a>
+			</div>
+
 		</div>
-		<!-- /SECTION -->
 
-		<!-- FOOTER -->
+	</div>
 
+</div>
