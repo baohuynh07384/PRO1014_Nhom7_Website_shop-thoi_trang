@@ -57,7 +57,7 @@
                                             <td><?= $status ?></td>
                                             <td>
                                                 <div class="row">
-                                                    <form action="/?url=ProductController/edit/<?= $items['id'] ?>" method="post">
+                                                    <form action="/?url=ProductController/UpdateProductPage/<?= $items['id'] ?>" method="post">
                                                         <button type="submit" name="update" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i></button>
                                                     </form>
                                                     <button type="button" name="" value="<?= $item['id'] ?>" class="btn btn-outline-danger btn-sm deletebtn" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></button>

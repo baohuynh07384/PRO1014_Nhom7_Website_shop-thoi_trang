@@ -6,18 +6,16 @@ use App\Core\RenderBase;
 use App\Models\UserModel;
 use App\Core\Validation;
 use App\Core\Sessions;
-
 class AccountController extends BaseController
 {
 
     private $_renderBase;
     private $_account;
-
     /**
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
-     *
-     */
+     * 
+    */
     function __construct()
     {
         parent::__construct();
@@ -29,7 +27,7 @@ class AccountController extends BaseController
     {
         $this->CreateAccountPage();
     }
-
+    
     function CreateAccountPage()
     {
         $this->_renderBase->renderAdminHeader();
@@ -189,6 +187,7 @@ class AccountController extends BaseController
     {
         if ($_SESSION['user']['role'] == 1) {
             if (isset($_POST['deleteAccount'])) {
+                $id = $_POST['delete_id_acc'];
                 $users = new UserModel;
                 $resultDelete = $users->deleteUser($id);
 

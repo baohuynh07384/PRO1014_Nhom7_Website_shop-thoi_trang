@@ -99,13 +99,14 @@ class BlogController extends BaseController
                         $newImageName = $info['filename'] . "($i)." . $info['extension'];
                         $i++;
                     }
-
                     move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_URL . $newImageName);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($newImageName), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
+                    $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
                 } else {
                     move_uploaded_file($_FILES['image']['tmp_name'], $image);
                     $BlogModel->create(['title' => $name, 'thumbnail' => basename($_FILES['image']['name']), 'author' => $author, 'new_type' => $new_type, 'status' => $status, 'content' => $content]);
+                    $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
                 }
             }
@@ -131,7 +132,6 @@ class BlogController extends BaseController
                 } else {
                     $update_image = $new_image;
                     var_dump($update_image);
-
                 }
             } else {
                 $update_image = $old_image;
@@ -157,7 +157,6 @@ class BlogController extends BaseController
             $_SESSION['success'] = "Chỉnh sửa thành công";
             header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
             exit();
-
         } else {
             echo "Có lỗi xảy ra khi cập nhật danh mục.";
         }
@@ -165,9 +164,10 @@ class BlogController extends BaseController
     public function delete($id)
     {
         if (isset($_POST['deleteBlog'])) {
+            $id = $_POST['delete_id'];
+
             $blog = new BlogModel;
             $resultDelete = $blog->deleteBlog($id);
-
             if (!$resultDelete) {
                 die("Không thể xóa dữ liệu!");
             }
@@ -176,6 +176,3 @@ class BlogController extends BaseController
         }
     }
 }
-
-
-

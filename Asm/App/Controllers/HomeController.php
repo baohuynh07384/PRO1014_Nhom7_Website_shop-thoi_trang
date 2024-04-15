@@ -23,7 +23,7 @@ class HomeController extends BaseController
      * Copy lại là hết đau lưng
      * 
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
@@ -32,18 +32,18 @@ class HomeController extends BaseController
         $this->_blogs = new BlogModel();
     }
 
-    function HomeController()
+    public function HomeController()
     {
         $this->homePage();
     }
 
 
-    function homePage()
+    public function homePage()
     {
         $data = [
             'categories' =>  $this->_categories->countCategories(),
             'users' => $this->_users->countUsers(),
-            'blogs' => $this->_blogs->countBlogs(),
+            'blogs' => $this->_blogs->countBlog(),
         ];
         
         $this->_renderBase->renderAdminHeader();

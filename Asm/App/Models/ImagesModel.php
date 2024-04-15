@@ -27,7 +27,7 @@ class ImagesModel extends BaseModel{
     public function edit($data, $id)
     {
         
-        return $this->table('blog')->where('id', ' = ',  $id)->update($data);
+        return $this->table('images')->where('id', ' = ',  $id)->update($data);
     }
     public function getAllWithPaginate(int $limit = 10,int  $offset = 0){
         // return $this->select()->where('email', '=', $email)->first();
@@ -39,5 +39,6 @@ class ImagesModel extends BaseModel{
         return $this->insert($this->table,$data);
         
     }
+    
       
 }
