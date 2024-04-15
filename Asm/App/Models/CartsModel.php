@@ -25,7 +25,7 @@ class CartsModel extends BaseModel{
         return $this->insert($this->table, $data);
     }
     public function getcart($id){
-        return $this->select('carts.*, products.name')->join('products','products.id = carts.product_id')->join('users','users.id = carts.user_id')->where('users.id','=', $id)->fetch();
+        return $this->select('carts.*')->join('products','products.id = carts.product_id')->join('users','users.id = carts.user_id')->where('users.id','=', $id)->fetch();
     }
     public function checkcart($id , $size){
         return $this->select()->where('product_id', '=', $id)
