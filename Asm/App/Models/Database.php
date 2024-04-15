@@ -14,7 +14,7 @@ class Database
 
     private static $dbHost = 'localhost';
 
-    private static $dbName = 'php2';
+    private static $dbName = 'php';
 
 
     private static $dbUser = 'root';

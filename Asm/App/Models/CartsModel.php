@@ -40,7 +40,7 @@ class CartsModel extends BaseModel{
     }
     public function countCart($id)
     {
-        $data = $this->select('COUNT(id) AS carts')->table($this->table)->where('user_id', '=', $id)->first();
+        $data = $this->select('COUNT(id) AS carts')->table($this->table)->where('user_id', '=', $id)->fist();
         if ($data) {
             return $data['carts'];
         } else {
