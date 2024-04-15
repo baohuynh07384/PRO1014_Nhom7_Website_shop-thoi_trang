@@ -29,7 +29,7 @@ class ProductModel extends BaseModel{
     }
 
     public function getProductID($id){
-        return $this->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->where('products.status', ' = ',  '1')->where('products.id' , '=', $id)->first();
+        return $this->select(' images.id as idimg, products.id,products.categories_id as cateId, products.status, products.create_at, path, products.name as proName, description, price, quantity, categories.name as cateName')->join('categories', 'categories.id = products.categories_id')->join('images', 'images.product_id = products.id')->where('products.status', ' = ',  '1')->where('products.id' , '=', $id)->fetch();
     }
     public function checkimageexit(string $image){
         return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
@@ -37,7 +37,7 @@ class ProductModel extends BaseModel{
     public function edit($data, $id)
     {
         
-        return $this->table('blog')->where('id', ' = ',  $id)->update($data);
+        return $this->table('products')->where('id', ' = ',  $id)->update($data);
     }
     public function getAllWithPaginate(int $limit = 10,int  $offset = 0){
         // return $this->select()->where('email', '=', $email)->first();
@@ -58,4 +58,7 @@ class ProductModel extends BaseModel{
     public function getidpro(){
         return $this->select('id')->fetch();
     }
+    // public function edit($data, $id){
+    //     return $this->select('id',)->fetch();
+    // }
 }

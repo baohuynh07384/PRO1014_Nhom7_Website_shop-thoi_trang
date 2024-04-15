@@ -1,4 +1,4 @@
-
+<?php include "header.php" ?>
 <!-- /NAVIGATION -->
 
 <!-- BREADCRUMB -->
@@ -44,3 +44,4 @@
 <!-- /SECTION -->
 
 <!-- FOOTER -->
+<?php include "footer.php" ?>

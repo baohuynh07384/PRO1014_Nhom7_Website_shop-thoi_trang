@@ -3,45 +3,45 @@
 use App\Models\CategoriesModel;
 
 
-if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
+if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
   echo $_SESSION['success'];
- 
 }
 
 ?>
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Danh sách danh mục</h1>
-          </div>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh sách danh mục</h1>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped text-center">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped text-center">
                 <thead>
-                    <tr>
-                        <th scope="col">Mã số</th>
-                        <th scope="col">Hình ảnh</th>
-                        <th scope="col">Tên danh mục</th>
-                        <th scope="col">Ngày tạo</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Thao tác</th>
-                    </tr>
+                  <tr>
+                    <th scope="col">Mã số</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Tên danh mục</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Thao tác</th>
+                  </tr>
                 </thead>
                 <tbody>
                 <?php
+               
                         foreach ($data as $item) :
                           $status = $item['status'] == 1 ? "Hiện" : "Ẩn";
                          ?>
@@ -67,45 +67,45 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != ''){
                     <?php endforeach; ?>
 
 
-                    </tbody>
-                </table>
-               
-              </div>
-              <!-- /.card-body -->
+                </tbody>
+              </table>
+
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
           </div>
-          <!-- /.col -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- Delete-modal -->
-    <div class="modal fade" id="DeleteModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Thông báo</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="/?url=CategoriesController/delete/<?php echo $item['id'] ?>" method="POST">
-            <div class="modal-body">
-              <input type="hidden" name="delete_id" id="" class="delete_id_cate">
-              <p>Bạn có chắc chắn muốn xóa ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" name="deleteCate">Delete</button>
-            </div>
-            </form>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Delete-modal -->
+  <div class="modal fade" id="DeleteModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Thông báo</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/?url=CategoriesController/delete/<?php echo $item['id'] ?>" method="POST">
+          <div class="modal-body">
+            <input type="hidden" name="delete_id" id="" class="delete_id_cate">
+            <p>Bạn có chắc chắn muốn xóa ?</p>
           </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="deleteCate">Delete</button>
+          </div>
+        </form>
       </div>
-     
-    <!-- /.content -->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
+
+  <!-- /.content -->
+</div>

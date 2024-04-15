@@ -1,4 +1,4 @@
-
+<?php include "header.php" ?>
 <?php use App\Controllers\ProductController; ?>
 <div class="section">
     <!-- container -->
@@ -43,3 +43,4 @@
 <!-- /SECTION -->
 
 <!-- FOOTER -->
+<?php include "footer.php" ?>

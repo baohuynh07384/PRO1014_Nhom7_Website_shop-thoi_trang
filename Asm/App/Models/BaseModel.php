@@ -83,7 +83,6 @@ abstract class BaseModel implements CrudInterface
             $valueStr = rtrim($valueStr, ',');
             $sql = "INSERT INTO  $table ($fieldStr) VALUES ($valueStr)";
             $status = $this->query($sql);
-            
          
             if (!$status)
                 return false;

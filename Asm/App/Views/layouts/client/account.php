@@ -2,6 +2,7 @@
 use App\Controllers\ClientHomeController;
 
 ?>
+<?php include "header.php" ?>
 
 <section class="section">
     <div class="container">
@@ -42,3 +43,5 @@ use App\Controllers\ClientHomeController;
             </div>
         </div>
 </section>
+
+<?php include "footer.php" ?>
