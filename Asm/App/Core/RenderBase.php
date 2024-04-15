@@ -2,16 +2,13 @@
 
 namespace App\Core;
 
-use App\Models\CartsModel;
 use App\Controllers\BaseController;
 
 class RenderBase extends BaseController
 {
-    private $_cart;
     public function __construct()
     {
         parent::__construct();
-        $this->_cart = new CartsModel();
     }
     /**
      * chỗ này là phương thức render của admin 
@@ -43,7 +40,7 @@ class RenderBase extends BaseController
         $this->load->render('layouts/admin/footer');
     }   
    
-    public function renderProduct(){
+    public function renderCreateProduct(){
         $this->load->render('layouts/admin/createproduct');
     }
        
@@ -80,13 +77,7 @@ class RenderBase extends BaseController
         $this->load->render('layouts/client/contact');
     }
     public function renderClientHeader(){
-        if(isset($_SESSION['user'])){
-        $count = $this->_cart->countCart($_SESSION['user']['id']);
-        $this->load->render('layouts/client/header', ['count' => $count]);
-        } else {
-            $this->load->render('layouts/client/header');
-        }
-
+        $this->load->render('layouts/client/header');
     }
     public function renderClientFooter(){
         $this->load->render('layouts/client/footer');

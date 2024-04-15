@@ -8,11 +8,11 @@ use App\Core\Sessions;
         <div class="card-header">
             <h3 class="card-title">Thêm danh mục</h3>
         </div>
-        <form method="post" action="/?url=CategoriesController/addCategory" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
+        <form method="post" action="/?url=CategoriesController/addCategory" enctype="multipart/form-data" >
             <div class="card-body">
                 <div class="form-group">
                     <label for="name">Tên danh mục</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required class="error">
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"  class="error">
                     <?php if (isset($_SESSION['name'])) : ?>
                         <p style="color: red;">
                             <?php echo Sessions::display_session('name'); ?>
@@ -34,7 +34,7 @@ use App\Core\Sessions;
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh danh mục</label>
-                    <input name="image" type="file" multiple  class="form-control" required/>
+                    <input name="image" type="file" multiple  class="form-control" />
                     <?php if (isset($_SESSION['image'])) : ?>
                         <p style="color: red;">
                             <?php echo Sessions::display_session('image'); ?>

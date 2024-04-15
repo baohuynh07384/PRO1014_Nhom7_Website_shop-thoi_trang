@@ -69,15 +69,14 @@ class ProductController extends BaseController
         $this->load->render('layouts/admin/list-product', $data);
         $this->_renderBase->renderAdminFooter();
     }
-    public function edit($id)
+    public function UpdateProductPage($id)
     {
         $pro = $this->_product->getProductID($id);
         $cate = $this->_categories->getListCate();
-        $img = $this->_image->getImages();
+
         $data = [
             "product" => $pro,
             "category" => $cate,
-            "images" => $img
         ];
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderSilder();
@@ -153,7 +152,7 @@ class ProductController extends BaseController
                         $file = $image[$index]['name'];
                         $error = $image[$index]['error'];
                         if ($error === 0) {
-                            $uploadDir = ROOT_PATH . basename($file = $image[$index]['name']);
+                            $uploadDir = UPLOAD_PATH . basename($file = $image[$index]['name']);
                             $imageModel = new ImagesModel();
                             move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
                             $imageModel->create(['path' => $file, 'product_id' => $idpro]);
@@ -164,7 +163,8 @@ class ProductController extends BaseController
             }
         }
     }
-    public function update(){
+    public function update($id)
+    {
         if (isset($_POST['update'])) {
             $name = $_POST['name'];
             $price = $_POST['price'];
@@ -172,78 +172,43 @@ class ProductController extends BaseController
             $category = $_POST['category'];
             $description = $_POST['description'];
             $status = $_POST['status'];
-            $image = array();
+            $idimg = $_POST['idimg'];
+            $changedImageIndexes = [];
             for ($index = 0; $index < sizeof($_FILES['image']['name']); $index++) {
-                $arrayItem = array(
-                    "name" => $_FILES['image']['name'][$index],
-                    "type" => $_FILES['image']['type'][$index],
-                    "tmp_name" => $_FILES['image']['tmp_name'][$index],
-                    "error" => $_FILES['image']['error'][$index],
-                    "size" => $_FILES['image']['size'][$index],
-                );
-                array_push($image, $arrayItem);
-            }
-            $errors = [];
-            $data = [
-                'tên sản phẩm' => $name,
-                'ảnh' => $image,
-                'giá' => $price,
-                'số lượng' => $quantity,
-                'danh mục'  => $category,
-                'mô tả' => $description,
-                'trạng thái' => $status,
 
-            ];
-            foreach ($data as $field => $value) {
-                if (Validation::CheckEmtpy($value)) {
-                    $errors[$field] = "Vui lòng nhập $field.";
-                } else {
-                    if ($field == 'giá' || $field == 'số lượng') { // Chỉ kiểm tra giá và số lượng
-                        if (!Validation::isNumber($value)) {
-                            $errors[$field] = "$field phải là một số.";
-                        }
-                    }
-                }
-                if (Validation::CheckEmtpy($value == $image)) {
-                    Sessions::addSession('ảnh', 'Vui lòng tải ảnh.');
+                if (!empty($_FILES['image']['name'][$index])) {
+
+                    $changedImageIndexes[] = $index;
                 }
             }
-            if (!empty($errors)) {
-                foreach ($errors as $key => $error) {
-                    Sessions::addSession($key, $error);
-                }
-                return $this->redirect("/?url=ProductController/CreateProductPage");
-            } else {
-
-
-                $ProductModel = new ProductModel();
-                $insert = $ProductModel->create([
-                    'name' => $name,
-                    'price' => $price,
-                    'status' => $status,
-                    'quantity' => $quantity,
-                    'description' => $description,
-                    'categories_id' => $category
-                ]);
-
-
-                if ($insert) {
-                    $idpro = $ProductModel->product_id;
-                    for ($index = 0; $index < sizeof($image); $index++) {
-                        $file = $image[$index]['name'];
-                        $error = $image[$index]['error'];
-                        if ($error === 0) {
-                            $uploadDir = UPLOAD_URL . basename($file = $image[$index]['name']);
-                            $imageModel = new ImagesModel();
-                            move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
-                            $imageModel->create(['path' => $file, 'product_id' => $idpro]);
-                            echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
-                        }
+            $ProductModel = new ProductModel();
+            $insert = $ProductModel->edit([
+                'name' => $name,
+                'price' => $price,
+                'status' => $status,
+                'quantity' => $quantity,
+                'description' => trim($description),
+                'categories_id' => $category
+            ], $id);
+            if ($insert) {
+                foreach ($changedImageIndexes as $changedIndex) {
+                    $file = $_FILES['image']['name'][$changedIndex];
+                    $error = $_FILES['image']['error'][$changedIndex];
+                    $id = $idimg[$changedIndex];
+                    if ($error === 0) {
+                        $uploadDir = UPLOAD_PATH . basename($file);
+                        $imageModel = new ImagesModel();
+                        move_uploaded_file($_FILES['image']['tmp_name'][$changedIndex], $uploadDir);
+                        $b = $imageModel->edit(['path' => $file], $id);
+                        var_dump($b);
+                        echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
                     }
                 }
-                $_SESSION['success'] = 'Thêm sản phẩm thành công';
-                header('Location: /?url=ProductController/ListProductPage');
-                exit;
+                for ($index = 0; $index < sizeof($idimg); $index++) {
+                    if (!in_array($index, $changedImageIndexes)) {
+                        $id = $idimg[$index];
+                    }
+                }
             }
         }
     }

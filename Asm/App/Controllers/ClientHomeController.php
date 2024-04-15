@@ -10,9 +10,7 @@ use App\Core\Sessions;
 use App\Models\BlogModel;
 use App\Models\CategoriesModel;
 use App\Models\ImagesModel;
-use App\Models\CartsModel;
-
-// use App\Models\OrderModel;
+use App\Models\OrderModel;
 
 class ClientHomeController extends BaseController
 {
@@ -29,7 +27,6 @@ class ClientHomeController extends BaseController
 
     private $_image;
     private $_order;
-    private $_cart;
 
 
 
@@ -47,8 +44,7 @@ class ClientHomeController extends BaseController
         $this->_product = new ProductModel();
         $this->_category = new CategoriesModel();
         $this->_image = new ImagesModel();
-        $this->_cart = new CartsModel();
-        // $this->_order = new OrderModel();
+        $this->_order = new OrderModel();
     }
 
 
@@ -82,6 +78,8 @@ class ClientHomeController extends BaseController
 
     public function ClientHomePage()
     {
+
+
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/home');
         $this->_renderBase->renderClientFooter();
@@ -89,12 +87,12 @@ class ClientHomeController extends BaseController
 
     public function ClientCartPage()
     {
-        $id = $_SESSION['user']['id'];
-        $carts = $this->_cart->getCart($id);
+        $orders = $this->_order->getCart($_SESSION['user']['id']);
         $images = $this->_image->getImages();
+        
         $data = [
             'images' => $images,
-            'carts' => $carts,
+            'orders' => $orders
         ];
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/cart', $data);
@@ -106,60 +104,44 @@ class ClientHomeController extends BaseController
         if (isset($_POST['submit'])) {
             $user_id = $_POST['userid'];
             $pro_id = $_POST['proid'];
+            $status = $_POST['status'];
             $price = $_POST['price'];
             $size = $_POST['size'];
             $qty = $_POST['qty'];
-            $cart = new CartsModel();
-            $check = $cart->checkcart($pro_id, $size);
+            $total = $price * $qty;
+            $order = new OrderModel();
+            $insert = $order->create(['status' => $status, 'product_id' => $pro_id, 'user_id' => $user_id, 'total' => '0' ]);
+            if ($insert){
+                $order_id = $order->order_id;
+                $order->insertOrderdetial(['price' => $total, 'size' => $size,  'quantity' => $qty , 'order_id' => $order_id]);
+            
 
-            if ($check) {
-                $new_qty = $check['quantity'] + $qty;
-                $cart->updatecart(['quantity' => $new_qty], $pro_id, $size);
                 $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
-            } else {
-                $cart->create(['product_id' => $pro_id, 'user_id' => $user_id, 'price' => $price, 'size' => $size, 'quantity' => $qty]);
-                $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
+                header('Location: /?url=ClientHomeController/ClientCartPage');
             }
-            header('Location: /?url=ClientHomeController/ClientCartPage');
-
-
-        }
-    }
-    public function updateCart()
-    {
-        if (isset($_POST['submit'])) {
 
         }
     }
 
     public function ClientCheckoutPage()
     {
-        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderCheckoutPage();
-        $this->_renderBase->renderClientFooter();
     }
 
     public function ClientBlogsPage()
     {
         $data = $this->_blog->getlistblog();
-        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/blogs', $data);
-        $this->_renderBase->renderClientFooter();
     }
 
-    public function ClientBlogDetailPage($id)
-    {
+    public function ClientBlogDetailPage($id){
         $data = $this->_blog->getwithid($id);
-        $this->_renderBase->renderClientHeader();
-        $this->load->render('layouts/client/blog_detail', $data);
-        $this->_renderBase->renderClientFooter();
+        $this->load->render('layouts/client/blog_detail',$data);
     }
 
     function ClientContactPage()
     {
-        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderContactPage();
-        $this->_renderBase->renderClientFooter();
     }
 
 
@@ -169,9 +151,7 @@ class ClientHomeController extends BaseController
     {
         $userData = $_SESSION['user'];
         $data = $this->_user->getOneUser($userData['id']);
-        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/account', $data);
-        $this->_renderBase->renderClientFooter();
     }
 
     public function showUpdateAccount()
@@ -179,9 +159,7 @@ class ClientHomeController extends BaseController
 
         $userData = $_SESSION['user'];
         $data = $this->_user->getOneUser($userData['id']);
-        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/update_account', $data);
-        $this->_renderBase->renderClientFooter();
 
     }
 
@@ -229,9 +207,7 @@ class ClientHomeController extends BaseController
 
     public function changePassAccount()
     {
-        $this->_renderBase->renderClientHeader();
         $this->_renderBase->renderChangePass();
-        $this->_renderBase->renderClientFooter();
     }
 
     public function changePass()
@@ -296,15 +272,11 @@ class ClientHomeController extends BaseController
 
     public function orderPage()
     {
-        $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/order_page');
-        $this->_renderBase->renderClientFooter();
     }
 
     public function blogPage()
     {
-        $this->_renderBase->renderClientHeader();
-        $this->load->render('layouts/client/blog_detail');
-        $this->_renderBase->renderClientFooter();
+        $this->load->render('layouts/client/blog_page');
     }
 }

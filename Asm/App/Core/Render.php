@@ -8,6 +8,7 @@ use Exception;
 class Render
 {
     function __construct(){
+        
     }
     /**
      * render là hàm dùng để gọi các trang trong Views
