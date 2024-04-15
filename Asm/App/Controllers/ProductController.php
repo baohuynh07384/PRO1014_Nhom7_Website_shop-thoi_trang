@@ -83,7 +83,7 @@ class ProductController extends BaseController
         $this->load->render('layouts/admin/updateproduct', $data);
         $this->_renderBase->renderAdminFooter();
     }
-    public function create()
+    public function create() 
     {
         if (isset($_POST['upload'])) {
             $name = $_POST['name'];
@@ -147,7 +147,7 @@ class ProductController extends BaseController
                     'price' => $price,
                     'status' => $status,
                     'quantity' => $quantity,
-                    'description' => $description,
+                    'description' => $description, 
                     'categories_id' => $category
                 ]);
 
@@ -205,17 +205,26 @@ class ProductController extends BaseController
                         $uploadDir = UPLOAD_PATH . basename($file);
                         $imageModel = new ImagesModel();
                         move_uploaded_file($_FILES['image']['tmp_name'][$changedIndex], $uploadDir);
-                        $b = $imageModel->edit(['path' => $file], $id);
-                        var_dump($b);
-                        echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
+                        $imageModel->edit(['path' => $file], $id);
+                        
                     }
                 }
-                for ($index = 0; $index < sizeof($idimg); $index++) {
-                    if (!in_array($index, $changedImageIndexes)) {
-                        $id = $idimg[$index];
-                    }
-                }
+                echo '<script>alert("Thêm sản phẩm thành công"); window.location.href = "' . ROOT_URL . '/?url=ProductController/ListProductPage";</script>';
             }
+        }
+    }
+    public function delete($id)
+    {
+        if (isset($_POST['deletePro'])) {
+            $id = $_POST['delete_id'];
+            $product = new ProductModel;
+            $resultDelete = $product->deletePro($id);
+
+            if (!$resultDelete) {
+                die("Không thể xóa dữ liệu!");
+            }
+            $_SESSION['success'] = 'Xóa sản phẩm thành công';
+            header("Location:" . ROOT_URL . "/?url=ProductController/ListProductPage");
         }
     }
 }

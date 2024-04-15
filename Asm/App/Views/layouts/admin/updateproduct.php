@@ -109,8 +109,8 @@ use App\Controllers\ProductController;
                                 </div>
                             </div>
                         </div>
-                        <input type="text" name="idimg[]" value="<?= $item['idimg'] ?>">
-                        <img src="<?= PUBLIC_URL . $item['path'] ?>" alt="" width="100" height="100">
+                        <input type="hidden" name="idimg[]" value="<?= $item['idimg'] ?>">
+                        <img src="<?= PUBLIC_URL . $item['path'] ?>" alt="" style="max-width: 100%;">
                     <?php endforeach ?>
                 </div>
             </div>
