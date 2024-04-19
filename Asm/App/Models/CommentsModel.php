@@ -14,13 +14,25 @@ class CommentsModel extends BaseModel{
 
     }
 
+    public function updateComment($data, $id)
+    {
+        return $this->table($this->table)->where('id', ' = ',  $id)->update($data);
+    }
+    
+    public function getComment($id)
+    {
+        return $this->select()->table('comments')->where('id', '=', $id)->first();
+    }
     public function create( array $data)
     {
-
+       return $this->insert($this->table, $data);
     }
-
+    public function deleteComment($id)
+    {
+        return $this->table($this->table)->where('id', '=', $id)->delete();
+    }
     public function getAllComments($id){
-        $data = $this->select('name,content,comments.id, comments.create_at')->table('comments')->join('users', 'comments.user_id = users.id')->where('product_id', '=', $id)->fetch();
+        $data = $this->select('name, comments.*')->table('comments')->join('users', 'comments.user_id = users.id')->where('product_id', '=', $id)->fetch();
         return $data;
     }
 

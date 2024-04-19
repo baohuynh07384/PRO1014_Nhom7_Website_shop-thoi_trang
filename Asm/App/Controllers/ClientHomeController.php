@@ -60,15 +60,15 @@ class ClientHomeController extends BaseController
 
     public function ClientCategoriesPage()
     {
-        if(isset($_GET['keyword'])){
+        if (isset($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
-            $products = $this->_product->productGetKeyword($keyword);       
-        }else if(isset($_GET['price'])){
+            $products = $this->_product->productGetKeyword($keyword);
+        } else if (isset($_GET['price'])) {
             $price = $_GET['price'];
             $products = $this->_product->productGetPrice($price);
             var_dump($products);
             die;
-        }else{
+        } else {
             $products = $this->_product->getProduct();
         }
         $images = $this->_image->getImages();
@@ -83,25 +83,26 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientFooter();
     }
 
-    public function ClientCategoriesPageID($id){
+    public function ClientCategoriesPageID($id)
+    {
         $images = $this->_image->getImages();
-        if(isset($_GET['keyword'])){
+        if (isset($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
             $products = $this->_product->productGetKeyword($keyword);
-        }else if(isset($_GET['price'])){
+        } else if (isset($_GET['price'])) {
             $price = $_GET['price'];
             $products = $this->_product->productGetPrice($price);
-        }else{
+        } else {
             $products = $this->_product->getProductCate($id);
         }
-        
+
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
             'products' => $products,
             'categories' => $categories
         ];
-        
+
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/categories', $data);
         $this->_renderBase->renderClientFooter();
@@ -110,9 +111,9 @@ class ClientHomeController extends BaseController
     public function ClientProductPage($id)
     {
         $products = $this->_product->getDetailProduct($id);
-        // $comments = $this->_comment->getAllComments($id);    
+        $comments = $this->_comment->getAllComments($id);
         $data = [
-            // 'comments' => $comments,
+            'comments' => $comments,
             'products' => $products
         ];
 
@@ -159,6 +160,71 @@ class ClientHomeController extends BaseController
         $this->_renderBase->renderClientFooter();
     }
 
+    public function addComment()
+    {
+        if (isset($_POST['submit'])) {
+            $user_id = $_POST['userid'];
+            $pro_id = $_POST['proid'];
+            $content = $_POST['content'];
+            $comment = new CommentsModel();
+            if (Validation::CheckEmtpy($content)) {
+                Sessions::addSession("content", "Vui lòng nhập bình luận");
+                return $this->redirect("?url=ClientHomeController/ClientProductPage/" . $pro_id);
+            }
+            $comment->create(['user_id' => $user_id, 'product_id' => $pro_id, 'content' => $content]);
+            $_SESSION['success'] = 'Thêm bình luận thành công';
+            header("Location: ?url=ClientHomeController/ClientProductPage/" . $pro_id);
+
+
+        }
+    }
+
+    public function deleteComment($id)
+    {
+        if (isset($_POST['submit'])) {
+            $id = $_POST['delete'];
+            $pro_id = $_POST['proid'];
+            $comment = new CommentsModel();
+            $resultDelete = $comment->deleteComment($id);
+            if (!$resultDelete) {
+                die("Không thể xóa dữ liệu!");
+            }
+            $_SESSION['success'] = 'Xóa bình luận thành công';
+            header("Location: ?url=ClientHomeController/ClientProductPage/" . $pro_id);
+        }
+    }
+    public function updateComment($id)
+    {
+        $pro_id = $_POST['proid'];
+        $products = $this->_product->getDetailProduct($pro_id);
+        $comments = $this->_comment->getAllComments($pro_id);
+        $updatecomments = $this->_comment->getComment($id);
+        $data = [
+            'updatecomments' => $updatecomments,
+            'comments' => $comments,
+            'products' => $products
+        ];
+        $this->_renderBase->renderClientHeader();
+        $this->load->render('layouts/client/product', $data);
+        $this->_renderBase->renderClientFooter();
+    }
+    public function editComment($id)
+    {
+        if (isset($_POST['submit'])) {
+            $user_id = $_POST['userid'];
+            $pro_id = $_POST['proid'];
+            $content = $_POST['content'];
+            $comment = new CommentsModel();
+            if (Validation::CheckEmtpy($content)) {
+                Sessions::addSession("content", "Vui lòng nhập bình luận");
+                return $this->redirect("?url=ClientHomeController/updateComment/" . $id);
+            }
+            $comment->updateComment(['user_id' => $user_id, 'product_id' => $pro_id, 'content' => $content], $id);
+            $_SESSION['success'] = "Cập nhập bình luận thành công";
+            header("Location: " . ROOT_URL . "?url=ClientHomeController/ClientProductPage/" . $pro_id);
+
+        }
+    }
     public function addCart()
     {
         if (isset($_POST['submit'])) {
@@ -181,12 +247,6 @@ class ClientHomeController extends BaseController
             }
             header('Location: /?url=ClientHomeController/ClientCartPage');
 
-
-        }
-    }
-    public function updateCart()
-    {
-        if (isset($_POST['submit'])) {
 
         }
     }

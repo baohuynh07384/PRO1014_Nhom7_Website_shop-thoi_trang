@@ -94,7 +94,6 @@ class CategoriesController extends BaseController
         if (isset($_POST['deleteCate'])) {
             $id = $_POST['delete_id'];
             $category = new CategoriesModel;
-            
             $resultDelete = $category->deleteCate($id);
             if (!$resultDelete) {
                 die("Không thể xóa dữ liệu!");

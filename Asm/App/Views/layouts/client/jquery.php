@@ -93,11 +93,11 @@
   $(document).ready(function() {
     var active = location.search; //?kytu=asc
     // alert(active)
-    $('.input-select option[value="' + active + '"]').attr('selected', 'selected');
+    $('#input-select option[value="' + active + '"]').attr('selected', 'selected');
   })
 
-  $('.input-select').change(function() {
-    var ROOT_URL = 'http://duan1.local/?url=ClientHomeController/ClientCategoriesPage/';
+  $('#input-select').change(function() {
+    var ROOT_URL = '?url=ClientHomeController/ClientCategoriesPage/';
     var value = ROOT_URL + $(this).find(':selected').val();
     // alert(value);
     if (value != 0) {
@@ -110,6 +110,7 @@
 
   })
 </script>
+
 
 
 

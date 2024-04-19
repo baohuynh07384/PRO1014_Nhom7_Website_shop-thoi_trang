@@ -4,7 +4,7 @@ namespace App\Core;
 
 class Route
 {
-    
+
     public $url;
     public $nameController = "ClientHomeController";
     public $nameMethod = "home";
@@ -41,7 +41,6 @@ class Route
         } else {
             $this->nameController = $this->url[0];
             $file = __DIR__ . '/../Controllers/' . $this->nameController . '.php';
-
             if (file_exists($file)) {
                 require_once $file;
                 $className = $this->path . $this->nameController;

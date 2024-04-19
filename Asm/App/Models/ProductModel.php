@@ -36,7 +36,6 @@ class ProductModel extends BaseModel{
     }
     public function edit($data, $id)
     {
-        
         return $this->table('products')->where('id', ' = ',  $id)->update($data);
     }
     public function getAllWithPaginate(int $limit = 10,int  $offset = 0){
