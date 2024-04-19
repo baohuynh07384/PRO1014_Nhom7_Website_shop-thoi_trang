@@ -58,13 +58,13 @@ class CategoriesController extends BaseController
             $name = $_POST['name'];
             $option = $_POST['option'];
             $target_file = UPLOAD_PATH . basename($_FILES["image"]["name"]);
+            $image = $_FILES["image"]["name"];
 
             $data = [
                 'name' => $_POST['name'],
                 'option' => $_POST['option'],
                 'image' => $_FILES["image"]["name"],
             ];
-
             foreach ($data as $field => $value) {
                 if(Validation::CheckEmtpy($value)){
                     $errors[$field] = "Vui lòng nhập $field";
@@ -76,7 +76,14 @@ class CategoriesController extends BaseController
                 }
                 return $this->redirect("/?url=CategoriesController/CreateCategoresPage");
             }
-
+            $category = new CategoriesModel();
+            $checkname = $category->checkName($name);
+            $checkimage = $category->checkImage($image);
+            if($checkname || $checkimage){
+                $_SESSION['success'] = 'Danh mục đã tồn tại';
+                header('Location: /?url=CategoriesController/CreateCategoresPage');
+                die;
+            }
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
                 $category = new CategoriesModel();
                 $category->createCate(['name' => $name, 'status' => $option, 'image' => basename($_FILES["image"]["name"])]);
@@ -138,7 +145,6 @@ class CategoriesController extends BaseController
                     if ($_FILES['image']['name'] != '') {
                         unlink(UPLOAD_PATH . $old_image);
                         move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_PATH . $_FILES["image"]["name"]);
-                        
                     }
                     $_SESSION['success'] = "Chỉnh sửa thành công";
                     header("Location: " . ROOT_URL . "/?url=CategoriesController/ListCatPage");

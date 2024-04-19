@@ -162,20 +162,24 @@ class ClientHomeController extends BaseController
 
     public function addComment()
     {
-        if (isset($_POST['submit'])) {
-            $user_id = $_POST['userid'];
-            $pro_id = $_POST['proid'];
-            $content = $_POST['content'];
-            $comment = new CommentsModel();
-            if (Validation::CheckEmtpy($content)) {
-                Sessions::addSession("content", "Vui lòng nhập bình luận");
-                return $this->redirect("?url=ClientHomeController/ClientProductPage/" . $pro_id);
+        if (isset($_SESSION['user'])) {
+            if (isset($_POST['submit'])) {
+                $user_id = $_POST['userid'];
+                $pro_id = $_POST['proid'];
+                $content = $_POST['content'];
+                $comment = new CommentsModel();
+                if (Validation::CheckEmtpy($content)) {
+                    Sessions::addSession("content", "Vui lòng nhập bình luận");
+                    return $this->redirect("?url=ClientHomeController/ClientProductPage/" . $pro_id);
+                }
+                $comment->create(['user_id' => $user_id, 'product_id' => $pro_id, 'content' => $content]);
+                $_SESSION['success'] = 'Thêm bình luận thành công';
+                header("Location: ?url=ClientHomeController/ClientProductPage/" . $pro_id);
+
+
             }
-            $comment->create(['user_id' => $user_id, 'product_id' => $pro_id, 'content' => $content]);
-            $_SESSION['success'] = 'Thêm bình luận thành công';
-            header("Location: ?url=ClientHomeController/ClientProductPage/" . $pro_id);
-
-
+        } else {
+            header("Location: " . ROOT_URL . "?url=LoginController/LoginPage");
         }
     }
 
@@ -235,7 +239,7 @@ class ClientHomeController extends BaseController
             $size = $_POST['size'];
             $qty = $_POST['qty'];
             $cart = new CartsModel();
-            $check = $cart->checkcart($pro_id, $size);
+            $check = $cart->checkcart($pro_id, $size, $user_id);
 
             if ($check) {
                 $new_qty = $check['quantity'] + $qty;

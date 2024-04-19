@@ -87,7 +87,16 @@ class BlogController extends BaseController
                     Sessions::addSession($key, $error);
                 }
                 return $this->redirect("/?url=BlogController/CreateBlogPage");
-            } else {
+            } 
+            $BlogModel = new BlogModel();
+            $checkname = $BlogModel->checkTitle($name);
+            $checkcontent = $BlogModel->checkContent($content);
+            $checkimage = $BlogModel->checkImage($_FILES['image']['name']);
+            if($checkname || $checkcontent || $checkimage){
+                $_SESSION['success'] = 'Bài viết đã tồn tại';
+                header('Location: /?url=BlogController/CreateBlogPage');
+                die;
+            }
                 $BlogModel = new BlogModel();
                 $listthumbnail = $BlogModel->checkimageexit($_FILES['image']['name']);
                 if ($listthumbnail) {
@@ -110,7 +119,7 @@ class BlogController extends BaseController
                     $_SESSION['success'] = "Tạo bài viết thành công";
                     header("Location: " . ROOT_URL . "/?url=BlogController/ListBlogPage");
                 }
-            }
+            
         }
     }
     function update($id)

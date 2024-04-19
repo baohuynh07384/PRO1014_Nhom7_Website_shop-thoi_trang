@@ -130,21 +130,29 @@
                                                     <div class="review-body">
                                                         <p><?= $items['content'] ?></p>
                                                         <div class="review-btn">
-                                                            <form action="?url=ClientHomeController/deleteComment/<?= $items['id'] ?>"
-                                                                enctype="multipart/form-data" method="post">
-                                                                <input type="hidden" name="proid"
-                                                                    value="<?= $data['products'][0]['id'] ?>">
-                                                                <input type="hidden" name="delete"
-                                                                    value="<?= $items['id'] ?>">
-                                                                <input type="submit" name="submit" value="Xóa">
-                                                            </form>
-                                                            <form action="?url=ClientHomeController/updateComment/<?= $items['id'] ?>"
-                                                                enctype="multipart/form-data" method="post">
-                                                            <input type="hidden" name="proid"
-                                                                    value="<?= $data['products'][0]['id'] ?>">
-                                                                <input type="hidden" name="iddupdate" value="">
-                                                                <input type="submit" name="" value="Sửa">
-                                                            </form>
+                                                            <?php if ($_SESSION['user']['id'] === $items['user_id']): ?>
+                                                                <div class="row">
+                                                              
+                                                               <form class=" review-btn-left"
+                                                                    action="?url=ClientHomeController/deleteComment/<?= $items['id'] ?>"
+                                                                    enctype="multipart/form-data" method="post" >
+                                                                    <input type="hidden" name="proid"
+                                                                        value="<?= $data['products'][0]['id'] ?>">
+                                                                    <input type="hidden" name="delete"
+                                                                        value="<?= $items['id'] ?>">
+                                                                    <input type="submit"  name="submit" value="Xóa" >
+                                                                </form>
+                                                               
+                                                                <form class=" review-btn-right"
+                                                                    action="?url=ClientHomeController/updateComment/<?= $items['id'] ?>"
+                                                                    enctype="multipart/form-data" method="post">
+                                                                    <input type="hidden" name="proid"
+                                                                        value="<?= $data['products'][0]['id'] ?>">
+                                                                    <input type="hidden" name="iddupdate" value="">
+                                                                    <input type="submit"  name="" value="Sửa">
+                                                                </form>
+                                                                </div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -154,42 +162,45 @@
                                 </div>
                                 <!-- /Reviews -->
                                 <!-- Review Form -->
-                                <?php if(isset($data['updatecomments'])): ?>
-                                    <div class="col-md-3">
-                                    <div id="review-form">
-                                        <form class="review-form" method="post" enctype="multipart/form-data"
-                                            action="?url=ClientHomeController/editComment/<?= $data['updatecomments']['id']?>">
-                                            <input type="hidden" name="userid" value="<?= $_SESSION['user']['id'] ?>">
-                                            <input type="hidden" name="proid" value="<?= $data['products'][0]['id'] ?>">
-                                            <textarea class="input" name="content"
-                                                placeholder="Nhập đánh giá"><?= $data['updatecomments']['content']?></textarea>
-                                            <?php if (isset($_SESSION['content'])): ?>
-                                                <p style="color: red;">
-                                                    <?php echo Sessions::display_session('content'); ?>
-                                                </p>
-                                            <?php endif; ?>
-                                            <button name="submit" class="primary-btn">Cập nhập</button>
-                                        </form>
-                                    </div>
-                                </div>
+                                <?php if (isset($data['updatecomments'])): ?>
+                                    <?php if ($_SESSION['user']['id'] === $data['updatecomments']['user_id']): ?>
+                                        <div class="col-md-3">
+                                            <div id="review-form">
+                                                <form class="review-form" method="post" enctype="multipart/form-data"
+                                                    action="?url=ClientHomeController/editComment/<?= $data['updatecomments']['id'] ?>">
+                                                    <input type="hidden" name="userid"
+                                                        value="<?= $data['updatecomments']['user_id'] ?>">
+                                                    <input type="hidden" name="proid" value="<?= $data['products'][0]['id'] ?>">
+                                                    <textarea class="input" name="content"
+                                                        placeholder="Nhập đánh giá"><?= $data['updatecomments']['content'] ?></textarea>
+                                                    <?php if (isset($_SESSION['content'])): ?>
+                                                        <p style="color: red;">
+                                                            <?php echo Sessions::display_session('content'); ?>
+                                                        </p>
+                                                    <?php endif; ?>
+                                                    <button name="submit" class="primary-btn">Cập nhập</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php else: ?>
-                                <div class="col-md-3">
-                                    <div id="review-form">
-                                        <form class="review-form" method="post" enctype="multipart/form-data"
-                                            action="?url=ClientHomeController/addComment">
-                                            <input type="hidden" name="userid" value="<?= $_SESSION['user']['id'] ?>">
-                                            <input type="hidden" name="proid" value="<?= $data['products'][0]['id'] ?>">
-                                            <textarea class="input" name="content"
-                                                placeholder="Nhập đánh giá"></textarea>
-                                            <?php if (isset($_SESSION['content'])): ?>
-                                                <p style="color: red;">
-                                                    <?php echo Sessions::display_session('content'); ?>
-                                                </p>
-                                            <?php endif; ?>
-                                            <button name="submit" class="primary-btn">Đánh giá</button>
-                                        </form>
+                                    <div class="col-md-3">
+                                        <div id="review-form">
+                                            <form class="review-form" method="post" enctype="multipart/form-data"
+                                                action="?url=ClientHomeController/addComment">
+                                                <input type="hidden" name="userid" value="<?= $_SESSION['user']['id'] ?>">
+                                                <input type="hidden" name="proid" value="<?= $data['products'][0]['id'] ?>">
+                                                <textarea class="input" name="content"
+                                                    placeholder="Nhập đánh giá"></textarea>
+                                                <?php if (isset($_SESSION['content'])): ?>
+                                                    <p style="color: red;">
+                                                        <?php echo Sessions::display_session('content'); ?>
+                                                    </p>
+                                                <?php endif; ?>
+                                                <button name="submit" class="primary-btn">Đánh giá</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
                                 <?php endif; ?>
                                 <!-- /Review Form -->
                             </div>

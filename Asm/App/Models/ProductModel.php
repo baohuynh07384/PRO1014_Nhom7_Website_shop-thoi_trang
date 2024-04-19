@@ -69,7 +69,9 @@ class ProductModel extends BaseModel{
         }
         
     }
-
+    public function checkName($name){
+        return $this->select()->where('name', '=', "'$name'")->first();
+    }  
     public function productGetKeyword($value){
         return $this
         ->select(' products.id, products.status, products.create_at, products.name as proName, description, price, quantity, categories.name as cateName')

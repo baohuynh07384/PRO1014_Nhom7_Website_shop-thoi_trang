@@ -20,15 +20,16 @@ class ImagesModel extends BaseModel{
     public function getImages(){
         return $this->getAll()->fetch();
     }
-
-    public function checkimageexit(string $image){
-        return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
+    public function checkImage($image){
+        return $this->select()->where('path', '=', "'$image'")->first();
     }
     public function edit($data, $id)
     {
         
         return $this->table('images')->where('id', ' = ',  $id)->update($data);
     }
+
+
     public function getAllWithPaginate(int $limit = 10,int  $offset = 0){
         // return $this->select()->where('email', '=', $email)->first();
     }
