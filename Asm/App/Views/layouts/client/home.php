@@ -15,7 +15,7 @@
                         </div>
                         <div class="shop-body">
                             <h3><?= $item['name'] ?></h3>
-                            <a href="" class="cta-btn">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="?url=ClientHomeController/ClientCategoriesPageID/<?=$item['id']  ?>" class="cta-btn">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

@@ -36,5 +36,34 @@ class CommentsModel extends BaseModel{
         return $data;
     }
 
+    public function getAll(){
+        return $this
+            ->select('products.id, products.name, COUNT(comments.id) AS total_comments')
+            ->join('products', 'comments.product_id = products.id')
+            ->groupBy('products.id')
+            ->fetch();
+    }
+
+    public function getCommentByID($id){
+        return $this
+        ->select('products.name as proname, users.name as username, comments.content, comments.create_at, comments.id as comment_id')
+        ->join('products', 'comments.product_id = products.id')
+        ->join('users', 'users.id = comments.user_id')
+        ->where('comments.product_id','=', $id)
+        ->fetch();
+    }
+
+    public function countComment()
+    {
+        $data = $this->select('COUNT(comments.id) AS comments')->table('comments')->first();
+       
+        if ($data) {
+            return $data['comments']; 
+        } else {
+            return 0; 
+        }
+        
+    }
+    
   
 }

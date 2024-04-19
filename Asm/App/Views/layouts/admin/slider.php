@@ -144,6 +144,14 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a href="?url=CommentsController/listComments" class="nav-link ">
+          <i class="fa-solid fa-comment nav-icon "></i>
+            <p>
+              Bình luận
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

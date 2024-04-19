@@ -324,6 +324,12 @@
       $('.delete_id_blog').val(blog_id);
       $('#DeleteModalBlog').modal('show');
     });
+    $('.deletebtn_comment').click(function (e) {
+      e.preventDefault();
+      var comment_id = $(this).val();
+      $('.delete_id_comment').val(comment_id);
+      $('#DeleteModalComment').modal('show');
+    });
 
 
 

@@ -21,6 +21,13 @@ class BlogModel extends BaseModel{
         return $this->getAll()->fetch();
     }
 
+    public function getAllBlogClient(){
+        return $this
+        ->select()
+        ->where('status', '=', '1')
+        ->fetch();
+    }
+
     public function checkimageexit(string $image){
         return $this->select('thumbnail')->where('thumbnail', '=', $image)->first();
     }

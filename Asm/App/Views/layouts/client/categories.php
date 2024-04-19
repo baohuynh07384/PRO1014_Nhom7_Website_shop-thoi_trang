@@ -148,14 +148,7 @@
 				<div class="store-filter clearfix">
 
 					<ul class="store-pagination">
-						<?php 
-						  $totalProducts = count($data['products']);
-
-							for($i = 0; $i <= $totalProducts ; $i++){
-								echo '<li><a href="?url=ClientHomeController/ClientCategoriesPage/' . $i . '">' . $i . '</a></li>';
-							}
-						?>
-						<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+						
 					</ul>
 				</div>
 				<!-- /store bottom filter -->

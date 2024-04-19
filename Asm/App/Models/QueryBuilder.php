@@ -155,7 +155,6 @@ trait QueryBuilder
     {
         // echo $this->innerJoin;
         $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->leftJoin $this->where $this->groupBy  $this->orderBy  $this->limit";
-        
         $query    = $this->query($sqlQuery);
         $this->resetQuery();
         if (!empty($query))

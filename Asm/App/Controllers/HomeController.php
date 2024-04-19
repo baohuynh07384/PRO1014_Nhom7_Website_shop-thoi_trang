@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\RenderBase;
 use App\Models\CategoriesModel;
+use App\Models\CommentsModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 use App\Models\BlogModel;
@@ -21,6 +22,8 @@ class HomeController extends BaseController
 
     private $_products;
 
+    private $_comments;
+
     /**
      * Thuốc trị đau lưng
      * Copy lại là hết đau lưng
@@ -34,6 +37,7 @@ class HomeController extends BaseController
         $this->_users = new UserModel();
         $this->_blogs = new BlogModel();
         $this->_products = new ProductModel();
+        $this->_comments = new CommentsModel();
     }
 
     function HomeController()
@@ -48,7 +52,8 @@ class HomeController extends BaseController
             'categories' =>  $this->_categories->countCategories(),
             'users' => $this->_users->countUsers(),
             'blogs' => $this->_blogs->countBlogs(),
-            'products' => $this->_products->countProducts()
+            'products' => $this->_products->countProducts(),
+            'comments' => $this->_comments->countComment()
         ];
         
         $this->_renderBase->renderAdminHeader();

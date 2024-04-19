@@ -128,7 +128,7 @@ class CategoriesController extends BaseController
             } else {
                 $update_image = $old_image;
             }
-            if (file_exists(UPLOAD_PATH . $_FILES["image"]["name"])) {
+            if (file_exists(UPLOAD_URL . $_FILES["image"]["name"])) {
                 echo '<script>alert("Ảnh đã tồn tại")</script>';
                 header("Location:" . ROOT_URL . "/?url=CategoriesController/ListCatPage");
                 exit();
@@ -138,7 +138,7 @@ class CategoriesController extends BaseController
 
                 if ($updateResult) {
                     if ($_FILES['image']['name'] != '') {
-                        unlink(UPLOAD_PATH . $old_image);
+                        unlink(UPLOAD_URL . $old_image);
                         move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_PATH . $_FILES["image"]["name"]);
                         
                     }

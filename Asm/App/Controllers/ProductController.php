@@ -234,7 +234,7 @@ class ProductController extends BaseController
                         $file = $image[$index]['name'];
                         $error = $image[$index]['error'];
                         if ($error === 0) {
-                            $uploadDir = UPLOAD_URL . basename($file = $image[$index]['name']);
+                            $uploadDir = UPLOAD_PATH . basename($file = $image[$index]['name']);
                             $imageModel = new ImagesModel();
                             move_uploaded_file($image[$index]['tmp_name'], $uploadDir);
                             $imageModel->create(['path' => $file, 'product_id' => $idpro]);
@@ -243,7 +243,7 @@ class ProductController extends BaseController
                         }
                     }
                 }
-                $_SESSION['success'] = 'Thêm sản phẩm thành công';
+                $_SESSION['success'] = 'Cập nhật sản phẩm thành công';
                 header('Location: /?url=ProductController/ListProductPage');
                 exit;
             }

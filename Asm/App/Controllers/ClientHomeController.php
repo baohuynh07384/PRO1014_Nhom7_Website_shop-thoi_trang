@@ -58,14 +58,12 @@ class ClientHomeController extends BaseController
     {
         
         $products = $this->_product->getProduct();   
-        $totalPages = $this->_product->productPagne();
         $images = $this->_image->getImages();
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
             'products' => $products,
             'categories' => $categories,
-            'totalPages' => $totalPages
         ];
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/store', $data);
@@ -75,15 +73,8 @@ class ClientHomeController extends BaseController
     public function ClientCategoriesPageID($id)
     {
         $images = $this->_image->getImages();
-        if (isset($_GET['keyword'])) {
-            $keyword = $_GET['keyword'];
-            $products = $this->_product->productGetKeyword($keyword);
-        } else if (isset($_GET['price'])) {
-            $price = $_GET['price'];
-            $products = $this->_product->productGetPrice($price);
-        } else {
-            $products = $this->_product->getProductCate($id);
-        }
+        $products = $this->_product->getProductCate($id);
+
 
         $categories = $this->_category->getCateClient();
         $data = [
@@ -120,17 +111,8 @@ class ClientHomeController extends BaseController
     public function ClientHomePage()
     {
         $images = $this->_image->getImages();
-        if (isset($_GET['keyword'])) {
-            $keyword = $_GET['keyword'];
-            $products = $this->_product->productGetKeyword($keyword);
-
-        } else if (isset($_GET['price'])) {
-            $price = $_GET['price'];
-            $products = $this->_product->productGetPrice($price);
-
-        } else {
-            $products = $this->_product->getProduct();
-        }
+        $products = $this->_product->getProduct();
+        
         $categories = $this->_category->getCateClient();
         $data = [
             'images' => $images,
@@ -257,7 +239,7 @@ class ClientHomeController extends BaseController
 
     public function ClientBlogsPage()
     {
-        $data = $this->_blog->getlistblog();
+        $data = $this->_blog->getAllBlogClient();
         $this->_renderBase->renderClientHeader();
         $this->load->render('layouts/client/blogs', $data);
         $this->_renderBase->renderClientFooter();

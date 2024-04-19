@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-warning">
+          <div class="small-box bg-success">
             <div class="inner">
               <h3><?= $data['categories'] ?></h3>
               <p>Danh mục</p>
@@ -61,6 +61,18 @@
               <i class="fa-solid fa-list"></i>
             </div>
             <a href="?url=CategoriesController/ListCatPage" class="small-box-footer">Chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3><?= $data['comments'] ?></h3>
+              <p>Bình luận</p>
+            </div>
+            <div class="icon">
+              <i class="fa-solid fa-comment"></i>
+            </div>
+            <a href="?url=CommentsController/listComments" class="small-box-footer">Chi tiết<i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>

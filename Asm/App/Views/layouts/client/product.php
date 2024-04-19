@@ -90,12 +90,8 @@
                         <li>Danh mục:</li>
                         <li><a href="#"><?= $data['products'][0]['cateName'] ?></a></li>
                     </ul>
-
-
-
                 </div>
             </form>
-
             <!-- /Product details -->
             <!-- Product tab -->
             <div class="col-md-12">
@@ -107,7 +103,6 @@
                         <li><a data-toggle="tab" href="#tab3">Mô tả</a></li>
                     </ul>
                     <!-- /product tab nav -->
-
                     <!-- product tab content -->
                     <div class="tab-content">
                         <!-- tab1  -->
@@ -150,7 +145,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                            <? endforeach; ?>
+                                            <?php endforeach; ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -213,17 +208,7 @@
                         <div id="tab3" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Mẫu áo thun Streetwear Basic tốt nhất trên thị trường:
-
-                                        . Chất liệu: GRDC™ Streetvibe Fabric: 100% cotton 2 chiều, định lượng 250 gsm,
-                                        dày dặn, hầu như không chảy nhão, bo cổ bền bỉ, thấm hút cực tốt và mát mẻ. Giặt
-                                        máy thoải mái.
-
-                                        . Thiết kế tối giản, với Grimm DC Brand name và Signature box logo.
-
-                                        . Chi tiết in: kéo lụa mực plastisol.
-
-                                        . Box logo thêu tỉ mỉ và tinh tế.</p>
+                                <p><?= $data['products'][0]['description'] ?>.</p>
                                 </div>
                             </div>
                         </div>
@@ -360,5 +345,5 @@
     <!-- /container -->
 </div>
 <!-- /Section -->
-
+</div>
 <!-- /NEWSLETTER -->
