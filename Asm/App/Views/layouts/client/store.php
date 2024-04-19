@@ -78,10 +78,10 @@
 					<form class="store-sort" id="sortForm">
 						<label>
 							Sắp xếp theo:
-							<select class="input-select" onchange="sortForm()">
+							<select id="input-select"  class="input-select" onchange="sortForm()">
 								<option value="0">Chọn phân loại</option>
-								<option value="?keyword=new">Mới nhất</option>
-								<option value="?keyword=old">Cũ nhất</option>
+								<option value="?keyword=asc">Mới nhất</option>
+								<option value="?keyword=desc">Cũ nhất</option>
 								<option value="?price=asc">Giá tăng dần</option>
 								<option value="?price=desc">Giá giảm dần</option>
 							</select>
