@@ -94,12 +94,12 @@ class AccountController extends BaseController
                     foreach ($errors as $key => $error) {
                         Sessions::addSession($key, $error);
                     }
-                    return $this->redirect("/?url=AccountController/CreateAccountPage");
+                    return $this->redirect("/?url=AccountController/CreateAccountPage");        
                 }
                 $userModel = new UserModel();
                 $user = $userModel->checkUserExist($email);
                 if ($user) {
-                    echo '<script>alert("Tài khoản đã tồn tại!"); window.location.href = "' . ROOT_URL . '/?url=RegristerController/RegristerPage";</script>';
+                    echo '<script>alert("Tài khoản đã tồn tại!"); window.location.href = "' . ROOT_URL . '/?url=AccountController/CreateAccountPage";</script>';
                 } else if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                     $hash_password = password_hash($password, PASSWORD_DEFAULT);
                     $userModel->createUser(['name' => $name, 'email' => $email, 'password' => $hash_password, 'address' => $address, 'phone' => $phone, 'status' => $status, 'role' => $role, 'image' => basename($_FILES["image"]["name"])]);

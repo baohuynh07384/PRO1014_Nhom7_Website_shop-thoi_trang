@@ -27,9 +27,11 @@ class CartsModel extends BaseModel{
     public function getcart($id){
         return $this->select('carts.*, products.name')->join('products','products.id = carts.product_id')->join('users','users.id = carts.user_id')->where('users.id','=', $id)->fetch();
     }
-    public function checkcart($id , $size){
+    public function checkcart($id , $size, $user_id){
+        
         return $this->select()->where('product_id', '=', $id)
                              ->where('size', '=', $size)
+                             ->where('user_id', '=', $user_id)
                              ->first();
     }
     public function updatecart(array $data, $id, $size){

@@ -87,6 +87,7 @@
 			</div>
 			<!-- /bottom footer -->
 		</footer>
+		
 		<!-- /FOOTER -->
 
 		<?php 

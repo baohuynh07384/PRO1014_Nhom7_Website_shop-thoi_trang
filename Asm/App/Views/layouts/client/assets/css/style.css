@@ -1728,7 +1728,22 @@ textarea.input {
   padding-left: 145px;
   margin-bottom: 30px;
 }
-
+.review-btn input{
+  background-color: transparent;    
+  border: none; 
+  cursor: pointer;  
+  padding: 0;
+}
+ .review-btn .row{
+  width: 30px;
+  position: relative;
+}
+.review-btn-right input{
+  position: absolute;
+  margin-left: 3rem;
+  top: 0;
+  
+}
 .reviews .review-heading {
   position: absolute;
   width: 130px;

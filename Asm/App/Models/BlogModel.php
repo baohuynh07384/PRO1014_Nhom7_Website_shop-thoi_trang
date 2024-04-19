@@ -16,6 +16,16 @@ class BlogModel extends BaseModel{
         parent::__construct();
         
     }
+    public function checkTitle($name){
+        return $this->select()->where('	title', '=', "'$name'")->first();
+    }
+    public function checkImage($image){
+        return $this->select()->where('thumbnail', '=', "'$image'")->first();
+    }
+
+    public function checkContent($content){
+        return $this->select()->where('content', '=', "'$content'")->first();
+    }
 
     public function getlistblog(){
         return $this->getAll()->fetch();

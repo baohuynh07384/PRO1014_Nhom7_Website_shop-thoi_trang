@@ -152,3 +152,59 @@ if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
 }
 
 ?>
+<script >
+$(document).ready(function () {
+  const products = $(".products");
+  const itemsPerPage = 3;
+  let currentPage = 1;
+
+  function showPage(page) {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    products.hide().slice(startIndex, endIndex).show();
+  }
+
+  function goToPage(page) {
+    showPage(page);
+    currentPage = page;
+    updatePagination();
+  }
+
+  function goToPrevPage() {
+    if (currentPage > 1) {
+      goToPage(currentPage - 1);
+    }
+  }
+
+  function goToNextPage() {
+    const maxPage = Math.ceil(products.length / itemsPerPage);
+    if (currentPage < maxPage) {
+      goToPage(currentPage + 1);
+    }
+  }
+
+  function updatePagination() {
+    const maxPage = Math.ceil(products.length / itemsPerPage);
+    const paginationElement = $(".store-pagination");
+    paginationElement.empty();
+    paginationElement.append(`<li><a href="#" id="prev"><i class="fa fa-angle-left"></i></a></li>`);
+    for (let i = 1; i <= maxPage; i++) {
+        paginationElement.append(`<li><a href="#" class="page">${i}</a></li>`);
+    }
+    paginationElement.append(`<li><a href="#" id="next"><i class="fa fa-angle-right"></i></a></li>`);
+
+    $(".page").click(function () {
+        const pageNum = parseInt($(this).text());
+        goToPage(pageNum);
+    });
+
+    $("#prev").click(goToPrevPage);
+    $("#next").click(goToNextPage);
+  }
+
+  // Show the first page initially
+  showPage(currentPage);
+  updatePagination();
+});
+</script>

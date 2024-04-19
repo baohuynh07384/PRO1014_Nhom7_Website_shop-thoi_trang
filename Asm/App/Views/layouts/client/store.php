@@ -15,21 +15,21 @@
 				<div class="aside">
 					<h3 class="aside-title">Danh mục</h3>
 					<div class="checkbox-filter">
-					<?php foreach($data['categories'] as $items): ?>
-						<div class="input-checkbox">
-							<input type="checkbox" id="category-1">
-							<label for="category-1">
-								<span></span>
-								<?=$items['name']?>
-							</label>
-						</div>
+						<?php foreach ($data['categories'] as $items): ?>
+							<div class="input-checkbox">
+								<input type="checkbox" id="category-1">
+								<label for="category-1">
+									<span></span>
+									<?= $items['name'] ?>
+								</label>
+							</div>
 						<?php endforeach; ?>
 					</div>
 				</div>
 				<!-- /aside Widget -->
 
 				<!-- aside Widget -->
-				<div class="aside">
+				<!-- <div class="aside">
 					<h3 class="aside-title">Top bán chạy</h3>
 					<div class="product-widget">
 						<div class="product-img">
@@ -66,7 +66,7 @@
 							<h4 class="product-price">100.000đ <del class="product-old-price">140.000đ</del></h4>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /aside Widget -->
 			</div>
 			<!-- /ASIDE -->
@@ -78,7 +78,7 @@
 					<form class="store-sort" id="sortForm">
 						<label>
 							Sắp xếp theo:
-							<select id="input-select"  class="input-select" onchange="sortForm()">
+							<select id="input-select" class="input-select" onchange="sortForm()">
 								<option value="0">Chọn phân loại</option>
 								<option value="?keyword=asc">Mới nhất</option>
 								<option value="?keyword=desc">Cũ nhất</option>
@@ -96,32 +96,36 @@
 				<!-- store products -->
 				<div class="row">
 					<!-- product -->
-					<?php					
-					 foreach ($data['products'] as $items): 
+					<?php
+					foreach ($data['products'] as $items):
 						foreach ($data['images'] as $image) {
-							
+
 							if ($image['product_id'] == $items['id']) {
-								
+
 								break;
 							}
 						}
-					 ?>
-						<a href="">
+						?>
+						<a id="page" href="">
 							<div class="col-md-4 col-xs-6">
-								<div class="product">
+								<div class="products">
+									<div class="product">
 
 										<div class="product-img">
 											<img src="<?= PUBLIC_URL . $image['path'] ?>" alt="">
 										</div>
 
-									<div class="product-body">
-										<p class="product-category"><?=$items['cateName'] ?></p>
-										<h3 class="product-name"><a href="#"><?=$items['proName'] ?></a></h3>
-										<h4 class="product-price"><?=number_format($items['price'] )?>đ
-										</h4>
-									</div>
-									<div class="add-to-cart">
-										<a href="?url=ClientHomeController/ClientProductPage/<?= $items['id'] ?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Xem chi tiết</button></a>
+										<div class="product-body">
+											<p class="product-category"><?= $items['cateName'] ?></p>
+											<h3 class="product-name"><a href="#"><?= $items['proName'] ?></a></h3>
+											<h4 class="product-price"><?= number_format($items['price']) ?>đ
+											</h4>
+										</div>
+										<div class="add-to-cart">
+											<a href="?url=ClientHomeController/ClientProductPage/<?= $items['id'] ?>"><button
+													class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Xem chi
+													tiết</button></a>
+										</div>
 									</div>
 								</div>
 							</div>

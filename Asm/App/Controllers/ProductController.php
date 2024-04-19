@@ -135,7 +135,13 @@ class ProductController extends BaseController
                 }
                 return $this->redirect("/?url=ProductController/CreateProductPage");
             } else {
-
+                $ProductModel = new ProductModel();
+                $checkname = $ProductModel->checkName($name);
+                if ($checkname) {
+                    $_SESSION['success'] = 'Sản phẩm đã tồn tại';
+                    header('Location: /?url=ProductController/CreateProductPage');
+                    die;
+                }
                 $ProductModel = new ProductModel();
                 $insert = $ProductModel->create([
                     'name' => $name,

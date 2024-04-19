@@ -55,6 +55,18 @@ class CategoriesModel extends BaseModel
         return $this->table($this->table)->where('id', ' = ',  $id)->update($data);
     }
 
+    public function checkName($name){
+        return $this->select()->where('name', '=', "'$name'")->first();
+    }
+    public function checkImage($image){
+        return $this->select()->where('image', '=', "'$image'")->first();
+    }
+
+    public function findCate($field, $value)
+    {
+        $result = $this->table($this->table)->where($field, ' = ', $value)->first();
+        return $result;
+    }
     public function getCateClient(){
         return $this->table('categories')->where('status', '=', '1')->fetch();
     }
