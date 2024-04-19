@@ -142,7 +142,7 @@ class AccountController extends BaseController
                 $old_image = $_POST['image_old'];
                 if ($new_image != '') {
                     $update_image = $new_image;
-                    if (file_exists(UPLOAD_URL . basename($_FILES["image"]["name"]))) {
+                    if (file_exists(UPLOAD_PATH . basename($_FILES["image"]["name"]))) {
                         echo '<script>alert("Ảnh đã tồn tại")</script>';
                         header("Location:" . ROOT_URL . "/?url=AccountController/listAccount");
                         exit();
@@ -166,7 +166,7 @@ class AccountController extends BaseController
                 ], $id);
                 if ($updateResult) {
                     if ($new_image != '') {
-                        $target_path = UPLOAD_URL . basename($_FILES["image"]["name"]);
+                        $target_path = UPLOAD_PATH . basename($_FILES["image"]["name"]);
                         move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
                         unlink(UPLOAD_PATH . $old_image);
                     }

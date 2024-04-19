@@ -1,9 +1,4 @@
-<!-- /NAVIGATION -->
 
-<!-- BREADCRUMB -->
-
-<!-- /BREADCRUMB -->
-<!-- SECTION -->
 <?php
 
 ?>
